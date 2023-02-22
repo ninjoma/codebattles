@@ -29,6 +29,14 @@ namespace codebattle_api.Repositories
         public async Task<bool> Delete(int id)
         {
             var entity = await dbSet.FindAsync(id);
+            entity.isActive = !entity.isActive;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DbDelete(int id)
+        {
+            var entity = await dbSet.FindAsync(id);
             dbSet.Remove(entity);
             await _context.SaveChangesAsync();
             return true;

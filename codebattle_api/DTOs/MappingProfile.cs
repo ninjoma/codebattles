@@ -8,7 +8,7 @@ namespace disclone_api.DTO
         public MappingProfile()
         {
             // CreateMap<Server, ServerDetailDTO>()
-                .ReverseMap(); //TEMPLATE
+                // .ReverseMap(); //TEMPLATE
         }
     }
 }

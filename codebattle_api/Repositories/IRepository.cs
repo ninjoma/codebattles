@@ -6,6 +6,7 @@ namespace codebattle_api.Repositories
         Task<T> GetById(int id, bool isActive = true);
         Task<T> Add(T newDto);
         Task<bool> Delete(int id);
+        Task<bool> DbDelete(int id);
         Task<T> Edit(T newDto);
         Task<bool> Save();
     }
