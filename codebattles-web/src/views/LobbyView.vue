@@ -2,11 +2,15 @@
 import Header from "../components/Header.vue";
 import LobbyHeader from "../components/LobbyHeader.vue";
 import CodeEditor from "../components/CodeEditor.vue";
+import PlayerCard from "../components/PlayerCard.vue";
+import ScoreCard from "../components/ScoreCard.vue";
 export default {
     components: {
         Header,
         LobbyHeader,
-        CodeEditor
+        CodeEditor,
+        PlayerCard,
+        ScoreCard
     }
 }
 </script>
@@ -16,20 +20,13 @@ export default {
         <Header></Header>
         <LobbyHeader></LobbyHeader>
         <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
-            <div className="w-1/2 flex gap-2">
-              <div className="bg-base-300 rounded-lg p-2">
-                
-                <a className="font-bold text-sm">55</a>
-              </div>
-              <div className="bg-base-300 rounded-lg p-2">
-                <span>Mega Sweat Lord</span>
-              </div>
+            <div className="w-1/2 flex justify-between">
+                <PlayerCard/>
+                <ScoreCard/>
             </div>
-            <div className="w-1/2 flex">
-              <div className="bg-base-300 rounded-lg p-2">
-                <a className="font-bold">LVL:55 </a>
-                <span>Mega Sweat Lord</span>
-              </div>
+            <div className="w-1/2 flex justify-between">
+                <ScoreCard/>
+                <PlayerCard/>
             </div>
         </div>
         <div class="flex grow w-full px-4 pb-2 gap-5">

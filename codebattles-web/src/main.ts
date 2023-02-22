@@ -4,6 +4,11 @@ import App from './App.vue'
 import Router from './router/index'
 import { basicSetup } from "codemirror";
 import VueCodeMirror from "vue-codemirror";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faCrown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCrown, faCircleArrowUp)
 
 createApp(App)
 
@@ -18,7 +23,7 @@ createApp(App)
     extensions: [basicSetup]
 })
 
-
+.component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app')
 
 
