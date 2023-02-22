@@ -3,7 +3,6 @@
 
 <template>
     <RouterView>
-        
     </RouterView>
 </template>
 
