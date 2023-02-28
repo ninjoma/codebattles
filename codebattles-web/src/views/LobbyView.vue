@@ -1,12 +1,10 @@
 <script lang="ts">
-import Header from "../components/Header.vue";
 import LobbyHeader from "../components/LobbyHeader.vue";
 import CodeEditor from "../components/CodeEditor.vue";
 import PlayerCard from "../components/PlayerCard.vue";
 import ScoreCard from "../components/ScoreCard.vue";
 export default {
     components: {
-        Header,
         LobbyHeader,
         CodeEditor,
         PlayerCard,
@@ -16,8 +14,7 @@ export default {
 </script>
 
 <template>
-    <div class="h-screen flex flex-col">
-        <Header></Header>
+    <div class="flex flex-col flex-1">
         <LobbyHeader></LobbyHeader>
         <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
             <div className="w-1/2 flex justify-between">
