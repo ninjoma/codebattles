@@ -1,7 +1,7 @@
 using AutoMapper;
-using disclone_api.Entities;
+using codebattle_api.Entities;
 
-namespace disclone_api.DTO
+namespace codebattle_api.DTO
 {
     public class MappingProfile : Profile
     {
