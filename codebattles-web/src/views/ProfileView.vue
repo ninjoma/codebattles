@@ -32,9 +32,25 @@ export default {
                                         <p>"An Experienced Developer"</p>
                                     </blockquote>
                                 </div>
-                                <div class="flex justify-end flex-1 items-baseline gap-1 font-inter w-full">
-                                    <a>LEVEL</a>
-                                    <a class="text-3xl text-[#36D399]">23</a>
+                                <div class="flex flex-col flex items-end flex-1 gap-1 font-inter w-full">
+                                    <div class="flex flex-1 items-end gap-1 font-inter">
+                                        <a>LEVEL</a>
+                                        <a class="text-3xl text-[#36D399]">23</a>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <div className="tooltip tooltip-bottom" data-tip="Random Text">
+                                            <font-awesome-icon icon="fa-solid fa-brain" class="text-[green]" />
+                                        </div>
+                                        <div className="tooltip tooltip-bottom" data-tip="Random Text">
+                                            <font-awesome-icon icon="fa-solid fa-brain" class="text-[green]" />
+                                        </div>
+                                        <div className="tooltip tooltip-bottom" data-tip="Random Text">
+                                            <font-awesome-icon icon="fa-solid fa-brain" class="text-[green]" />
+                                        </div>
+                                        <div className="tooltip tooltip-bottom" data-tip="Random Text">
+                                            <font-awesome-icon icon="fa-solid fa-brain" class="text-[green]" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="py-2 flex flex-col items-center rounded-xl w-full">
@@ -70,7 +86,6 @@ export default {
             </div>
             <PlayerStatsPanel/>
             <PlayerFriendsPanel/>
-            <PlayerBadgesPanel/>
         </div>
     </div>
 </template>

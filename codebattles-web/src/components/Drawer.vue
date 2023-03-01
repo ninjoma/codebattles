@@ -19,12 +19,13 @@ export default {
         </div> 
         <div className="drawer-side">
             <label htmlFor="header-drawer" className="drawer-overlay"></label> 
-            <ul className="menu p-4 w-80 bg-base-100">
+            <div className="menu p-4 w-80 bg-base-100">
             <!-- Sidebar content here -->
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
+                <div>
+                    
+                </div>
             
-            </ul>
+            </div>
             
         </div>
         </div>
