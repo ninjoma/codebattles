@@ -16,4 +16,19 @@ export default {
         </Drawer>
     </div>
 </template>
+<style>
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #20252e;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #36d399; 
+}
+
+</style>

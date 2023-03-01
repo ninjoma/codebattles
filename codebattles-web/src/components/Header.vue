@@ -8,7 +8,7 @@ export default {
 }
 </script>
 <template>
-    <div className="navbar bg-base-300 flex items-center justify-between gap-3 p-0 px-2 items-stretch drop-shadow-lg">
+    <div className="navbar bg-base-300 flex items-center justify-between gap-3 p-0 px-2 items-stretch drop-shadow-lg fixed z-50">
         <div class="">
             <input id="header-drawer" type="checkbox" className="drawer-toggle" />
             <div className="flex-none sm:hidden">
@@ -41,3 +41,4 @@ export default {
         </div>
     </div>
 </template>
+

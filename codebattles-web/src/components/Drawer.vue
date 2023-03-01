@@ -13,7 +13,9 @@ export default {
             <!-- Navbar -->
             <Header/>
             <!-- Page content here -->
-            <slot/>
+            <div class="pt-14">
+                <slot/>
+            </div>
         </div> 
         <div className="drawer-side">
             <label htmlFor="header-drawer" className="drawer-overlay"></label> 
