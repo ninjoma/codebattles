@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql("name=ConnectionStrings:DefaultConnection"));
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("local")));
 
 var app = builder.Build();
 
@@ -17,6 +17,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+    db.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
