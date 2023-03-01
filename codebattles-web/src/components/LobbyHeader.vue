@@ -12,7 +12,12 @@ export default {}
                 </button>
             </div>
         </div>
-        <a className="font-inter font-bold flex-1 justify-end flex">15:66:33</a>
+        <a className="font-mono font-bold flex-1 justify-end flex gap-1 text-success">
+            <font-awesome-icon icon="fa-solid fa-stopwatch" />
+            <span className="countdown">
+                <span style="{{'--value':52}}"></span>
+            </span>
+        </a>
     </div>
 
 </template>

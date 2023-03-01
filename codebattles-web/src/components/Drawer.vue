@@ -9,11 +9,11 @@ export default {
 <template>
     <div className="drawer">
         <input id="header-drawer" type="checkbox" className="drawer-toggle" /> 
-        <div className="drawer-content flex flex-col">
+        <div className="drawer-content flex flex-col min-h-screen">
             <!-- Navbar -->
             <Header/>
             <!-- Page content here -->
-            <div class="pt-14">
+            <div class="pt-16 min-h-screen flex flex-col">
                 <slot/>
             </div>
         </div> 
