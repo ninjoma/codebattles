@@ -8,7 +8,9 @@ export default {
 </script>
 <template>
     <div class="bg-base-100 m-5 rounded-xl p-2">
-        <SectionTitle>Stats</SectionTitle>
+        <div class="px-5">
+            <SectionTitle>Stats</SectionTitle>
+        </div>
         <div class="flex flex-col">
             <div className="stats w-full font-inter flex flex-col sm:flex-row sm:flex-row stats-vertical sm:stats-horizontal">
                 <div className="stat text-center flex-1">
