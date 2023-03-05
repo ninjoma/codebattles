@@ -1,13 +1,14 @@
 <script lang="ts">
+import SectionTitle from './SectionTitle.vue';
 export default {
-    
+    components: {
+        SectionTitle
+    }
 }
 </script>
 <template>
     <div class="bg-base-100 m-5 rounded-xl p-2">
-        <div>
-            <h3 className="px-6 pt-3 text-xl underline underline-offset-4 font-inter decoration-4 decoration-[#36D399]">Stats</h3>
-        </div>
+        <SectionTitle>Stats</SectionTitle>
         <div class="flex flex-col">
             <div className="stats w-full font-inter flex flex-col sm:flex-row sm:flex-row stats-vertical sm:stats-horizontal">
                 <div className="stat text-center flex-1">
