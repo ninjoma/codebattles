@@ -24,9 +24,6 @@ export default {
                 <HeaderButton targetUrl="/battle">
                     <a>Battles</a>
                 </HeaderButton>
-                <HeaderButton targetUrl="/coop">
-                    <a>Co-Op</a>
-                </HeaderButton>
             </div>
         </div>
         <div>
