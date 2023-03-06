@@ -6,10 +6,10 @@ import { basicSetup } from "codemirror";
 import VueCodeMirror from "vue-codemirror";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag, faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag, faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, faXmark, faXmarkCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag, faPlus, faPenToSquare, faBars, faJetFighter,
-    faBrain, faStopwatch)
+    faBrain, faStopwatch, faCircleXmark, faXmark)
 
 createApp(App)
 

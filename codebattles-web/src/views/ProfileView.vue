@@ -1,14 +1,12 @@
 <script lang="ts">
 import PlayerStatsPanel from '../components/PlayerStatsPanel.vue';
 import PlayerBadgesPanel from "../components/PlayerBadgesPanel.vue";
-import PlayerFriendsPanel from "../components/PlayerFriendsPanel.vue";
 
 
 export default {
     components: {
         PlayerStatsPanel,
-        PlayerBadgesPanel,
-        PlayerFriendsPanel
+        PlayerBadgesPanel
     }
 }
 </script>
@@ -85,7 +83,7 @@ export default {
                 </div>
             </div>
             <PlayerStatsPanel/>
-            <PlayerFriendsPanel/>
+            <PlayerBadgesPanel/>
         </div>
     </div>
 </template>
