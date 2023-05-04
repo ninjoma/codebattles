@@ -12,7 +12,7 @@ namespace codebattle_api.Services
         {
             // collection.AddTransient<IUserService, UserService>(); TEMPLATE
             
-            collection.AddTransient<IUserService, UserService>();
+            collection.AddScoped<IUserService, UserService>();
             collection.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
         }
     }
