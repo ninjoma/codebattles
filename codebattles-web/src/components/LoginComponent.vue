@@ -4,6 +4,7 @@ import RegisterForm from './RegisterForm.vue';
 import SectionTitle from './SectionTitle.vue';
 import LoginForm from './LoginForm.vue';
 import ResetPasswordForm from './ResetPasswordForm.vue';
+import AlertComponent from './AlertComponent.vue';
 
 
 
@@ -11,9 +12,12 @@ export default {
     components: {
         GoogleButton,
         SectionTitle,
-
+        AlertComponent
     },
     data() {
+
+    },
+    methods: {
 
     }
 }
@@ -22,6 +26,7 @@ export default {
 <template>
     <div class="lg:rounded-xl p-4 lg:p-10 font-inter w-full">
         <SectionTitle>Login</SectionTitle>
+        <AlertComponent></AlertComponent>
         <div className="form-control w-full py-2">
             <input type="text" placeholder="Username" className="input input-bordered w-full" />
         </div>

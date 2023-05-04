@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag, faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, faXmark, faXmarkCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag, faPlus, faPenToSquare, faBars, faJetFighter,
-    faBrain, faStopwatch, faCircleXmark, faXmark)
+    faBrain, faStopwatch, faCircleXmark, faXmark, faCircleXmark)
 
 createApp(App)
 
