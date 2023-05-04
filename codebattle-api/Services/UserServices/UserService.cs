@@ -1,6 +1,6 @@
 using codebattle_api.DTO;
 namespace codebattle_api.Services.UserServices{
-    public class UserService : IMainService<UserDTO, UserDetailDTO>
+    public class UserService : IUserService
     {
         public UserService()
         {
