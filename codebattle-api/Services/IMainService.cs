@@ -1,10 +1,10 @@
 namespace codebattle_api.Services
 {
-    public interface IMainService<T,V> where T : class
+    public interface IMainService<PostDTO,DetailDTO> where PostDTO : class
     {
-        Task<V> GetById(int id, bool isActive = true);
-        Task<T> EditById(T entryDTO);
-        Task<T> Add(T entryDTO);
-        Task<T> DeleteById(int id);
+        Task<DetailDTO> GetById(int id, bool isActive = true);
+        Task<PostDTO> EditById(PostDTO entryDTO);
+        Task<PostDTO> Add(PostDTO entryDTO);
+        Task<PostDTO> DeleteById(int id);
     }
 }
