@@ -1,30 +1,48 @@
+using AutoMapper;
 using codebattle_api.DTO;
+using codebattle_api.Entities;
+using codebattle_api.Repositories;
+
 namespace codebattle_api.Services.UserServices{
     public class UserService : IUserService
     {
-        public UserService()
+        #region Builder & Properties
+        private readonly IMapper _mapper;
+        private readonly IRepository<UserDTO, User> _userRepository;
+
+        public UserService(IMapper mapper, IRepository<UserDTO, User> userRepository)
         {
-            
+            _mapper = mapper;
+            _userRepository = userRepository;
+        }
+        #endregion Builder & Properties
+
+        public async Task<UserDTO> Add(UserDTO entryDTO)
+        {
+            return await _userRepository.Add(entryDTO);
         }
 
-        public Task<UserDTO> Add(UserDTO entryDTO)
+        public async Task<bool> DeleteById(int id, bool isDbDelete = false)
         {
-            throw new NotImplementedException();
+            if (isDbDelete){
+                return await _userRepository.DbDelete(id);
+            } else {
+                return await _userRepository.Delete(id);
+            }
         }
 
-        public Task<UserDTO> DeleteById(int id)
+        public async Task<UserDTO> EditById(UserDTO entryDTO)
         {
-            throw new NotImplementedException();
+            return await _userRepository.Edit(entryDTO);
         }
 
-        public Task<UserDTO> EditById(UserDTO entryDTO)
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<UserDetailDTO>> GetList(bool isActive){
+            return await _userRepository.List<UserDetailDTO>(x => x.Friends , isActive);
         }
 
-        public Task<UserDetailDTO> GetById(int id, bool isActive = true)
+        public async Task<UserDetailDTO> GetById(int id, bool isActive = true)
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetById<UserDetailDTO>(id, x => x.Friends , isActive);
         }
     }
 }
