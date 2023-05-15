@@ -1,5 +1,6 @@
 using codebattle_api.DTO;
 using codebattle_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace codebattle_api.Controllers
@@ -26,6 +27,7 @@ namespace codebattle_api.Controllers
         /// <param name="id">Database Id of the desired Entity</param>
         /// <returns>Detail DTO of the desired Entity</returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<DetailDTO> Get(int id)
         {
             return await _service.GetById(id);
