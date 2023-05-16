@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using codebattle_api.DTO;
 using codebattle_api.Repositories;
@@ -48,6 +49,11 @@ namespace codebattle_api.Services
         public async Task<IEnumerable<DetailDTO>> GetList(bool isActive = true)
         {
             return await _repository.List<DetailDTO>(null, isActive);
+        }
+
+        public async Task<returnDTO> GetBySpec<returnDTO> (Expression<Func<Entity, bool>> specification)
+        {
+            return await _repository.GetBySpec<returnDTO>(specification);
         }
     }
 }

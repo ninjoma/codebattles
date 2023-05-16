@@ -11,7 +11,8 @@ namespace codebattle_api.Controllers
     /// <typeparam name="IService"></typeparam>
     /// <typeparam name="PostDTO"></typeparam>
     /// <typeparam name="DetailDTO"></typeparam>
-    public abstract class MainController<IService, PostDTO, DetailDTO> : ControllerBase where PostDTO : BaseDTO where DetailDTO : BaseDTO where IService : IMainService<PostDTO, DetailDTO>
+    /// <typeparam name="Entity"></typeparam>
+    public abstract class MainController<IService, PostDTO, DetailDTO, Entity> : ControllerBase where PostDTO : BaseDTO where DetailDTO : BaseDTO where IService : IMainService<PostDTO, DetailDTO, Entity>
     {
         #region Builder & Properties
         protected readonly IService _service;
