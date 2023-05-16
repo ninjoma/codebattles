@@ -29,7 +29,7 @@ namespace codebattle_api.Controllers
         /// <returns>Detail DTO of the desired Entity</returns>
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<DetailDTO> Get(int id)
+        public virtual async Task<DetailDTO> Get(int id)
         {
             return await _service.GetById(id);
         }
@@ -39,7 +39,7 @@ namespace codebattle_api.Controllers
         /// </summary>
         /// <returns>List of Detail DTOs</returns>
         [HttpGet("")]
-        public async Task<IEnumerable<DetailDTO>> List()
+        public virtual async Task<IEnumerable<DetailDTO>> List()
         {
             return await _service.GetList();
         }
@@ -51,7 +51,7 @@ namespace codebattle_api.Controllers
         /// <param name="postDto">New Content of the Entity</param>
         /// <returns>DTO of the edited entity</returns>
         [HttpPut("{id}")]
-        public async Task<PostDTO> Update(int id, [FromBody] PostDTO postDto)
+        public virtual async Task<PostDTO> Update(int id, [FromBody] PostDTO postDto)
         {
             postDto.Id = id;
             return await _service.EditById(postDto);
@@ -63,7 +63,7 @@ namespace codebattle_api.Controllers
         /// <param name="postDTO">New Entity content</param>
         /// <returns>DTO of the new Entity</returns>
         [HttpPost("")]
-        public async Task<PostDTO> Create([FromBody] PostDTO postDTO)
+        public virtual async Task<PostDTO> Create([FromBody] PostDTO postDTO)
         {
             return await _service.Add(postDTO);
         }
@@ -75,7 +75,7 @@ namespace codebattle_api.Controllers
         /// <param name="isDbDelete">Defines if the delete is going to be logical or physical</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(int id, [FromBody] bool isDbDelete = false)
+        public virtual async Task<bool> Delete(int id, [FromBody] bool isDbDelete = false)
         {
             return await _service.DeleteById(id, isDbDelete);
         }

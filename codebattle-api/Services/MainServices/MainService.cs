@@ -18,12 +18,12 @@ namespace codebattle_api.Services
         }
         #endregion Builder & Properties
 
-        public async Task<PostDTO> Add(PostDTO entryDTO)
+        public virtual async Task<PostDTO> Add(PostDTO entryDTO)
         {
             return await _repository.Add(entryDTO);
         }
 
-        public async Task<bool> DeleteById(int id, bool isDbDelete = false)
+        public virtual async Task<bool> DeleteById(int id, bool isDbDelete = false)
         {
             if (isDbDelete)
             {
@@ -35,23 +35,23 @@ namespace codebattle_api.Services
             }
         }
 
-        public async Task<PostDTO> EditById(PostDTO entryDTO)
+        public virtual async Task<PostDTO> EditById(PostDTO entryDTO)
         {
             return await _repository.Edit(entryDTO);
 
         }
 
-        public async Task<DetailDTO> GetById(int id, bool isActive = true)
+        public virtual async Task<DetailDTO> GetById(int id, bool isActive = true)
         {
             return await _repository.GetById<DetailDTO>(id, null , isActive);
         }
 
-        public async Task<IEnumerable<DetailDTO>> GetList(bool isActive = true)
+        public virtual async Task<IEnumerable<DetailDTO>> GetList(bool isActive = true)
         {
             return await _repository.List<DetailDTO>(null, isActive);
         }
 
-        public async Task<returnDTO> GetBySpec<returnDTO> (Expression<Func<Entity, bool>> specification)
+        public virtual async Task<returnDTO> GetBySpec<returnDTO> (Expression<Func<Entity, bool>> specification)
         {
             return await _repository.GetBySpec<returnDTO>(specification);
         }

@@ -19,7 +19,7 @@ namespace codebattle_api.Controllers
             _UserSv = UserSv;
         }
 
-        [HttpGet("Authenticate")]
+        [HttpPost("Authenticate")]
         public async Task<string> GenerateToken([FromBody] UserDTO user)
         {
             var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email.Equals(user.Email.Trim()));
