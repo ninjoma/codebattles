@@ -1,42 +1,45 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using codebattle_api.DTO;
+using codebattle_api.utils;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace codebattle_api.Services.AuthServices
 {
     public class AuthService : IAuthService
     {
-        public AuthService()
+        private readonly IConfiguration _configuration;
+        public AuthService(IConfiguration configuration)
         {
-
+            _configuration = configuration;
         }
 
         public string GenerateToken(UserDTO user)
         {
-            var configuration = new ConfigurationBuilder()
-            .AddEnvironmentVariables()
-            .Build();
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]{
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name,  user.Username),
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: "codebattle-web", //TODO: Implementar que lo extraiga de la llamada
+                audience: _configuration["Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+            );
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration["JWT_ENCRYPTIONKEY"] ?? "Prueba");
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                //Claims
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name,  user.Username),
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var encodedToken = tokenHandler.WriteToken(token);
+            var tokenString = tokenHandler.WriteToken(token);
 
-            // Retorna el token JWT generado
-            return encodedToken;
+            return "Bearer " + tokenString;
         }
 
         public Task<UserDetailDTO> GetTokenUser(string token)
