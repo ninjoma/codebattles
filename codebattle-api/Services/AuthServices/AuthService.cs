@@ -39,10 +39,10 @@ namespace codebattle_api.Services.AuthServices
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenString = tokenHandler.WriteToken(token);
 
-            return "Bearer " + tokenString;
+            return tokenString;
         }
 
-        public Task<UserDetailDTO> GetTokenUser(string token)
+        public Task<UserDetailDTO> GetTokenUserName(string token)
         {
             throw new NotImplementedException();
         }

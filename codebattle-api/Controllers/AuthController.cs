@@ -8,12 +8,12 @@ namespace codebattle_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthenticationController
+    public class AuthController
     {
 
         private readonly IAuthService _AuthSv;
         private readonly IUserService _UserSv;
-        public AuthenticationController(IAuthService AuthSv, IUserService UserSv)
+        public AuthController(IAuthService AuthSv, IUserService UserSv)
         {
             _AuthSv = AuthSv;
             _UserSv = UserSv;
@@ -25,6 +25,7 @@ namespace codebattle_api.Controllers
             var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email.Equals(user.Email.Trim()));
             if (result != null)
             {
+                //TODO: Repensar como funciona este sistema
                 if (PasswordHasher.VerifyPassword(user.Password, result.Password)){
                     return _AuthSv.GenerateToken(result);
                 } 
