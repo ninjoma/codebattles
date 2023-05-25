@@ -11,7 +11,7 @@ namespace codebattle_api.Repositories
         /// <param name="include">Expression that defines which relations to include</param>
         /// <param name="isActive">Bool that defines Wether to get the not deleted or deleted Entities</param>
         /// <returns>IEnumerable of Mapped Objects</returns>
-        Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>> include = null, bool isActive = true);
+        Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>>? include = null, bool isActive = true);
 
         /// <summary>
         /// Gets a mapped object based on a id
@@ -21,7 +21,7 @@ namespace codebattle_api.Repositories
         /// <param name="include">Expression that defines which relations to include</param>
         /// <param name="isActive">Bool that defines Wether to get the not deleted or deleted Entities</param>
         /// <returns>Mapped Object</returns>
-        Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>> include = null, bool isActive = true);
+        Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>>? include = null, bool isActive = true);
 
         /// <summary>
         /// Gets a mapped object based on a lambda expression
@@ -30,7 +30,7 @@ namespace codebattle_api.Repositories
         /// <param name="specification">Expression that defines the specficiations to match</param>
         /// <param name="include">Expression that defines which relations to include</param>
         /// <returns>Mapped Object</returns>
-        Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>> include = null);
+        Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null);
 
         /// <summary>
         /// Gets a list of mapped objects based on a lambda expression
@@ -39,7 +39,7 @@ namespace codebattle_api.Repositories
         /// <param name="specification">Expression that defines the specficiations to match</param>
         /// <param name="include">Expression that defines which relations to include</param>
         /// <returns>IEnumerable of Mapped Object</returns>
-        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>> include = null);
+        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null);
 
         /// <summary>
         /// Creates a new entity in de DB

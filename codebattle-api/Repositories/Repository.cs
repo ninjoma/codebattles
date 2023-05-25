@@ -78,7 +78,7 @@ namespace codebattle_api.Repositories
             return _mapper.Map<PostDTO>(entity);
         }
 
-        public async Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>> include = null, bool isActive = true)
+        public async Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>>? include = null, bool isActive = true)
         {
             if (include != null)
             {
@@ -90,7 +90,7 @@ namespace codebattle_api.Repositories
             }
         }
 
-        public async Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>> include = null, bool isActive = true)
+        public async Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>>? include = null, bool isActive = true)
         {
             if (include != null)
             {
@@ -111,11 +111,12 @@ namespace codebattle_api.Repositories
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
 
-        public async Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>> include = null)
+        public async Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null)
         {
             if (include != null)
             {
@@ -127,7 +128,7 @@ namespace codebattle_api.Repositories
             }
         }
 
-        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>> include = null)
+        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null)
         {
             if (include != null)
             {
