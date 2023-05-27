@@ -8,7 +8,7 @@ namespace codebattle_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class FriendController : MainController<IFriendService, FriendDTO, FriendDTO, Friend>
+    public class FriendController : MainController<IFriendService, FriendDTO, FriendDetailDTO, Friend>
     {
         public FriendController(IFriendService service) : base(service)
         {

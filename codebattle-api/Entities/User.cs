@@ -30,6 +30,6 @@ namespace codebattle_api.Entities
 
         public virtual ICollection<Friend>? FriendList2 { get; set; }
 
-        public virtual ICollection<Participant>? Participant { get; set; }
+        public virtual ICollection<Participant>? Participants { get; set; }
     }
 }

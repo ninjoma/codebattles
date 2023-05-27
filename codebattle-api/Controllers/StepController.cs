@@ -8,7 +8,7 @@ namespace codebattle_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StepController : MainController<IStepService, StepDTO, StepDTO, Step>
+    public class StepController : MainController<IStepService, StepDTO, StepDetailDTO, Step>
     {
         public StepController(IStepService service) : base(service)
         {

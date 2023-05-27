@@ -4,7 +4,7 @@ using codebattle_api.Entities;
 using codebattle_api.Repositories;
 
 namespace codebattle_api.Services.ParticipantServices{
-    public class ParticipantService : MainService<Participant, ParticipantDTO, ParticipantDTO>, IParticipantService
+    public class ParticipantService : MainService<Participant, ParticipantDTO, ParticipantDetailDTO>, IParticipantService
     {
         #region Builder & Properties
         public ParticipantService(IMapper mapper, IRepository<ParticipantDTO, Participant> repository) : base(mapper, repository)
