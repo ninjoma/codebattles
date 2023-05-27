@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using codebattle_api.DTO;
 using codebattle_api.Entities;
+using codebattle_api.Exceptions;
 using codebattle_api.Repositories;
 using codebattle_api.utils;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +26,11 @@ namespace codebattle_api.Services.AuthServices
         /// This Method Generates a User Token
         /// </summary>
         /// <param name="user"></param>
-        /// <returns></returns>
+        /// <returns>JWT Token</returns>
         public string GenerateToken(UserDTO user)
         {
-            if (user != null && user.Email != null && user.Username != null){
+            if (user != null && user.Email != null && user.Username != null)
+            {
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
                 var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -53,12 +55,52 @@ namespace codebattle_api.Services.AuthServices
             return "No data supplied";
         }
 
-        public async Task<string?> RegisterUser(UserDTO user){
-            if (user != null && user.Email != null && user.Username != null){
+        /// <summary>
+        /// This Method Registers a user into de app
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>JWT Token</returns>
+        public async Task<string?> RegisterUser(UserDTO user)
+        {
+            if (user != null && user.Email != null && user.Username != null && user.Password != null)
+            {
+                user.Password = PasswordHasher.HashPassword(user.Password);
                 var result = await _userRepo.Add(user);
                 return GenerateToken(result);
             }
-            return null;
+            else
+            {
+                throw new CodeBattleException(ErrorCode.InvalidInput);
+            }
+        }
+
+        /// <summary>
+        /// This Method Registers a user into de app
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>JWT Token</returns>
+        public async Task<string?> Login(UserDTO user)
+        {
+            if (user != null && user.Email != null && user.Password != null)
+            {
+                var result = await _userRepo.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(user.Email.Trim()));
+                if (result != null && result.Password != null)
+                {
+                    if (PasswordHasher.VerifyPassword(user.Password, result.Password))
+                    {
+                        return GenerateToken(result);
+                    }
+                    else
+                    {
+                        throw new CodeBattleException(ErrorCode.WrongPassword);
+                    }
+                }
+                else
+                {
+                    throw new CodeBattleException(ErrorCode.WrongEmail);
+                }
+            }
+            throw new CodeBattleException(ErrorCode.InvalidInput);
         }
     }
 }

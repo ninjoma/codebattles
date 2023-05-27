@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using codebattle_api.DTO;
+using codebattle_api.Exceptions;
 using codebattle_api.Services.AuthServices;
 using codebattle_api.Services.UserServices;
 using codebattle_api.utils;
@@ -21,52 +22,28 @@ namespace codebattle_api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> GenerateToken([FromBody] UserDTO user)
+        public async Task<IActionResult> Login([FromBody] UserDTO user)
         {
-            if (user.Email != null)
+            try
             {
-                var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(user.Email.Trim()));
-                if (result != null)
-                {
-                    //TODO: Repensar como funciona este sistema
-                    if (user.Password != null && result.Password != null)
-                    {
-                        if (PasswordHasher.VerifyPassword(user.Password, result.Password))
-                        {
-                            return Ok(_AuthSv.GenerateToken(result));
-                        }
-                        else
-                        {
-                            return BadRequest("Wrong Password");
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest("No Password Supplied");
-                    }
-                }
+                return Ok(await _AuthSv.Login(user));
             }
-            return NotFound("No account Binded to email");
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
         }
 
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] UserDTO user)
         {
-            if (user != null)
+            try
             {
-                if (user.Password != null)
-                {
-                    user.Password = PasswordHasher.HashPassword(user.Password);
-                    return Ok(await _AuthSv.RegisterUser(user));
-                }
-                else
-                {
-                    return BadRequest("No Password Supplied");
-                }
+                return Ok(await _AuthSv.RegisterUser(user));
             }
-            else
+            catch (CodeBattleException ex)
             {
-                return BadRequest("No Data Supplied");
+                return BadRequest(new ErrorResponse(ex));
             }
         }
     }
