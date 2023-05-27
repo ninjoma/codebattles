@@ -1,5 +1,6 @@
 using System.Net;
 using codebattle_api.DTO;
+using codebattle_api.Exceptions;
 using codebattle_api.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace codebattle_api.Controllers
         public virtual async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetById(id);
-            return result != null ? Ok(result) : NotFound(result);
+            return result != null ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace codebattle_api.Controllers
         public virtual async Task<IActionResult> List()
         {
             var result = await _service.GetList();
-            return result != null ? Ok(result) : NotFound(result);
+            return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
         }
 
         /// <summary>
@@ -58,9 +59,16 @@ namespace codebattle_api.Controllers
         [Authorize]
         public virtual async Task<IActionResult> Update(int id, [FromBody] PostDTO postDto)
         {
-            postDto.Id = id;
-            var result = await _service.EditById(postDto);
-            return Ok(result);
+            try
+            {
+                postDto.Id = id;
+                var result = await _service.EditById(postDto);
+                return Ok(result);
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
         }
 
         /// <summary>
@@ -72,8 +80,15 @@ namespace codebattle_api.Controllers
         [Authorize]
         public virtual async Task<IActionResult> Create([FromBody] PostDTO postDTO)
         {
-            var result = await _service.Add(postDTO);
-            return Ok(result);
+            try
+            {
+                var result = await _service.Add(postDTO);
+                return Ok(result);
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
         }
 
         /// <summary>
@@ -86,8 +101,15 @@ namespace codebattle_api.Controllers
         [Authorize]
         public virtual async Task<IActionResult> Delete(int id, [FromBody] bool isDbDelete = false)
         {
-            var result = await _service.DeleteById(id, isDbDelete);
-            return Ok(result);
+            try
+            {
+                var result = await _service.DeleteById(id, isDbDelete);
+                return Ok(result);
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
         }
 
     }

@@ -17,7 +17,7 @@ namespace codebattle_api.Exceptions
         public CodeBattleException(ErrorCode errorCode) : base(GetErrorMessage(errorCode))
         {
             ErrorCode = ErrorCode;
-            ErrorTranslation = GetErrorTranslationMessage(ErrorCode);
+            ErrorTranslation = GetErrorTranslationMessage(errorCode);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace codebattle_api.Exceptions
         /// <param name="errorCode"></param>
         /// <returns></returns>
         private static string GetErrorTranslationMessage(ErrorCode errorCode){
-            var Errorname = ErrorCode.GetName(errorCode);
+            var Errorname = ErrorCode.GetName(typeof(ErrorCode), errorCode);
             if (Errorname != null){
                 return "ERROR." + Errorname.ToUpperInvariant();
             }
