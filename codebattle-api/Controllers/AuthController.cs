@@ -8,7 +8,7 @@ namespace codebattle_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController
+    public class AuthController : ControllerBase
     {
 
         private readonly IAuthService _AuthSv;
@@ -19,26 +19,46 @@ namespace codebattle_api.Controllers
             _UserSv = UserSv;
         }
 
-        [HttpPost("Authenticate")]
-        public async Task<string> GenerateToken([FromBody] UserDTO user)
+        [HttpPost("Login")]
+        public async Task<IActionResult> GenerateToken([FromBody] UserDTO user)
         {
-            if (user.Email != null){
+            if (user.Email != null)
+            {
                 var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(user.Email.Trim()));
                 if (result != null)
                 {
                     //TODO: Repensar como funciona este sistema
-                    if (user.Password != null && result.Password != null){
-                        if (PasswordHasher.VerifyPassword(user.Password, result.Password)){
-                            return _AuthSv.GenerateToken(result);
-                        } 
+                    if (user.Password != null && result.Password != null)
+                    {
+                        if (PasswordHasher.VerifyPassword(user.Password, result.Password))
+                        {
+                            return Ok(_AuthSv.GenerateToken(result));
+                        }
                         else
                         {
-                            return "Wrong Password";
+                            return BadRequest("Wrong Password");
                         }
+                    }
+                    else
+                    {
+                        return BadRequest("No Password Supplied");
                     }
                 }
             }
-            return "User not found";
+            return NotFound("No account Binded to email");
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] UserDTO user)
+        {
+            if (user != null)
+            {
+                return Ok(await _AuthSv.RegisterUser(user));
+            } 
+            else 
+            {
+                return BadRequest("No Password Supplied");
+            }
         }
     }
 }

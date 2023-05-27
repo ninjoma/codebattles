@@ -53,6 +53,14 @@ namespace codebattle_api.Services.AuthServices
             return "No data supplied";
         }
 
+        public async Task<string?> RegisterUser(UserDTO user){
+            if (user != null && user.Email != null && user.Username != null){
+                var result = await _userRepo.Add(user);
+                return GenerateToken(result);
+            }
+            return null;
+        }
+
         /// <summary>
         /// This Method Recovers User Data from a token
         /// </summary>

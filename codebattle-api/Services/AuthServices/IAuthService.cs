@@ -4,5 +4,6 @@ namespace codebattle_api.Services.AuthServices{
     public interface IAuthService {
         string GenerateToken(UserDTO user);
         Task<UserDetailDTO?> GetTokenUser(string token);
+        Task<string?> RegisterUser(UserDTO user);
     }
 }
