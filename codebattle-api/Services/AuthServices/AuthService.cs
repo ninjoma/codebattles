@@ -68,7 +68,7 @@ namespace codebattle_api.Services.AuthServices
 
                 if (emailClaim != null)
                 {
-                    return await _userRepo.GetBySpec<UserDetailDTO>(x => x.Email.Equals(emailClaim.Value));
+                    return await _userRepo.GetBySpec<UserDetailDTO>(x => x.Email != null && x.Email.Equals(emailClaim.Value));
                 }
             }
             return null;
