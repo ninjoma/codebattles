@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace codebattle_api.Entities
 {
@@ -7,5 +8,8 @@ namespace codebattle_api.Entities
         [Key]
         public int Id { get; set; }
         public bool IsActive { get; set; }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreationDate { get; set; }
     }
 }

@@ -14,9 +14,6 @@ namespace codebattle_api.Entities
         [Required]
         public string? Email { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreationDate { get; set; }
-
         [Required]
         public string? Password { get; set; }
 

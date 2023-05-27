@@ -13,8 +13,5 @@ namespace codebattle_api.Entities
 
         [Required]
         public int FriendId { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime AddDate { get; set; }
     }
 }

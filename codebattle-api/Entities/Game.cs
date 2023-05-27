@@ -15,9 +15,6 @@ namespace codebattle_api.Entities
         [Required]
         public LanguageEnum Language { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreationDate { get; set; }
-
         public int? WinnerId { get; set; }
 
         [ForeignKey(nameof(WinnerId))]
