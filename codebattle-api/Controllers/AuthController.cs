@@ -22,16 +22,20 @@ namespace codebattle_api.Controllers
         [HttpPost("Authenticate")]
         public async Task<string> GenerateToken([FromBody] UserDTO user)
         {
-            var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(user.Email.Trim()));
-            if (result != null)
-            {
-                //TODO: Repensar como funciona este sistema
-                if (PasswordHasher.VerifyPassword(user.Password, result.Password)){
-                    return _AuthSv.GenerateToken(result);
-                } 
-                else
+            if (user.Email != null){
+                var result = await _UserSv.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(user.Email.Trim()));
+                if (result != null)
                 {
-                    return "Wrong Password";
+                    //TODO: Repensar como funciona este sistema
+                    if (user.Password != null && result.Password != null){
+                        if (PasswordHasher.VerifyPassword(user.Password, result.Password)){
+                            return _AuthSv.GenerateToken(result);
+                        } 
+                        else
+                        {
+                            return "Wrong Password";
+                        }
+                    }
                 }
             }
             return "User not found";

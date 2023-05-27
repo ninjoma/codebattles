@@ -1,3 +1,4 @@
+using System.Net;
 using codebattle_api.DTO;
 using codebattle_api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -29,9 +30,10 @@ namespace codebattle_api.Controllers
         /// <returns>Detail DTO of the desired Entity</returns>
         [HttpGet("{id}")]
         [Authorize]
-        public virtual async Task<DetailDTO> Get(int id)
+        public virtual async Task<IActionResult> Get(int id)
         {
-            return await _service.GetById(id);
+            var result = await _service.GetById(id);
+            return result != null ? Ok(result) : NotFound(result);
         }
 
         /// <summary>
@@ -39,9 +41,11 @@ namespace codebattle_api.Controllers
         /// </summary>
         /// <returns>List of Detail DTOs</returns>
         [HttpGet("")]
-        public virtual async Task<IEnumerable<DetailDTO>> List()
+        [Authorize]
+        public virtual async Task<IActionResult> List()
         {
-            return await _service.GetList();
+            var result = await _service.GetList();
+            return result != null ? Ok(result) : NotFound(result);
         }
 
         /// <summary>
@@ -51,10 +55,12 @@ namespace codebattle_api.Controllers
         /// <param name="postDto">New Content of the Entity</param>
         /// <returns>DTO of the edited entity</returns>
         [HttpPut("{id}")]
-        public virtual async Task<PostDTO> Update(int id, [FromBody] PostDTO postDto)
+        [Authorize]
+        public virtual async Task<IActionResult> Update(int id, [FromBody] PostDTO postDto)
         {
             postDto.Id = id;
-            return await _service.EditById(postDto);
+            var result = await _service.EditById(postDto);
+            return Ok(result);
         }
 
         /// <summary>
@@ -63,9 +69,11 @@ namespace codebattle_api.Controllers
         /// <param name="postDTO">New Entity content</param>
         /// <returns>DTO of the new Entity</returns>
         [HttpPost("")]
-        public virtual async Task<PostDTO> Create([FromBody] PostDTO postDTO)
+        [Authorize]
+        public virtual async Task<IActionResult> Create([FromBody] PostDTO postDTO)
         {
-            return await _service.Add(postDTO);
+            var result = await _service.Add(postDTO);
+            return Ok(result);
         }
 
         /// <summary>
@@ -75,9 +83,11 @@ namespace codebattle_api.Controllers
         /// <param name="isDbDelete">Defines if the delete is going to be logical or physical</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public virtual async Task<bool> Delete(int id, [FromBody] bool isDbDelete = false)
+        [Authorize]
+        public virtual async Task<IActionResult> Delete(int id, [FromBody] bool isDbDelete = false)
         {
-            return await _service.DeleteById(id, isDbDelete);
+            var result = await _service.DeleteById(id, isDbDelete);
+            return Ok(result);
         }
 
     }

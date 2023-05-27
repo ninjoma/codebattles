@@ -14,13 +14,13 @@ namespace codebattle_api.Controllers
         {
         }
 
-        public override async Task<UserDTO> Create([FromBody] UserDTO postDTO)
+        public override async Task<IActionResult> Create([FromBody] UserDTO postDTO)
         {
             if (postDTO.Password != null){
                 postDTO.Password = PasswordHasher.HashPassword(postDTO.Password);
-                return await _service.Add(postDTO);
+                return Ok(await _service.Add(postDTO));
             }
-            return null;
+            return BadRequest();
         }
 
     }
