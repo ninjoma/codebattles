@@ -22,14 +22,7 @@ namespace codebattle_api.Entities
 
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
-
-
-
-        [InverseProperty("User")]
-        public virtual ICollection<Friend>? FriendList1 { get; set; }
-
-        public virtual ICollection<Friend>? FriendList2 { get; set; }
-
+        public ICollection<Friend>? Friends { get; set; }
         public virtual ICollection<Participant>? Participants { get; set; }
     }
 }

@@ -17,11 +17,11 @@ namespace codebattle_api.Entities
         
         #region Game
 
-            [Required]
-            public int GameId { get; set; }
+        [Required]
+        public int GameId { get; set; }
     
-            [ForeignKey(nameof(GameId))]
-            public Game? Game {get; set; }
+        [ForeignKey(nameof(GameId))]
+        public Game? Game {get; set; }
 
         #endregion Game
 

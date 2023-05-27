@@ -16,6 +16,5 @@ namespace codebattle_api
         public DbSet<Participant>? Participant { get; set; }
         public DbSet<Step>? Step { get; set; }
         public DbSet<Tag>? Tag { get; set; }
-
     }
 }

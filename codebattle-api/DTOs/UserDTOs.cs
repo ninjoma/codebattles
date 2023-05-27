@@ -10,8 +10,7 @@ namespace codebattle_api.DTO
     }
 
     public class UserDetailDTO : UserDTO {
-        public virtual ICollection<FriendDTO>? FriendList1 { get; set; }
-        public virtual ICollection<FriendDTO>? FriendList2 { get; set; }
+        public virtual ICollection<FriendDTO>? Friends { get; set; }
         public virtual ICollection<ParticipantDTO>? Participants {get; set;}
     }
 }

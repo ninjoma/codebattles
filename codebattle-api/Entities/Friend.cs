@@ -12,10 +12,7 @@ namespace codebattle_api.Entities
         public User? User { get; set; }
 
         [Required]
-        public int FriendUserId { get; set; }
-
-        [ForeignKey(nameof(FriendUserId))]
-        public User? UserFriend { get; set; }
+        public int FriendId { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime AddDate { get; set; }
