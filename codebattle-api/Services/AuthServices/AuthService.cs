@@ -28,27 +28,29 @@ namespace codebattle_api.Services.AuthServices
         /// <returns></returns>
         public string GenerateToken(UserDTO user)
         {
+            if (user != null && user.Email != null && user.Username != null){
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
+                var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var claims = new[]{
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Name,  user.Username),
+                };
 
-            var claims = new[]{
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name,  user.Username),
-            };
+                var token = new JwtSecurityToken(
+                    issuer: "codebattle-web", //TODO: Implementar que lo extraiga de la llamada
+                    audience: _configuration["Audience"],
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddHours(1),
+                    signingCredentials: credentials
+                );
 
-            var token = new JwtSecurityToken(
-                issuer: "codebattle-web", //TODO: Implementar que lo extraiga de la llamada
-                audience: _configuration["Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
-                signingCredentials: credentials
-            );
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var tokenString = tokenHandler.WriteToken(token);
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenString = tokenHandler.WriteToken(token);
-
-            return tokenString;
+                return tokenString;
+            }
+            return "No data supplied";
         }
 
         /// <summary>
