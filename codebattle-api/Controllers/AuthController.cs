@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using codebattle_api.DTO;
 using codebattle_api.Services.AuthServices;
 using codebattle_api.Services.UserServices;
@@ -53,11 +54,19 @@ namespace codebattle_api.Controllers
         {
             if (user != null)
             {
-                return Ok(await _AuthSv.RegisterUser(user));
-            } 
-            else 
+                if (user.Password != null)
+                {
+                    user.Password = PasswordHasher.HashPassword(user.Password);
+                    return Ok(await _AuthSv.RegisterUser(user));
+                }
+                else
+                {
+                    return BadRequest("No Password Supplied");
+                }
+            }
+            else
             {
-                return BadRequest("No Password Supplied");
+                return BadRequest("No Data Supplied");
             }
         }
     }

@@ -60,28 +60,5 @@ namespace codebattle_api.Services.AuthServices
             }
             return null;
         }
-
-        /// <summary>
-        /// This Method Recovers User Data from a token
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        public async Task<UserDetailDTO?> GetTokenUser(string token)
-        {
-            var handler = new JwtSecurityTokenHandler();
-
-            if (handler.CanReadToken(token))
-            {
-                JwtSecurityToken jwtToken = handler.ReadJwtToken(token);
-                var emailClaim = jwtToken.Claims.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Email));
-                var usernameClaim = jwtToken.Claims.FirstOrDefault(x => x.Type.Equals(ClaimTypes.Name));
-
-                if (emailClaim != null)
-                {
-                    return await _userRepo.GetBySpec<UserDetailDTO>(x => x.Email != null && x.Email.Equals(emailClaim.Value));
-                }
-            }
-            return null;
-        }
     }
 }
