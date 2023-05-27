@@ -9,6 +9,14 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using codebattle_api.utils;
 using Microsoft.Extensions.Hosting;
+using Sentry;
+
+SentrySdk.Init(options =>
+{
+    options.Dsn = "https://47a4042b018041039fd5c0d19c414997@o4504822339010560.ingest.sentry.io/4505255632109568";
+    options.AutoSessionTracking = true;
+    options.EnableTracing = true;
+});
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,7 +84,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 var app = builder.Build();
-
 
 
 // Configure the HTTP request pipeline.
