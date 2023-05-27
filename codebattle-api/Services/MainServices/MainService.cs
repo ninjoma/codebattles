@@ -46,9 +46,9 @@ namespace codebattle_api.Services
             return await _repository.GetById<DetailDTO>(id, null , isActive);
         }
 
-        public virtual async Task<IEnumerable<DetailDTO>> GetList(bool isActive = true)
+        public virtual async Task<IEnumerable<DetailDTO>> GetList(Expression<Func<Entity, object>>? include = null, bool isActive = true)
         {
-            return await _repository.List<DetailDTO>(null, isActive);
+            return await _repository.List<DetailDTO>(include, isActive);
         }
 
         public virtual async Task<returnDTO> GetBySpec<returnDTO> (Expression<Func<Entity, bool>> specification)
