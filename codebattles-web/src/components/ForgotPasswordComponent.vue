@@ -1,10 +1,16 @@
 <script lang="ts">
 import SectionTitle from './SectionTitle.vue';
+import { event } from "vue-gtag";
 
 export default { 
     components: { 
         SectionTitle 
-    } 
+    },
+    methods: {
+        resetPassword() {
+            event('resetPassword', { event_category: 'login' })
+        }
+    }
 }
 </script>
 <template>
@@ -22,7 +28,7 @@ export default {
             <div class="flex flex-col items-center gap-y-5 py-3">
                 <div class="flex gap-3 items-center w-full">
                     <router-link to="/login" tag="button" className="btn flex-1 w-full">Back</router-link>
-                    <button className="btn flex-1 w-full btn-success">Reset Password</button>
+                    <button @click="resetPassword" className="btn flex-1 w-full btn-success">Reset Password</button>
                 </div>
             </div>
         </div>

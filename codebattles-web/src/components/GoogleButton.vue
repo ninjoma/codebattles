@@ -1,4 +1,6 @@
 <script lang="ts">
+import { event } from "vue-gtag"
+
 export default {
     components: {
         
@@ -10,11 +12,16 @@ export default {
             googleClientID,
             loginUri
         }
+    },
+    methods: {
+        clicked() {
+            event('login', { method: 'Google' })
+        }
     }
 }
 </script>
 <template>
-    <div>
+    <button @click="clicked">
         <div id="g_id_onload"
             :data-client_id=googleClientID
             :data-login_uri=loginUri
@@ -23,10 +30,10 @@ export default {
         <div class="g_id_signin"
             data-type="standard"
             data-size="large"
-            data-theme="outline"
+            data-theme="filled_black"
             data-text="sign_in_with"
             data-shape="rectangular"
             data-logo_alignment="left">
         </div>
-    </div>
+    </button>
 </template>

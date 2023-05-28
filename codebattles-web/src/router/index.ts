@@ -7,12 +7,12 @@ import RegisterView from "../views/RegisterView.vue";
 import ForgotPasswordView from "../views/ForgotPasswordView.vue";
 
 const routes: VueRouter.RouteRecordRaw[] = [
-    { path: '/lobby', component: LobbyView },
-    { path: '/profile', component: ProfileView },
-    { path: '/battle', component: BattleView },
-    { path: '/login', component: LoginView },
-    { path: '/register', component: RegisterView },
-    { path: '/forgot-password', component: ForgotPasswordView }
+    { name: 'Lobby', path: '/lobby', component: LobbyView },
+    { name: 'Profile', path: '/profile', component: ProfileView },
+    { name: 'Battle', path: '/battle', component: BattleView },
+    { name: 'Login', path: '/login', component: LoginView },
+    { name: 'Register', path: '/register', component: RegisterView },
+    { name: 'Forgot Password', path: '/forgot-password', component: ForgotPasswordView }
 ]
 
 const routerOptions: VueRouter.RouterOptions = {

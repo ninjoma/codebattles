@@ -11,11 +11,7 @@ export default {
     components: {
         GoogleButton,
         SectionTitle,
-
     },
-    data() {
-
-    }
 }
 
 </script>
@@ -35,7 +31,9 @@ export default {
             <div class="flex flex-col items-center gap-y-5">
                 <div class="flex flex-col gap-3 items-center w-full">
                     <button className="btn flex-1 w-full btn-success">Log In</button>
-                    <GoogleButton className="w-full"></GoogleButton>
+                    <div className="flex justify-center w-full">
+                        <GoogleButton></GoogleButton>
+                    </div>
                 </div>
                 <b className="text-success">Don't have a codebattles account?</b>
                 <router-link to="/register" tag="button" className="btn flex-1 w-full">Register</router-link>
