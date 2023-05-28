@@ -12,6 +12,7 @@ import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag,
     faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, 
     faXmark, faXmarkCircle, faCircleXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import VueGtagPlugin from 'vue-gtag';
 
 if(import.meta.env.DEV) {
     // Allow CORS from localhost
@@ -30,6 +31,12 @@ app.use(Router)
 
 .use(Store)
 
+
+.use(VueGtagPlugin, {
+    appName: "Codebattles",
+    pageTrackerScreenviewEnabled: true,
+    config: { id: "G-KK26T2CEXQ" }
+}, Router)
 
 .use(VueCodeMirror, {
     autofocus: false,

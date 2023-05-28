@@ -1,4 +1,6 @@
 <script lang="ts">
+import { event } from "vue-gtag"
+
 export default {
     components: {
         
@@ -34,6 +36,11 @@ export default {
                     this.$router.push("/battle");
                 } 
             }
+        }
+    },
+    methods: {
+        clicked() {
+            event('login', { method: 'Google' })
         }
     }
 }
