@@ -67,7 +67,7 @@ namespace codebattle_api.Controllers
             }
             catch (CodeBattleException ex)
             {
-                return BadRequest(new ErrorResponse(ex));
+                return ReturnError(ex);
             }
         }
 
@@ -87,7 +87,7 @@ namespace codebattle_api.Controllers
             }
             catch (CodeBattleException ex)
             {
-                return BadRequest(new ErrorResponse(ex));
+                return ReturnError(ex);
             }
         }
 
@@ -108,12 +108,14 @@ namespace codebattle_api.Controllers
             }
             catch (CodeBattleException ex)
             {
-                return BadRequest(new ErrorResponse(ex));
+                return ReturnError(ex);
             }
         }
 
-        protected IActionResult ReturnError(CodeBattleException ex){
-            switch(ex.ErrorCode){
+        protected IActionResult ReturnError(CodeBattleException ex)
+        {
+            switch (ex.ErrorCode)
+            {
                 case ErrorCode.WrongPassword:
                     return BadRequest(new ErrorResponse(ex));
                 default:
