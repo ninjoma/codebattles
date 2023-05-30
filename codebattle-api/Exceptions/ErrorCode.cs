@@ -9,5 +9,7 @@ namespace codebattle_api.Exceptions
         Unauthorized,
         InvalidInput,
 
+        PasswordsDontMatch,
+
     }
 }

@@ -11,7 +11,8 @@ namespace codebattle_api.Exceptions
             { ErrorCode.InvalidInput, "La entrada proporcionada es inválida." },
             { ErrorCode.NotFound, "No se encontró el recurso solicitado." },
             { ErrorCode.Unauthorized, "No está autorizado para acceder a este recurso." },
-            { ErrorCode.WrongPassword, "La contraseña proporcionada es incorrecta"}
+            { ErrorCode.WrongPassword, "La contraseña proporcionada es incorrecta" },
+            { ErrorCode.PasswordsDontMatch, "Las contraseñas no coinciden" }
         };
 
         public CodeBattleException(ErrorCode errorCode) : base(GetErrorMessage(errorCode))
