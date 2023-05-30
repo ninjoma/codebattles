@@ -112,5 +112,14 @@ namespace codebattle_api.Controllers
             }
         }
 
+        protected IActionResult ReturnError(CodeBattleException ex){
+            switch(ex.ErrorCode){
+                case ErrorCode.WrongPassword:
+                    return BadRequest(new ErrorResponse(ex));
+                default:
+                    return BadRequest(new ErrorResponse(ex));
+            }
+        }
+
     }
 }

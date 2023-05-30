@@ -37,6 +37,7 @@ namespace codebattle_api.Services.AuthServices
                 var claims = new[]{
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Name,  user.Username),
+                    new Claim(ClaimTypes.Upn, user.Id.ToString()),
                 };
 
                 var token = new JwtSecurityToken(

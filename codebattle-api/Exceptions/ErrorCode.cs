@@ -8,8 +8,8 @@ namespace codebattle_api.Exceptions
         NotFound,
         Unauthorized,
         InvalidInput,
-
         PasswordsDontMatch,
+        MissingTokenData,
 
     }
 }
