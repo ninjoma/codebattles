@@ -56,6 +56,14 @@ namespace codebattle_api.DTO
             CreateMap<Tag, TagDetailDTO>()
                 .ReverseMap();
             #endregion TAG
+
+            #region BADGE
+            CreateMap<Badge, BadgeDTO>()
+                .ReverseMap();
+
+            CreateMap<Badge, BadgeDetailDTO>()
+                .ReverseMap();
+            #endregion BADGE
         }
     }
 }
