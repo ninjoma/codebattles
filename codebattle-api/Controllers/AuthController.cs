@@ -46,5 +46,32 @@ namespace codebattle_api.Controllers
                 return BadRequest(new ErrorResponse(ex));
             }
         }
+
+        [HttpPost("ForgotPassword/Generate")]
+        public async Task<IActionResult> ForgotPassword([FromBody] string email)
+        {
+            try
+            {
+                return Ok(await _AuthSv.GeneratePasswordToken(email));
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
+        }
+
+        [HttpPost("ForgotPassword/Check")]
+        public async Task<IActionResult> CheckPassword([FromBody] PasswordDTO passwordDTO)
+        {
+            try
+            {
+                await _AuthSv.CheckPasswordToken(passwordDTO);
+                return Ok();
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
+        }
     }
 }
