@@ -5,6 +5,9 @@ using codebattle_api.Services.AuthServices;
 using codebattle_api.Services.UserServices;
 using codebattle_api.utils;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
+using System.Collections.Specialized;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace codebattle_api.Controllers
 {
@@ -15,10 +18,12 @@ namespace codebattle_api.Controllers
 
         private readonly IAuthService _AuthSv;
         private readonly IUserService _UserSv;
-        public AuthController(IAuthService AuthSv, IUserService UserSv)
+        private readonly IConfiguration Configuration;
+        public AuthController(IAuthService AuthSv, IUserService UserSv, IConfiguration configuration)
         {
             _AuthSv = AuthSv;
             _UserSv = UserSv;
+            Configuration = configuration;
         }
 
         [HttpPost("Login")]
@@ -27,6 +32,40 @@ namespace codebattle_api.Controllers
             try
             {
                 return Ok(await _AuthSv.Login(user));
+            }
+            catch (CodeBattleException ex)
+            {
+                return BadRequest(new ErrorResponse(ex));
+            }
+        }
+
+        [HttpPost("/sso/login")]
+        public async Task<IActionResult> SsoLogin()
+        {
+            try
+            {
+
+                StreamReader reader = new StreamReader(this.Request.Body);
+                string result = await reader.ReadToEndAsync();
+                NameValueCollection parts = HttpUtility.ParseQueryString(result);
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(parts["credential"]);
+
+                if(this.Request.Cookies["g_csrf_token"] != parts["g_csrf_token"]) {
+                    return BadRequest();
+                }
+                
+                var jwtValues = jsonToken as JwtSecurityToken;
+                string aud = jwtValues.Claims.First(claim => claim.Type == "aud").Value;
+
+                if(aud != Configuration["GOOGLE_CLIENT_ID"]) {
+                    return BadRequest();
+                }
+
+                string email = jwtValues.Claims.First(claim => claim.Type == "email").Value;
+                return Ok(await _AuthSv.HandleSsoLogin(email));
+
+                
             }
             catch (CodeBattleException ex)
             {

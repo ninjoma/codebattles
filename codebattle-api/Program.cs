@@ -68,6 +68,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.
 builder.Services.RegisterServices();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
 .AddJwtBearer(options =>
 {
     options.SaveToken = true;
@@ -82,6 +83,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? "")),
     };
 });
+
 
 
 var app = builder.Build();

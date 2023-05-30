@@ -102,5 +102,55 @@ namespace codebattle_api.Services.AuthServices
             }
             throw new CodeBattleException(ErrorCode.InvalidInput);
         }
+
+        public async Task<string?> HandleSsoLogin(string email)
+        {
+            var user = await _userRepo.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(email.Trim()));
+            if(user == null) {
+                string username = email.Substring(0, email.IndexOf("@"));
+                var otherUsers = await _userRepo.ListBySpec<UserDTO>(x => x.Username != null && x.Username.Equals(username.Trim()));
+                user = await _userRepo.Add(new UserDTO {
+                    Username = username + otherUsers.Count(),
+                    Email = email,
+                    Password = "password",
+                    CreationDate = DateTime.Now.ToUniversalTime()
+                });
+            }
+            return GenerateToken(user);
+        }
+
+        public async Task<string?> GeneratePasswordToken(string email)
+        {
+            
+            var user = await _userRepo.GetBySpec<User>(x => x.Email != null && x.Email.Equals(email.Trim()));
+            if(user != null && user.Email != null)
+            {
+                var PasswordResetToken = RandomTokenGenerator.GenerateToken();
+                user.PasswordResetToken = PasswordResetToken;
+                await _userRepo.Save();
+                return PasswordResetToken;
+            }
+            throw new CodeBattleException(ErrorCode.WrongEmail); 
+        }
+
+        public async Task<bool?> CheckPasswordToken(PasswordDTO passwordDTO)
+        {
+            if(passwordDTO.NewPassword != null && passwordDTO.RepeatNewPassword != null && passwordDTO.PasswordResetToken != null)
+            {
+                var user = await _userRepo.GetBySpec<User>(x => x.PasswordResetToken != null && x.PasswordResetToken.Equals(passwordDTO.PasswordResetToken.Trim()));
+                if(passwordDTO.NewPassword == passwordDTO.RepeatNewPassword) 
+                {
+                    user.PasswordResetToken = null;
+                    user.Password = PasswordHasher.HashPassword(passwordDTO.NewPassword);
+                    await _userRepo.Save();
+                    return true;
+                }
+                if(user != null)
+                {
+                    throw new CodeBattleException(ErrorCode.PasswordsDontMatch);
+                }
+            }
+            throw new CodeBattleException(ErrorCode.InvalidInput);
+        }
     }
 }
