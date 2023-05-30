@@ -9,5 +9,7 @@ namespace codebattle_api.Services.AuthServices{
         Task<string?> GeneratePasswordToken(string email);
 
         Task<bool?> CheckPasswordToken(PasswordDTO passwordDTO);
+
+        Task<string?> HandleSsoLogin(string email);
     }
 }

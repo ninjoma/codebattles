@@ -104,6 +104,22 @@ namespace codebattle_api.Services.AuthServices
             throw new CodeBattleException(ErrorCode.InvalidInput);
         }
 
+        public async Task<string?> HandleSsoLogin(string email)
+        {
+            var user = await _userRepo.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(email.Trim()));
+            if(user == null) {
+                string username = email.Substring(0, email.IndexOf("@"));
+                var otherUsers = await _userRepo.ListBySpec<UserDTO>(x => x.Username != null && x.Username.Equals(username.Trim()));
+                user = await _userRepo.Add(new UserDTO {
+                    Username = username + otherUsers.Count(),
+                    Email = email,
+                    Password = "password",
+                    CreationDate = DateTime.Now.ToUniversalTime()
+                });
+            }
+            return GenerateToken(user);
+        }
+
         public async Task<string?> GeneratePasswordToken(string email)
         {
             
