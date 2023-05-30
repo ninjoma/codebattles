@@ -2,8 +2,7 @@ namespace codebattle_api.Exceptions
 { 
     public enum ErrorCode
     {
-        WrongPassword,
-        WrongEmail,
+        WrongLoginData,
         MissingData,
         NotFound,
         Unauthorized,
