@@ -17,6 +17,8 @@ namespace codebattle_api.Entities
         [Required]
         public string? Password { get; set; }
 
+        public string? PasswordResetToken { get; set; }
+
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
         public ICollection<Friend>? Friends { get; set; }
