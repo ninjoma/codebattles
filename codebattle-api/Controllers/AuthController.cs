@@ -56,7 +56,7 @@ namespace codebattle_api.Controllers
                 }
                 
                 var jwtValues = jsonToken as JwtSecurityToken;
-                string aud = jwtValues.Claims.First(claim => claim.Type == "aud").Value;
+                string aud = jwtValues != null ? jwtValues.Claims.First(claim => claim.Type == "aud").Value : throw new CodeBattleException(ErrorCode.InvalidInput);
 
                 if(aud != Configuration["GOOGLE_CLIENT_ID"]) {
                     return BadRequest();
