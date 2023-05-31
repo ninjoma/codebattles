@@ -29,7 +29,7 @@ namespace codebattle_api.Controllers
 
         [HttpGet("")]
         [Authorize]
-        public async Task<IActionResult> FilterUsers([FromQuery] string? username = "", [FromQuery] string? email = "")
+        public async Task<IActionResult> FilterUsers([FromQuery] string? username = null, [FromQuery] string? email = null)
         {
             var result = await _service.FilterUsers(username ?? "", email ?? "", User.GetUserRole());
             return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
