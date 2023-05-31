@@ -15,7 +15,7 @@ namespace codebattle_api.Services.UserServices
         #endregion Builder & Properties
 
 
-        public virtual async Task<IEnumerable<UserDetailDTO>> ListByUsername(string username, string? role = "User")
+        public virtual async Task<IEnumerable<UserDetailDTO>> FilterUsers(string username = "", string email = "", string? role = "User")
         {
             Expression<Func<User, User>> selectExpression;
             if (role != null && role == "Admin")
@@ -39,7 +39,13 @@ namespace codebattle_api.Services.UserServices
                     IsPremium = p.IsPremium,
                 };
             }
-            return await _repository.ListBySpec<UserDetailDTO>(specification: x => x.Username != null && x.Username.Contains(username) && x.IsActive, selectExpression: selectExpression);
+            return await _repository
+                .ListBySpec<UserDetailDTO>(
+                    specification: x => x.Username != null && x.Email != null
+                        && x.Username.Contains(username)
+                        && x.Email.Contains(email)
+                        && x.IsActive,
+                    selectExpression: selectExpression);
         }
     }
 }

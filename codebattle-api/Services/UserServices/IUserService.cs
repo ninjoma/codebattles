@@ -8,8 +8,9 @@ namespace codebattle_api.Services.UserServices{
         /// Method that returns a list of users with a username similar
         /// </summary>
         /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        Task<IEnumerable<UserDetailDTO>> ListByUsername(string username, string? role = "User");
+        Task<IEnumerable<UserDetailDTO>> FilterUsers(string username, string email, string role = "User");
     }
 }

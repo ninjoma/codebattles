@@ -29,9 +29,9 @@ namespace codebattle_api.Controllers
 
         [HttpGet("")]
         [Authorize]
-        public async Task<IActionResult> ListByUsername([FromQuery] string username)
+        public async Task<IActionResult> FilterUsers([FromQuery] string? username = "", [FromQuery] string? email = "")
         {
-            var result = await _service.ListByUsername(username, User.GetUserRole());
+            var result = await _service.FilterUsers(username ?? "", email ?? "", User.GetUserRole());
             return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
         }
 
