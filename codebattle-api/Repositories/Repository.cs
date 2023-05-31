@@ -128,16 +128,23 @@ namespace codebattle_api.Repositories
             }
         }
 
-        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null)
+        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null, Expression<Func<Entity, Entity>>? selectExpression = null)
         {
+            IQueryable<Entity> query = dbSet;
+
             if (include != null)
             {
-                return _mapper.Map<IEnumerable<returnDTO>>(await dbSet.Include(include).Where(specification).ToListAsync());
+                query = query.Include(include);
             }
-            else
+
+            query = query.Where(specification);
+
+            if (selectExpression != null)
             {
-                return _mapper.Map<IEnumerable<returnDTO>>(await dbSet.Where(specification).ToListAsync());
+                query = query.Select(selectExpression);
             }
+
+            return _mapper.Map<IEnumerable<returnDTO>>(await query.ToListAsync());
         }
     }
 }
