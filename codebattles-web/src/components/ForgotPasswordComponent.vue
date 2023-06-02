@@ -4,7 +4,7 @@ import SectionTitle from './SectionTitle.vue';
 export default { 
     components: { 
         SectionTitle 
-    } 
+    }
 }
 </script>
 <template>

@@ -1,4 +1,5 @@
 <script lang="ts">
+import router from '../router';
 import GoogleButton from './GoogleButton.vue';
 import SectionTitle from './SectionTitle.vue';
 import axios from "axios";
@@ -7,20 +8,23 @@ export default {
     components: {
         GoogleButton,
         SectionTitle,
-
-    },
-    data() {
-
     },
     methods: {
         login() {
-            axios.post("/api/Auth/Login", {
-                email: (this.$refs.email as any).value,
-                password: (this.$refs.password as any).value
-            })
-            .then((response) => {
-                this.$store.commit("setToken", response.data);
-            })
+            var emailInput = (this.$refs.email as any);
+            var passwordInput = (this.$refs.password as any);
+
+            if(emailInput.value.length > 3 && passwordInput.value.length > 3) {
+                this.$store.commit("login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
+                
+            }
+        }
+    },
+    watch: {
+        '$store.state.user': function() {
+            if(this.$store.state.user) {
+                router.push("/battle");
+            } 
         }
     }
 }

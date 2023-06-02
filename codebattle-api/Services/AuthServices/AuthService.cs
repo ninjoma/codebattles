@@ -35,7 +35,6 @@ namespace codebattle_api.Services.AuthServices
                 var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var claims = new[]{
-                    new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.Id)),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Name,  user.Username),
                     new Claim(ClaimTypes.Upn, user.Id.ToString()),
@@ -67,6 +66,9 @@ namespace codebattle_api.Services.AuthServices
         {
             if (user != null && user.Email != null && user.Username != null && user.Password != null)
             {
+                // Disable Elevated Privileges for New Users.
+                user.IsAdmin = false;
+                user.IsPremium = false;
                 user.Password = PasswordHasher.HashPassword(user.Password);
                 var result = await _userRepo.Add(user);
                 return GenerateToken(result);
@@ -115,8 +117,7 @@ namespace codebattle_api.Services.AuthServices
                 user = await _userRepo.Add(new UserDTO {
                     Username = username + otherUsers.Count(),
                     Email = email,
-                    Password = "password",
-                    CreationDate = DateTime.Now.ToUniversalTime()
+                    Password = "password"
                 });
             }
             return GenerateToken(user);

@@ -6,6 +6,7 @@ using codebattle_api.utils;
 using codebattle_api.utils.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace codebattle_api.Controllers
 {
@@ -17,6 +18,7 @@ namespace codebattle_api.Controllers
         {
         }
 
+
         public override async Task<IActionResult> Create([FromBody] UserDTO postDTO)
         {
             if (postDTO.Password != null)
@@ -25,6 +27,16 @@ namespace codebattle_api.Controllers
                 return Ok(await _service.Add(postDTO));
             }
             return BadRequest();
+        }
+
+        [HttpGet("me")]
+        public async Task<IActionResult> Self()
+        {
+            try{
+                return Ok(await _service.GetById(this.User.GetUserId()));
+            } catch(CodeBattleException cbe) {
+                return BadRequest(cbe.Message);
+            }
         }
 
         [HttpGet("")]

@@ -5,9 +5,6 @@ export default {
         HeaderButton
     },
     watch: {
-        '$store.state.user': function() {
-            console.log(this.$store.state.user)
-        }
     }
 }
 </script>
@@ -22,7 +19,7 @@ export default {
             </div>
             <a className="normal-case text-xl font-inter font-bold px-2">>/&lt; CODE BATTLES</a>
             <div class="h-full flex gap-3 hidden sm:flex">
-                <HeaderButton targetUrl="/lobby">
+                <HeaderButton targetUrl="/lobby" v-if="$store.state.isLogged">
                     <a>Lobby</a>
                 </HeaderButton>
                 <HeaderButton targetUrl="/battle">
@@ -30,7 +27,7 @@ export default {
                 </HeaderButton>
             </div>
         </div>
-        <div>
+        <div v-if="$store.state.isLogged">
             <div class="h-full flex gap-3 hidden sm:flex">
                 <HeaderButton targetUrl="/profile">
                     <font-awesome-icon icon="fa-solid fa-user" />
