@@ -3,8 +3,12 @@ import HeaderButton from "./HeaderButton.vue";
 export default {
     components: {
         HeaderButton
+    },
+    watch: {
+        '$store.state.user': function() {
+            console.log(this.$store.state.user)
+        }
     }
-
 }
 </script>
 <template>

@@ -35,6 +35,7 @@ namespace codebattle_api.Services.AuthServices
                 var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var claims = new[]{
+                    new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.Id)),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Name,  user.Username),
                 };
@@ -43,7 +44,7 @@ namespace codebattle_api.Services.AuthServices
                     issuer: "codebattle-web", //TODO: Implementar que lo extraiga de la llamada
                     audience: _configuration["Audience"],
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),
+                    expires: DateTime.UtcNow.AddDays(7),
                     signingCredentials: credentials
                 );
 
