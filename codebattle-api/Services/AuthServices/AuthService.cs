@@ -38,6 +38,8 @@ namespace codebattle_api.Services.AuthServices
                     new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.Id)),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Name,  user.Username),
+                    new Claim(ClaimTypes.Upn, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, GetUserRole(user)),
                 };
 
                 var token = new JwtSecurityToken(
@@ -93,12 +95,12 @@ namespace codebattle_api.Services.AuthServices
                     }
                     else
                     {
-                        throw new CodeBattleException(ErrorCode.WrongPassword);
+                        throw new CodeBattleException(ErrorCode.WrongLoginData);
                     }
                 }
                 else
                 {
-                    throw new CodeBattleException(ErrorCode.WrongEmail);
+                    throw new CodeBattleException(ErrorCode.WrongLoginData);
                 }
             }
             throw new CodeBattleException(ErrorCode.InvalidInput);
@@ -131,7 +133,7 @@ namespace codebattle_api.Services.AuthServices
                 await _userRepo.Save();
                 return PasswordResetToken;
             }
-            throw new CodeBattleException(ErrorCode.WrongEmail); 
+            throw new CodeBattleException(ErrorCode.WrongLoginData); 
         }
 
         public async Task<bool?> CheckPasswordToken(PasswordDTO passwordDTO)
@@ -152,6 +154,19 @@ namespace codebattle_api.Services.AuthServices
                 }
             }
             throw new CodeBattleException(ErrorCode.InvalidInput);
+        }
+
+        private string GetUserRole(UserDTO user)
+        {
+            if (user.IsAdmin)
+            {
+                return "Admin";
+            }
+            else if (user.IsPremium)
+            {
+                return "Premium";
+            }
+            return "User";
         }
     }
 }

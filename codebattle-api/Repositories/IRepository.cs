@@ -37,9 +37,10 @@ namespace codebattle_api.Repositories
         /// </summary>
         /// <typeparam name="returnDTO">Type of Mapped Object returned</typeparam>
         /// <param name="specification">Expression that defines the specficiations to match</param>
+        /// <param name="selectExpression">Expression that defines which fields to exclude from getting</param>
         /// <param name="include">Expression that defines which relations to include</param>
         /// <returns>IEnumerable of Mapped Object</returns>
-        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null);
+        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null, Expression<Func<Entity, Entity>>? selectExpression = null);
 
         /// <summary>
         /// Creates a new entity in de DB

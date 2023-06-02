@@ -21,7 +21,10 @@ namespace codebattle_api.Entities
 
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
+        
         public ICollection<Friend>? Friends { get; set; }
         public virtual ICollection<Participant>? Participants { get; set; }
+        public virtual ICollection<Badge>? Badges { get; set; }
+
     }
 }
