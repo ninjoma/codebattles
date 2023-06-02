@@ -10,7 +10,7 @@ import Store from '../store/index.js';
 
 const routes: VueRouter.RouteRecordRaw[] = [
     { path: '/lobby', component: LobbyView, meta: {requiresAuth: true} },
-    { path: '/profile', component: ProfileView, meta: {requiresAuth: true} },
+    { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true} },
     { path: '/battle', component: BattleView, meta: {requiresAuth: true} },
     { path: '/login', component: LoginView, meta: {requiresAuth: false} },
     { path: '/register', component: RegisterView, meta: {requiresAuth: false} },

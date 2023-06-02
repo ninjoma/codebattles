@@ -4,7 +4,16 @@ export default {
     components: {
         HeaderButton
     },
-    watch: {
+    data(){
+        return {
+            showSearchBar: false
+        }
+    },
+    methods: {
+        search() {
+            var searchInput = (this.$refs.searchInput as any)
+            searchInput.value.length > 1 ? this.showSearchBar = true : this.showSearchBar = false
+        }
     }
 }
 </script>
@@ -28,6 +37,14 @@ export default {
             </div>
         </div>
         <div v-if="$store.state.isLogged">
+            <div class="px-3 hidden sm:flex">
+                <input ref="searchInput" v-on:input="search" type="text" placeholder="Search..." className="input input-sm input-ghost w-full w-96"/>
+                <div v-if="showSearchBar" className="card w-96 bg-base-100 shadow-xl absolute top-14">
+                    <div className="card-body">
+
+                    </div>
+                </div>
+            </div>
             <div class="h-full flex gap-3 hidden sm:flex">
                 <HeaderButton targetUrl="/profile">
                     <font-awesome-icon icon="fa-solid fa-user" />

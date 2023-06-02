@@ -43,9 +43,6 @@ export default createStore({
 				})
             })
 		},
-		register(state, data) {
-
-		},
 		logout(state) {
 			state.token = "";
 			state.user = defaultUser;
