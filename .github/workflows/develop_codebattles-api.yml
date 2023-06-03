@@ -3,6 +3,15 @@
 
 name: codebattles-api
 
+defaults:
+  run:
+    working-directory: ./codebattle-api
+    
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: '../../codebattle-api'
+  DOTNET_VERSION: '6.0'
+
+
 on:
   push:
     branches:
@@ -12,9 +21,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: codebattles-api
     steps:
       - uses: actions/checkout@v2
 
