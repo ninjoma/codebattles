@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using codebattle_api.utils;
 using Microsoft.Extensions.Hosting;
 using Sentry;
+using codebattle_api.Hubs;
 
 SentrySdk.Init(options =>
 {
@@ -26,6 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
             .AddUserSecrets<Program>()
             .Build();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -67,6 +70,16 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("local")));
 builder.Services.RegisterServices();
 
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .SetIsOriginAllowed((host) => true)
+                   .AllowCredentials();
+        }));
+
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 .AddJwtBearer(options =>
@@ -101,6 +114,12 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<DataContext>();
     db.Database.Migrate();
 }
+app.UseCors("CorsPolicy");
+app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<CodeHub>("/hubs/codehub");
+});
 
 app.UseHttpsRedirection();
 

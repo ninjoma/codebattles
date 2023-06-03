@@ -1,5 +1,5 @@
 <script lang="ts">
-import {ref, shallowRef } from "vue"
+import { ref, shallowRef } from "vue"
 import { Codemirror } from "vue-codemirror"
 import { javascript } from '@codemirror/lang-javascript'
 import { oneDark } from "@codemirror/theme-one-dark"
@@ -36,24 +36,22 @@ export default {
             log: console.log
         }
 
+    },
+    methods: {
+        updateProp() {
+            this.$emit('update:code', this.code);
+        },
+        updateValue(newValue : any) {
+            this.$emit('input', newValue);
+        }
     }
-
 }
 </script>
 <template>
-    <codemirror
-        v-model="code"
-        placeholder="Nothing here yet..."
-        :autofocus="false"
-        :indent-with-tab="true"
-        :tab-size="2"
-        :style= "{
+    <codemirror v-model="code" placeholder="Nothing here yet..." :autofocus="false" :indent-with-tab="true" :tab-size="2"
+        @input="updateValue($event.target.value)"
+        :style="{
             height: '100%'
-        }"
-        :extensions="extensions"
-        @ready="handleReady"
-        @change="log('change', $event)"
-        @focus="log('focus', $event)"
-        @blur="log('blur', $event)"
-    />
+        }" :extensions="extensions" @ready="handleReady" @change="" @focus=""
+        @blur="" />
 </template>
