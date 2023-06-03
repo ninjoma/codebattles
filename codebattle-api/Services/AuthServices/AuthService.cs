@@ -45,7 +45,7 @@ namespace codebattle_api.Services.AuthServices
                     issuer: "codebattle-web", //TODO: Implementar que lo extraiga de la llamada
                     audience: _configuration["Audience"],
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),
+                    expires: DateTime.UtcNow.AddDays(7),
                     signingCredentials: credentials
                 );
 
@@ -66,6 +66,9 @@ namespace codebattle_api.Services.AuthServices
         {
             if (user != null && user.Email != null && user.Username != null && user.Password != null)
             {
+                // Disable Elevated Privileges for New Users.
+                user.IsAdmin = false;
+                user.IsPremium = false;
                 user.Password = PasswordHasher.HashPassword(user.Password);
                 var result = await _userRepo.Add(user);
                 return GenerateToken(result);
@@ -114,8 +117,7 @@ namespace codebattle_api.Services.AuthServices
                 user = await _userRepo.Add(new UserDTO {
                     Username = username + otherUsers.Count(),
                     Email = email,
-                    Password = "password",
-                    CreationDate = DateTime.Now.ToUniversalTime()
+                    Password = "password"
                 });
             }
             return GenerateToken(user);
