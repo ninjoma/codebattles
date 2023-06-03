@@ -30,7 +30,7 @@ export default {
                 : this.$route.params.battleId;
 
             connection.invoke("JoinBattle", this.battleId).then(() => {
-                console.log("- You succesfully joined 'battle " + this.battleId + "'")
+                console.log("--> You succesfully joined Battle " + this.battleId)
             })
                 .catch((error: any) => {
                     console.error(error);
@@ -96,7 +96,7 @@ export default {
             <CodeEditor v-model="myCode"></CodeEditor>
         </div>
         <div class="grow w-1/2 bg-base-200 rounded-tl-lg p-3">
-            <CodeEditor v-model="enemyCode"></CodeEditor>
+            <CodeEditor v-model="enemyCode" :disabled="true"></CodeEditor>
         </div>
     </div>
 </template>

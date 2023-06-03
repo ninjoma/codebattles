@@ -37,6 +37,9 @@ export default {
         }
 
     },
+    props: {
+        disabled: {type: Boolean, default: false}
+    },
     methods: {
         updateProp() {
             this.$emit('update:code', this.code);
@@ -50,6 +53,7 @@ export default {
 <template>
     <codemirror v-model="code" placeholder="Nothing here yet..." :autofocus="false" :indent-with-tab="true" :tab-size="2"
         @input="updateValue($event.target.value)"
+        :disabled="disabled"
         :style="{
             height: '100%'
         }" :extensions="extensions" @ready="handleReady" @change="" @focus=""
