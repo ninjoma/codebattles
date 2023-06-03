@@ -14,7 +14,7 @@ const routes: VueRouter.RouteRecordRaw[] = [
     { path: '/battle', component: BattleView },
     { path: '/login', component: LoginView },
     { path: '/register', component: RegisterView },
-    { path: '/forgot-password', component: ForgotPasswordView }
+    { path: '/forgot-password', component: ForgotPasswordView },
     { path: '/logout', component: LogoutView, meta: {requiresAuth: false} }
 ]
 
