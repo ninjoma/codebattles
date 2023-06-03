@@ -20,6 +20,10 @@ namespace codebattle_api.Services
 
         public virtual async Task<PostDTO> Add(PostDTO entryDTO)
         {
+            if(entryDTO.CreationDate == null)
+            {
+                entryDTO.CreationDate = DateTime.Now.ToUniversalTime();
+            }
             return await _repository.Add(entryDTO);
         }
 
@@ -43,7 +47,7 @@ namespace codebattle_api.Services
 
         public virtual async Task<DetailDTO> GetById(int id, bool isActive = true)
         {
-            return await _repository.GetById<DetailDTO>(id, null , isActive);
+            return await _repository.GetById<DetailDTO>(id, null, isActive);
         }
 
         public virtual async Task<IEnumerable<DetailDTO>> GetList(Expression<Func<Entity, object>>? include = null, bool isActive = true)

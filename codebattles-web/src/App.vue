@@ -5,6 +5,9 @@ export default {
     components: {
         Header,
         Drawer
+    },
+    mounted() {
+      this.$store.dispatch("User/load");
     }
 }
 </script>
