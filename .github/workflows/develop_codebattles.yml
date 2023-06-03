@@ -3,10 +3,6 @@
 
 name: codebattle-api
 
-defaults:
-  run:
-    working-directory: ./codebattle-api
-
 on:
   push:
     branches:
@@ -58,4 +54,4 @@ jobs:
           app-name: 'codebattles'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_202662EEAB894ACF9283AE3B7DA7A554 }}
-          package: .
+          package: ./codebattles-api
