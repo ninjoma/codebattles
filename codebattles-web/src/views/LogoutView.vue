@@ -7,7 +7,7 @@ export default {
         
     },
     mounted(){
-        this.$store.commit("logout");
+        this.$store.commit("User/logout");
         router.push({ path: '/login' });
     }
 }

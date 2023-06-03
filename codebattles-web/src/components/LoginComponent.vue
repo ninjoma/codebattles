@@ -1,5 +1,4 @@
 <script lang="ts">
-import router from '../router';
 import GoogleButton from './GoogleButton.vue';
 import SectionTitle from './SectionTitle.vue';
 import axios from "axios";
@@ -13,18 +12,18 @@ export default {
         login() {
             var emailInput = (this.$refs.email as any);
             var passwordInput = (this.$refs.password as any);
-
             if(emailInput.value.length > 3 && passwordInput.value.length > 3) {
-                this.$store.commit("login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
-                
+                this.$store.commit("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
             }
         }
     },
     watch: {
-        '$store.state.user': function() {
-            if(this.$store.state.user) {
-                router.push("/battle");
-            } 
+        "$store.state.User.isLogged": {
+            handler(isLogged) {
+                if(isLogged == true) {
+                    this.$router.push("/battle");
+                } 
+            }
         }
     }
 }

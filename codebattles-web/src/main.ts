@@ -7,6 +7,7 @@ import VueCodeMirror from "vue-codemirror";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Store from './store/index.js';
+import SearchStore from "./store/Modules/Search.js";
 import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag,
     faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, 
     faXmark, faXmarkCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +29,7 @@ app.config.globalProperties.$store = Store;
 app.use(Router)
 
 .use(Store)
+
 
 .use(VueCodeMirror, {
     autofocus: false,

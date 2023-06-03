@@ -12,14 +12,21 @@ export default {
             var usernameInput = (this.$refs.username as any);
             var emailInput = (this.$refs.email as any);
             var passwordInput = (this.$refs.password as any);
-
-            axios.post('/api/Auth/Register', {
-                username: usernameInput.value,
-                email: emailInput.value,
+            this.$store.dispatch('User/register', 
+            { 
+                username: usernameInput.value, 
+                email: emailInput.value, 
                 password: passwordInput.value
-            }).then((response) => {
-                this.$store.commit("login")
-            })
+            });
+        }
+    },
+    watch: {
+        "$store.state.User.isLogged": {
+            handler(isLogged) {
+                if(isLogged == true) {
+                    this.$router.push("/battle");
+                } 
+            }
         }
     }
 }

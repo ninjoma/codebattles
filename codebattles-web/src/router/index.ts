@@ -27,7 +27,7 @@ var router = VueRouter.createRouter(routerOptions)
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some(record => record.meta.requiresAuth)) {
-        if(!Store.getters.isLogged) {
+        if(!Store.getters['User/isLogged']) {
             return next({ path: '/login' });
         }
     }
