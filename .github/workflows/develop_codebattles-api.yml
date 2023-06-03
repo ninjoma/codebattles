@@ -4,12 +4,8 @@
 name: codebattles-api
 
 defaults:
-  run:
-    working-directory: ./codebattle-api
-    
-env:
-  AZURE_WEBAPP_PACKAGE_PATH: '../../codebattle-api'
-
+      run:
+        working-directory: ./codebattles-api
 
 on:
   push:
