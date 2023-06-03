@@ -9,7 +9,6 @@ defaults:
     
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '../../codebattle-api'
-  DOTNET_VERSION: '6.0'
 
 
 on:
