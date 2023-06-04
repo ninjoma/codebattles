@@ -1,10 +1,22 @@
 <script lang="ts">
 import HeaderButton from "./HeaderButton.vue";
+import SearchBar from "./SearchBar.vue";
 export default {
     components: {
-        HeaderButton
-    }
-
+        HeaderButton,
+        SearchBar
+    },
+    data(){
+        return {
+            showSearchBar: false
+        }
+    },
+    methods: {
+        search() {
+            var searchInput = (this.$refs.searchInput as any)
+            searchInput.value.length > 1 ? this.showSearchBar = true : this.showSearchBar = false
+        }
+    },
 }
 </script>
 <template>
@@ -18,7 +30,7 @@ export default {
             </div>
             <a className="normal-case text-xl font-inter font-bold px-2">>/&lt; CODE BATTLES</a>
             <div class="h-full flex gap-3 hidden sm:flex">
-                <HeaderButton targetUrl="/lobby">
+                <HeaderButton targetUrl="/lobby" v-if="$store.state.User.isLogged">
                     <a>Lobby</a>
                 </HeaderButton>
                 <HeaderButton targetUrl="/battle">
@@ -26,9 +38,10 @@ export default {
                 </HeaderButton>
             </div>
         </div>
-        <div>
+        <div v-if="$store.state.User.isLogged">
+            <SearchBar></SearchBar>
             <div class="h-full flex gap-3 hidden sm:flex">
-                <HeaderButton targetUrl="/profile">
+                <HeaderButton :targetUrl=" '/users/' + $store.state.User.id + '/profile'">
                     <font-awesome-icon icon="fa-solid fa-user" />
                 </HeaderButton>
                 <HeaderButton targetUrl="/logout">

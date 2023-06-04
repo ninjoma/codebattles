@@ -5,14 +5,17 @@ import BattleView from "../views/BattleView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import ForgotPasswordView from "../views/ForgotPasswordView.vue";
+import LogoutView from "../views/LogoutView.vue";
+import Store from '../store/index.js';
 
 const routes: VueRouter.RouteRecordRaw[] = [
-    { name: 'Lobby', path: '/lobby', component: LobbyView },
-    { name: 'Profile', path: '/profile', component: ProfileView },
-    { name: 'Battle', path: '/battle', component: BattleView },
-    { name: 'Login', path: '/login', component: LoginView },
-    { name: 'Register', path: '/register', component: RegisterView },
-    { name: 'Forgot Password', path: '/forgot-password', component: ForgotPasswordView }
+    { path: '/lobby/:battleId', component: LobbyView},
+    { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true} },
+    { path: '/battle', component: BattleView },
+    { path: '/login', component: LoginView },
+    { path: '/register', component: RegisterView },
+    { path: '/forgot-password', component: ForgotPasswordView },
+    { path: '/logout', component: LogoutView, meta: {requiresAuth: false} }
 ]
 
 const routerOptions: VueRouter.RouterOptions = {
@@ -20,4 +23,16 @@ const routerOptions: VueRouter.RouterOptions = {
     routes
 }
 
-export default VueRouter.createRouter(routerOptions);
+var router = VueRouter.createRouter(routerOptions)
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if(!Store.getters['User/isLogged']) {
+            return next({ path: '/login' });
+        }
+    }
+    return next();
+});
+
+
+export default router;

@@ -1,19 +1,27 @@
 <script lang="ts">
 import Header from "./components/Header.vue";
 import Drawer from "./components/Drawer.vue";
+import ToastHandler from "./components/ToastHandler.vue";
+
 export default {
     components: {
         Header,
-        Drawer
+        Drawer,
+        ToastHandler
+    },
+    mounted() {
+      this.$store.dispatch("User/load");
     }
 }
 </script>
 
 <template>
     <div class="min-h-screen flex flex-col">
-        <Drawer>
-            <RouterView></RouterView>
+        <Drawer>  
+          <RouterView></RouterView>
+          <ToastHandler></ToastHandler>
         </Drawer>
+      
     </div>
 </template>
 <style>
