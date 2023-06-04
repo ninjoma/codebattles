@@ -10,8 +10,9 @@ import Store from './store/index.js';
 import SearchStore from "./store/Modules/Search.js";
 import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag,
     faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, 
-    faXmark, faXmarkCircle, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+    faXmark, faXmarkCircle, faCircleXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import VueGtagPlugin from 'vue-gtag';
 
 if(import.meta.env.DEV) {
     // Allow CORS from localhost
@@ -20,7 +21,7 @@ if(import.meta.env.DEV) {
 
 library.add(faCrown, faCircleArrowUp, faUser, faRightFromBracket, 
     faFlag, faPlus, faPenToSquare, faBars, faJetFighter,
-    faBrain, faStopwatch, faCircleXmark, faXmark)
+    faBrain, faStopwatch, faCircleXmark, faXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck)
 
 const app = createApp(App);
 
@@ -30,6 +31,12 @@ app.use(Router)
 
 .use(Store)
 
+
+.use(VueGtagPlugin, {
+    appName: "Codebattles",
+    pageTrackerScreenviewEnabled: true,
+    config: { id: "G-KK26T2CEXQ" }
+}, Router)
 
 .use(VueCodeMirror, {
     autofocus: false,

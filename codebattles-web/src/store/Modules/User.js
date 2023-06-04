@@ -48,6 +48,15 @@ export default {
 				state.isLogged = true;
             })
 		},
+		loginsso(state, data) {
+			axios.post("/api/sso/login", data)
+            .then((tokenResponse) => {
+				localStorage.token = tokenResponse.data;
+				state.token = localStorage.token;
+				axios.defaults.headers.common["Authorization"] = state.token ? ('Bearer ' + state.token) : null;
+				state.isLogged = true;
+            })
+		},
 		logout(state) {
 			delete localStorage.token;
 			state.isLogged = false;
@@ -66,6 +75,9 @@ export default {
 		},
 		load({ commit }) {
 			commit('load', localStorage.token != null);
+		},
+		loginsso({ commit }, data){
+			commit('loginsso', data);
 		}
 	}
 };

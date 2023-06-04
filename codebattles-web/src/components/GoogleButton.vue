@@ -1,32 +1,52 @@
 <script lang="ts">
+import { event } from "vue-gtag"
+
 export default {
     components: {
         
     },
-    data() {
-        const googleClientID = import.meta.env.VITE_GOOGLE_LOGIN_ID;
-        const loginUri = window.location.origin + import.meta.env.VITE_SSO_LOGIN_URI;
-        return {
-            googleClientID,
-            loginUri
+    mounted() { //const loginUri = window.location.origin + import.meta.env.VITE_SSO_LOGIN_URI;
+      window.google.accounts.id.initialize({
+        client_id: import.meta.env.VITE_GOOGLE_LOGIN_ID,
+        callback: this.handleCredentialResponse,
+        auto_select: true,
+        itp_support: true
+      })
+      window.google.accounts.id.renderButton(
+        this.$refs.googlebtn, {
+          text: 'signin',
+          size: 'large',
+          width: '366',
+          theme: 'outline',
+          logo_alignment: 'left'
+        }
+      )
+    },
+    methods: {
+      async handleCredentialResponse(response) {
+         this.$store.dispatch('User/loginsso', response.credential).then(() => {
+            this.$store.dispatch('User/load');
+         });
+      }
+    },
+    watch: {
+        "$store.state.User.isLogged": {
+            handler(isLogged) {
+                if(isLogged == true) {
+                    this.$router.push("/battle");
+                } 
+            }
+        }
+    },
+    methods: {
+        clicked() {
+            event('login', { method: 'Google' })
         }
     }
 }
 </script>
 <template>
     <div>
-        <div id="g_id_onload"
-            :data-client_id=googleClientID
-            :data-login_uri=loginUri
-            data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin"
-            data-type="standard"
-            data-size="large"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-shape="rectangular"
-            data-logo_alignment="left">
-        </div>
+        <div ref="googlebtn" />
     </div>
 </template>

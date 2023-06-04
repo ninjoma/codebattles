@@ -6,11 +6,6 @@ namespace codebattle_api.Entities
 {
     public class Game : Entity
     {
-        [Required]
-        public string? Result { get; set; }
-
-        [Required]
-        public string? Name { get; set; }
 
         [Required]
         public LanguageEnum Language { get; set; }
@@ -19,6 +14,8 @@ namespace codebattle_api.Entities
 
         [ForeignKey(nameof(WinnerId))]
         public User? Winner { get; set; }
+
+        public string? Result { get; set; }
 
         [Required]
         public int GameModeId { get; set; }

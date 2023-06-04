@@ -6,7 +6,6 @@ using codebattle_api.utils;
 using codebattle_api.utils.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace codebattle_api.Controllers
 {
@@ -30,6 +29,7 @@ namespace codebattle_api.Controllers
         }
 
         [HttpGet("me")]
+        [Authorize]
         public async Task<IActionResult> Self()
         {
             try{
