@@ -1,5 +1,6 @@
 <script lang="ts">
-
+// Example to call toast service
+// $store.commit('Alert/show', { type: 'error', message: 'invalid combination' })
 export default { 
     components: { 
         
