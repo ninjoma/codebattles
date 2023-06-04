@@ -21,7 +21,9 @@ export default {
     },
     methods: {
       async handleCredentialResponse(response) {
-         this.$store.dispatch('User/loginsso', response.data);
+         this.$store.dispatch('User/loginsso', response.data).then(() => {
+            this.$store.dispatch('User/load');
+         });
       }
     },
     watch: {

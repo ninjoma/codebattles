@@ -75,7 +75,6 @@ export default {
 		},
 		loginsso({ commit }, data){
 			commit('loginsso', data);
-			commit('load', localStorage.token != null);
 		}
 	}
 };
