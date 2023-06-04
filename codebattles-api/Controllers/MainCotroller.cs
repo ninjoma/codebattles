@@ -110,7 +110,10 @@ namespace codebattle_api.Controllers
             switch (ex.ErrorCode)
             {
                 case ErrorCode.WrongLoginData:
+                case ErrorCode.MissingData:
                     return BadRequest(new ErrorResponse(ex));
+                case ErrorCode.Unauthorized:
+                    return Unauthorized(new ErrorResponse(ex));
                 default:
                     return BadRequest(new ErrorResponse(ex));
             }

@@ -35,7 +35,7 @@ namespace codebattle_api.Controllers
             try{
                 return Ok(await _service.GetById(this.User.GetUserId()));
             } catch(CodeBattleException cbe) {
-                return BadRequest(cbe.Message);
+                return ReturnError(cbe);
             }
         }
 
