@@ -115,16 +115,14 @@ using (var scope = app.Services.CreateScope())
 }
 app.UseCors("CorsPolicy");
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<CodeHub>("/hubs/codehub");
 });
 
 app.UseHttpsRedirection();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

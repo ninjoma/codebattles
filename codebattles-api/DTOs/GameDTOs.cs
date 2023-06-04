@@ -9,11 +9,11 @@ namespace codebattle_api.DTO
         public LanguageEnum Language { get; set; }
         public int GameModeId { get; set; }
         public int? WinnerId { get; set; }
+        public virtual ICollection<ParticipantDTO>? Participants { get; set; }
     }
 
     public class GameDetailDTO : GameDTO {
         public UserDTO? Winner { get; set; }
         public GameModeDTO? GameMode { get; set; }
-        public virtual ICollection<ParticipantDTO>? Participants { get; set; }
     }
 }
