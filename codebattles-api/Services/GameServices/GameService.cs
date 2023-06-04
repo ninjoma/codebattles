@@ -11,5 +11,6 @@ namespace codebattle_api.Services.GameServices{
         {
         }
         #endregion Builder & Properties
+
     }
 }

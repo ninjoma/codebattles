@@ -6,7 +6,6 @@ using codebattle_api.utils;
 using codebattle_api.utils.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace codebattle_api.Controllers
 {
