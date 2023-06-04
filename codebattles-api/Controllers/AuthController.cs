@@ -44,17 +44,11 @@ namespace codebattle_api.Controllers
         {
             try
             {
-
+                
                 StreamReader reader = new StreamReader(this.Request.Body);
                 string result = await reader.ReadToEndAsync();
-                NameValueCollection parts = HttpUtility.ParseQueryString(result);
                 var handler = new JwtSecurityTokenHandler();
-                var jsonToken = handler.ReadToken(parts["credential"]);
-
-                if(this.Request.Cookies["g_csrf_token"] != parts["g_csrf_token"]) {
-                    return BadRequest();
-                }
-                
+                var jsonToken = handler.ReadToken(result);
                 var jwtValues = jsonToken as JwtSecurityToken;
                 string aud = jwtValues != null ? jwtValues.Claims.First(claim => claim.Type == "aud").Value : throw new CodeBattleException(ErrorCode.InvalidInput);
 

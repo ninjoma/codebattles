@@ -14,6 +14,8 @@ export default {
             var passwordInput = (this.$refs.password as any);
             if(emailInput.value.length > 3 && passwordInput.value.length > 3) {
                 this.$store.commit("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
+            } else {
+                this.$store.commit("Alert/show", {type: "error", message: "username and password both have to be over 3 characters long."});
             }
         }
     },
@@ -45,7 +47,7 @@ export default {
             <div class="flex flex-col items-center gap-y-5">
                 <div class="flex flex-col gap-3 items-center w-full">
                     <button className="btn flex-1 w-full btn-success" v-on:click="login">Log In</button>
-                    <GoogleButton className="w-full"></GoogleButton>
+                    <GoogleButton className="flex justify-center"></GoogleButton>
                 </div>
                 <b className="text-success">Don't have a codebattles account?</b>
                 <router-link to="/register" tag="button" className="btn flex-1 w-full">Register</router-link>

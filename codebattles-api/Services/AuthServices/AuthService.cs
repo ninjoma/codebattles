@@ -117,7 +117,8 @@ namespace codebattle_api.Services.AuthServices
                 user = await _userRepo.Add(new UserDTO {
                     Username = username + otherUsers.Count(),
                     Email = email,
-                    Password = "password"
+                    Password = "",
+                    IsActive = true
                 });
             }
             return GenerateToken(user);

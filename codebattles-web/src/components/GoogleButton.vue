@@ -7,7 +7,8 @@ export default {
       window.google.accounts.id.initialize({
         client_id: import.meta.env.VITE_GOOGLE_LOGIN_ID,
         callback: this.handleCredentialResponse,
-        auto_select: true
+        auto_select: true,
+        itp_support: true
       })
       window.google.accounts.id.renderButton(
         this.$refs.googlebtn, {
@@ -21,7 +22,7 @@ export default {
     },
     methods: {
       async handleCredentialResponse(response) {
-         this.$store.dispatch('User/loginsso', response.data).then(() => {
+         this.$store.dispatch('User/loginsso', response.credential).then(() => {
             this.$store.dispatch('User/load');
          });
       }

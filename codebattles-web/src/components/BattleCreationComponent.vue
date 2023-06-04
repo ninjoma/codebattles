@@ -5,6 +5,26 @@ export default {
     components: {
         SectionTitle,
         Devicon
+    },
+    data() {
+        return {
+            languages: [
+                { icon: 'devicon-nodejs-plain', name: 'Javascript', isActive: false },
+                { icon: 'devicon-csharp-plain', name: 'C Sharp', isActive: false },
+                { icon: 'devicon-python-plain', name: 'Python', isActive: false },
+                { icon: 'devicon-rust-plain', name: 'Rust', isActive: false },
+                { icon: 'devicon-cplusplus-plain', name: 'C++', isActive: false },
+                { icon: 'devicon-css3-plain', name: 'CSS', isActive: false }
+            ]
+        }
+    },
+    methods: {
+        selectLanguage(language) {
+            this.languages.forEach(element => {
+                element.isActive = false;
+            });
+            language.isActive = true;
+        }
     }
 }
 </script>
@@ -25,30 +45,10 @@ export default {
         <div class="flex justify-between gap-3 flex-wrap lg:flex-nowrap">
             <div class="flex items-start flex-col w-full">
                 <h6 class="">Language of choice</h6>
-                <div class="grid grid-cols-3 lg:grid-cols-6 py-2 gap-3 w-full">
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-nodejs-plain"></Devicon>
-                        Javascript
-                    </div>
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-csharp-plain"></Devicon>
-                        C Sharp
-                    </div>
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-python-plain"></Devicon>
-                        Python
-                    </div>
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-rust-plain"></Devicon>
-                        Rust
-                    </div>
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-cplusplus-plain"></Devicon>
-                        C++
-                    </div>
-                    <div class="flex flex-col items-center rounded drop-shadow-lg bg-base-100 gap-1 p-3">
-                        <Devicon icon="devicon-css3-plain"></Devicon>
-                        CSS
+                <div  class="grid grid-cols-3 lg:grid-cols-6 py-2 gap-3 w-full">
+                    <div v-for="language in languages" v-on:click="selectLanguage(language)" :class="'flex flex-col items-center rounded drop-shadow-lg gap-1 p-3 cursor-pointer ' + (language.isActive ? 'bg-success text-black' : 'bg-base-100')">
+                        <Devicon :icon="language.icon"></Devicon>
+                        {{ language.name }}
                     </div>
                 </div>
             </div>
@@ -70,10 +70,10 @@ export default {
                         <option>Battle Royale</option>
                     </select>
                 </div>
-                <label class="flex gap-1 btn btn-success btn-sm" htmlFor="create-modal">
+                <button className="btn btn-sm w-full btn-success gap-1">
                     <font-awesome-icon icon="fa-solid fa-plus" />
-                    Create
-                </label>
+                    <span>Create</span>
+                </button>
             </div>
         </div>
     </div>
