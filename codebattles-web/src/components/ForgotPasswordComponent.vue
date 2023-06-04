@@ -22,7 +22,7 @@ export default {
             <div class="flex flex-col items-center gap-y-5 py-3">
                 <div class="flex gap-3 items-center w-full">
                     <router-link to="/login" tag="button" className="btn flex-1 w-full">Back</router-link>
-                    <button className="btn flex-1 w-full btn-success">Reset Password</button>
+                    <button className="btn flex-1 w-full btn-success" v-on:click="$store.commit('Alert/show', { type: 'error', message: 'invalid combination' })">Reset Password</button>
                 </div>
             </div>
         </div>
