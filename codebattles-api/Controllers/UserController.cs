@@ -29,6 +29,7 @@ namespace codebattle_api.Controllers
         }
 
         [HttpGet("me")]
+        [Authorize]
         public async Task<IActionResult> Self()
         {
             try{

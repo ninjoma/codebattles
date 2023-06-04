@@ -20,10 +20,6 @@ namespace codebattle_api.Services
 
         public virtual async Task<PostDTO> Add(PostDTO entryDTO)
         {
-            if(entryDTO.CreationDate == null)
-            {
-                entryDTO.CreationDate = DateTime.Now.ToUniversalTime();
-            }
             return await _repository.Add(entryDTO);
         }
 

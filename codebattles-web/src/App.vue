@@ -21,7 +21,6 @@ export default {
           <RouterView></RouterView>
           <ToastHandler></ToastHandler>
         </Drawer>
-      
     </div>
 </template>
 <style>

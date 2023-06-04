@@ -25,6 +25,20 @@ export default {
                 default:
                     return 'fa-circle-info';
             }
+        },
+        adaptAlert(type) { // Sigh... https://tailwindcss.com/docs/content-configuration#dynamic-class-names
+            switch(type) {
+                case 'success':
+                    return 'alert-success';
+                case 'warning':
+                    return 'alert-warning';
+                case 'info':
+                    return 'alert-info';
+                case 'error':
+                    return 'alert-error';
+                default:
+                    return 'alert-info';
+            }
         }
     }
 }
@@ -40,10 +54,10 @@ export default {
 </style>
 <template>
     <div class="fixed right-0 bottom-0">
-        <TransitionGroup name="fade" tag="div">
-            <div v-for="alert in $store.state.Alert">
-                <div class="toast m-0 p-2" style="position:unset;">
-                    <div :className="'alert alert-' + alert.type">
+        <TransitionGroup name="fade" tag="div" class="alerts">
+            <div v-for="alert, index in $store.state.Alert">
+                <div class="toast m-0 p-2" style="position:unset;" :key="index">
+                    <div :className="'alert ' + adaptAlert(alert.type)">
                         <div class="d-flex gap-3">
                             <font-awesome-icon :icon="'fa-solid ' + setIcon(alert.type)" />
                             <span>{{ alert.message }}</span>
