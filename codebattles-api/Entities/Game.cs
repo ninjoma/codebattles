@@ -7,9 +7,13 @@ namespace codebattle_api.Entities
 {
     public class Game : Entity
     {
-
         [Required]
-        public LanguageEnum Language { get; set; }
+        public int LanguageId { get; set; }
+
+        [ForeignKey(nameof(LanguageId))]
+        public Language? Language { get; set; }
+
+
 
         public int? WinnerId { get; set; }
 

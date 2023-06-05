@@ -51,7 +51,7 @@ namespace codebattle_api.Services.GameServices
             return await _repository.GetById<GameDetailDTO>(id, includes, isActive);
         }
 
-        public async Task<IEnumerable<GameDetailDTO>> ListByFilter(LanguageEnum? language = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
+        public async Task<IEnumerable<GameDetailDTO>> ListByFilter(int? languageId = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
         {
 #pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
             var includes = new List<Expression<Func<Game, object>>>
@@ -65,7 +65,7 @@ namespace codebattle_api.Services.GameServices
             var result = await ListBySpec<GameDetailDTO>(
                 x => x.IsActive &&
                  (gameModeId != null ? x.GameModeId == gameModeId : x.GameModeId == x.GameModeId) &&
-                 (language != null ? x.Language == language : x.Language == x.Language) &&
+                 (languageId != null ? x.LanguageId == languageId : x.LanguageId == x.LanguageId) &&
                  (gameStatus != null ? x.GameStatus == gameStatus : x.GameStatus == x.GameStatus),
                  includes);
                  

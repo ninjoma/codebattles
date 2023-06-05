@@ -7,6 +7,6 @@ namespace codebattle_api.Services.GameServices{
     public interface IGameService : IMainService<GameDTO, GameDetailDTO, Game>
     {
         Task<GameDTO> AddWithParticipant(GameDTO postDTO, ClaimsPrincipal User);
-        Task<IEnumerable<GameDetailDTO>> ListByFilter(LanguageEnum? language = null, int? gameModeId = null, GameStatusEnum? gameStatus = null);
+        Task<IEnumerable<GameDetailDTO>> ListByFilter(int? language = null, int? gameModeId = null, GameStatusEnum? gameStatus = null);
     }
 }

@@ -6,7 +6,7 @@ namespace codebattle_api.DTO
     {
         public string? Result { get; set; }
         public string? Name { get; set; }
-        public LanguageEnum Language { get; set; }
+        public int LanguageId { get; set; }
         public int GameModeId { get; set; }
         public int? WinnerId { get; set; }
         public GameStatusEnum GameStatus { get; set; }
@@ -16,5 +16,6 @@ namespace codebattle_api.DTO
         public virtual ICollection<ParticipantDTO>? Participants { get; set; }
         public UserDTO? Winner { get; set; }
         public GameModeDTO? GameMode { get; set; }
+        public LanguageDTO? Language { get; set; }
     }
 }
