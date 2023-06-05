@@ -6,6 +6,8 @@ namespace codebattle_api.DTO
         public string? Password { get; set; }
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
+        public int? Level { get; set; }
+        public int? Experience { get; set; }
     }
 
     public class UserDetailDTO : UserDTO {

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -19,9 +20,17 @@ namespace codebattle_api.Entities
 
         public string? PasswordResetToken { get; set; }
 
+        [Required]
+        [DefaultValue(0)]
+        public int Experience { get; set; }
+
+        [Required]
+        [DefaultValue(0)]
+        public int Level { get; set; }
+
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
-        
+
         public ICollection<Friend>? Friends { get; set; }
         public virtual ICollection<Participant>? Participants { get; set; }
         public virtual ICollection<Badge>? Badges { get; set; }

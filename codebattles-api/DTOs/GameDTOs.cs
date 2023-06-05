@@ -9,6 +9,7 @@ namespace codebattle_api.DTO
         public LanguageEnum Language { get; set; }
         public int GameModeId { get; set; }
         public int? WinnerId { get; set; }
+        public GameStatusEnum GameStatus { get; set; }
     }
 
     public class GameDetailDTO : GameDTO {

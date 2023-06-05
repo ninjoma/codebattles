@@ -69,6 +69,8 @@ namespace codebattle_api.Services.AuthServices
                 // Disable Elevated Privileges for New Users.
                 user.IsAdmin = false;
                 user.IsPremium = false;
+                user.Level = null;
+                user.Experience = null;
                 user.Password = PasswordHasher.HashPassword(user.Password);
                 var result = await _userRepo.Add(user);
                 return GenerateToken(result);
