@@ -11,6 +11,8 @@ namespace codebattle_api.DTO
     }
 
     public class UserDetailDTO : UserDTO {
+        public virtual ICollection<BadgeDTO>? Badges { get; set; }
+        public virtual ICollection<GameDTO>? WinnedGames { get; set; }
         public virtual ICollection<FriendDTO>? Friends { get; set; }
         public virtual ICollection<ParticipantDTO>? Participants {get; set;}
     }

@@ -47,5 +47,20 @@ namespace codebattle_api.Services.UserServices
                         && x.IsActive,
                     selectExpression: selectExpression);
         }
+
+        public override async Task<UserDetailDTO> GetById(int id, bool isActive = true)
+        {
+#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
+            var includes = new List<Expression<Func<User, object>>>
+            {
+                u => u.Badges,
+                u => u.Friends,
+                u => u.Participants,
+                u => u.WinnedGames
+            };
+#pragma warning restore CS8603
+
+            return await _repository.GetById<UserDetailDTO>(id, includes, isActive);
+        }
     }
 }
