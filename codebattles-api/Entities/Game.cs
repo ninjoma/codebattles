@@ -33,6 +33,7 @@ namespace codebattle_api.Entities
         public GameStatusEnum GameStatus { get; set; }
 
         public virtual ICollection<Participant>? Participants { get; set; }
+        public virtual ICollection<Step>? Steps { get; set; }
     }
 
 

@@ -8,7 +8,6 @@ namespace codebattle_api.Entities
         public int GameModeId { get; set; }
 
         [ForeignKey(nameof(GameModeId))]
-        public GameMode? GameMode { get; set; }
 
 
         [Required]
@@ -29,6 +28,7 @@ namespace codebattle_api.Entities
         public string? BoilerPlate { get; set; }
 
 
+        public virtual ICollection<Game>? Games { get; set; }
         public virtual ICollection<Result>? Results { get; set; }
 
     }

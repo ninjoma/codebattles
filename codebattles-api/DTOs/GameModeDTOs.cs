@@ -10,7 +10,6 @@ namespace codebattle_api.DTO
     public class GameModeDetailDTO : GameModeDTO
     {
         public virtual ICollection<GameDTO>? Games { get; set; }
-        public virtual ICollection<StepDTO>? Steps { get; set; }
         public virtual ICollection<TagDTO>? Tags { get; set; }
     }
 }

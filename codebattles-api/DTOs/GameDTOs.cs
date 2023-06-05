@@ -17,5 +17,6 @@ namespace codebattle_api.DTO
         public UserDTO? Winner { get; set; }
         public GameModeDTO? GameMode { get; set; }
         public LanguageDTO? Language { get; set; }
+        public virtual ICollection<StepDTO>? Steps { get; set; }
     }
 }

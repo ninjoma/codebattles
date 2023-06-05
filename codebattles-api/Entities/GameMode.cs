@@ -14,7 +14,6 @@ namespace codebattle_api.Entities
 
         
         public virtual ICollection<Game>? Games {get; set; }
-        public virtual ICollection<Step>? Steps { get; set; }
         public virtual ICollection<Tag>? Tags { get; set; }
 
     }
