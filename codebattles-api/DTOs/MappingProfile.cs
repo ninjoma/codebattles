@@ -42,6 +42,9 @@ namespace codebattle_api.DTO
             #region PARTICIPANT
             CreateMap<Participant, ParticipantDTO>()
                 .ReverseMap();
+
+            CreateMap<Participant, ParticipantDetailDTO>()
+                .ReverseMap();
             #endregion PARTICIPANT
 
             #region STEP

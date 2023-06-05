@@ -79,28 +79,29 @@ namespace codebattle_api.Repositories
             return _mapper.Map<PostDTO>(entity);
         }
 
-        public async Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>>? include = null, bool isActive = true)
+        public async Task<returnDTO> GetById<returnDTO>(int id, List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true)
         {
-            if (include != null)
-            {
-                return _mapper.Map<returnDTO>(await dbSet.Include(include).FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
+            IQueryable<Entity> query = dbSet;
+
+            if (includes != null){
+                foreach(Expression<Func<Entity, object>>? include in includes){
+                    query = query.Include(include);
+                }
             }
-            else
-            {
-                return _mapper.Map<returnDTO>(await dbSet.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
-            }
+
+            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
         }
 
-        public async Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>>? include = null, bool isActive = true)
+        public async Task<IEnumerable<returnDTO>> List<returnDTO>(List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true)
         {
-            if (include != null)
-            {
-                return _mapper.Map<IEnumerable<returnDTO>>(await dbSet.Include(include).Where(x => x.IsActive == isActive).ToListAsync());
+            IQueryable<Entity> query = dbSet;
+
+            if (includes != null){
+                foreach(Expression<Func<Entity, object>>? include in includes){
+                    query = query.Include(include);
+                }
             }
-            else
-            {
-                return _mapper.Map<IEnumerable<returnDTO>>(await dbSet.Where(x => x.IsActive == isActive).ToListAsync());
-            }
+            return _mapper.Map<IEnumerable<returnDTO>>(await query.Where(x => x.IsActive == isActive).ToListAsync());
         }
 
         public async Task<bool> Save()

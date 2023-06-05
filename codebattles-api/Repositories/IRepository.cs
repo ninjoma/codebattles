@@ -8,20 +8,20 @@ namespace codebattle_api.Repositories
         /// Gets a list of Mapped Objects
         /// </summary>
         /// <typeparam name="returnDTO">Type of Mapped Object returned</typeparam>
-        /// <param name="include">Expression that defines which relations to include</param>
+        /// <param name="includes">Expression that defines which relations to include</param>
         /// <param name="isActive">Bool that defines Wether to get the not deleted or deleted Entities</param>
         /// <returns>IEnumerable of Mapped Objects</returns>
-        Task<IEnumerable<returnDTO>> List<returnDTO>(Expression<Func<Entity, object>>? include = null, bool isActive = true);
+        Task<IEnumerable<returnDTO>> List<returnDTO>(List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true);
 
         /// <summary>
         /// Gets a mapped object based on a id
         /// </summary>
         /// <typeparam name="returnDTO">Type of Mapped Object returned</typeparam>
         /// <param name="id">id of the desired entity</param>
-        /// <param name="include">Expression that defines which relations to include</param>
+        /// <param name="includes">Expression that defines which relations to include</param>
         /// <param name="isActive">Bool that defines Wether to get the not deleted or deleted Entities</param>
         /// <returns>Mapped Object</returns>
-        Task<returnDTO> GetById<returnDTO>(int id, Expression<Func<Entity, object>>? include = null, bool isActive = true);
+        Task<returnDTO> GetById<returnDTO>(int id, List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true);
 
         /// <summary>
         /// Gets a mapped object based on a lambda expression
