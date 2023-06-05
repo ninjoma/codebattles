@@ -28,9 +28,9 @@ namespace codebattle_api.Repositories
         /// </summary>
         /// <typeparam name="returnDTO">Type of Mapped Object returned</typeparam>
         /// <param name="specification">Expression that defines the specficiations to match</param>
-        /// <param name="include">Expression that defines which relations to include</param>
+        /// <param name="includes">Expression that defines which relations to include</param>
         /// <returns>Mapped Object</returns>
-        Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null);
+        Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, List<Expression<Func<Entity, object>>>? includes = null);
 
         /// <summary>
         /// Gets a list of mapped objects based on a lambda expression
@@ -38,9 +38,9 @@ namespace codebattle_api.Repositories
         /// <typeparam name="returnDTO">Type of Mapped Object returned</typeparam>
         /// <param name="specification">Expression that defines the specficiations to match</param>
         /// <param name="selectExpression">Expression that defines which fields to exclude from getting</param>
-        /// <param name="include">Expression that defines which relations to include</param>
+        /// <param name="includes">Expression that defines which relations to include</param>
         /// <returns>IEnumerable of Mapped Object</returns>
-        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null, Expression<Func<Entity, Entity>>? selectExpression = null);
+        Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, List<Expression<Func<Entity, object>>>? includes = null, Expression<Func<Entity, Entity>>? selectExpression = null);
 
         /// <summary>
         /// Creates a new entity in de DB

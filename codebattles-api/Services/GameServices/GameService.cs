@@ -3,6 +3,7 @@ using System.Security.Claims;
 using AutoMapper;
 using codebattle_api.DTO;
 using codebattle_api.Entities;
+using codebattle_api.Enums;
 using codebattle_api.Repositories;
 using codebattle_api.utils.Extensions;
 
@@ -48,6 +49,27 @@ namespace codebattle_api.Services.GameServices
 #pragma warning restore CS8603
 
             return await _repository.GetById<GameDetailDTO>(id, includes, isActive);
+        }
+
+        public async Task<IEnumerable<GameDetailDTO>> ListByFilter(LanguageEnum? language = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
+        {
+#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
+            var includes = new List<Expression<Func<Game, object>>>
+                {
+                    u => u.GameMode,
+                    u => u.Winner,
+                    u => u.Participants,
+                };
+#pragma warning restore CS8603
+
+            var result = await ListBySpec<GameDetailDTO>(
+                x => x.IsActive &&
+                 (gameModeId != null ? x.GameModeId == gameModeId : x.GameModeId == x.GameModeId) &&
+                 (language != null ? x.Language == language : x.Language == x.Language) &&
+                 (gameStatus != null ? x.GameStatus == gameStatus : x.GameStatus == x.GameStatus),
+                 includes);
+                 
+            return result;
         }
     }
 }

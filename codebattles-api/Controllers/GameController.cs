@@ -1,5 +1,7 @@
+using System.Linq.Expressions;
 using codebattle_api.DTO;
 using codebattle_api.Entities;
+using codebattle_api.Enums;
 using codebattle_api.Exceptions;
 using codebattle_api.Services.GameServices;
 using codebattle_api.Services.ParticipantServices;
@@ -26,6 +28,21 @@ namespace codebattle_api.Controllers
             try
             {
                 return Ok(await _service.AddWithParticipant(postDTO, User));
+            }
+            catch (CodeBattleException ex)
+            {
+                return ReturnError(ex);
+            }
+        }
+
+        [HttpGet("")]
+        [Authorize(Roles = "User, Admin")]
+        public async Task<IActionResult> List([FromQuery] LanguageEnum? language = null, [FromQuery] int? gameModeId = null, [FromQuery] GameStatusEnum? gameStatus = null)
+        {
+            try
+            {
+                var result = await _service.ListByFilter(language, gameModeId, gameStatus);
+                return result != null ? Ok(result) : NotFound(result);
             }
             catch (CodeBattleException ex)
             {

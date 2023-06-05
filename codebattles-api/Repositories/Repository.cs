@@ -83,8 +83,10 @@ namespace codebattle_api.Repositories
         {
             IQueryable<Entity> query = dbSet;
 
-            if (includes != null){
-                foreach(Expression<Func<Entity, object>>? include in includes){
+            if (includes != null)
+            {
+                foreach (Expression<Func<Entity, object>>? include in includes)
+                {
                     query = query.Include(include);
                 }
             }
@@ -96,8 +98,10 @@ namespace codebattle_api.Repositories
         {
             IQueryable<Entity> query = dbSet;
 
-            if (includes != null){
-                foreach(Expression<Func<Entity, object>>? include in includes){
+            if (includes != null)
+            {
+                foreach (Expression<Func<Entity, object>>? include in includes)
+                {
                     query = query.Include(include);
                 }
             }
@@ -118,25 +122,30 @@ namespace codebattle_api.Repositories
             }
         }
 
-        public async Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null)
-        {
-            if (include != null)
-            {
-                return _mapper.Map<returnDTO>(await dbSet.Include(include).FirstOrDefaultAsync(specification));
-            }
-            else
-            {
-                return _mapper.Map<returnDTO>(await dbSet.FirstOrDefaultAsync(specification));
-            }
-        }
-
-        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, Expression<Func<Entity, object>>? include = null, Expression<Func<Entity, Entity>>? selectExpression = null)
+        public async Task<returnDTO> GetBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, List<Expression<Func<Entity, object>>>? includes = null)
         {
             IQueryable<Entity> query = dbSet;
 
-            if (include != null)
+            if (includes != null)
             {
-                query = query.Include(include);
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(specification));
+        }
+
+        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, List<Expression<Func<Entity, object>>>? includes = null, Expression<Func<Entity, Entity>>? selectExpression = null)
+        {
+            IQueryable<Entity> query = dbSet;
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
             }
 
             query = query.Where(specification);
