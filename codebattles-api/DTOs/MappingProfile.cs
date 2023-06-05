@@ -67,6 +67,22 @@ namespace codebattle_api.DTO
             CreateMap<Badge, BadgeDetailDTO>()
                 .ReverseMap();
             #endregion BADGE
+
+            #region LANGUAGE
+            CreateMap<Language, LanguageDTO>()
+                            .ReverseMap();
+
+            CreateMap<Language, LanguageDetailDTO>()
+                .ReverseMap();
+            #endregion LANGUAGE
+
+            #region RESULT
+            CreateMap<Result, ResultDTO>()
+                            .ReverseMap();
+
+            CreateMap<Result, ResultDetailDTO>()
+                .ReverseMap();
+            #endregion RESULT
         }
     }
 }
