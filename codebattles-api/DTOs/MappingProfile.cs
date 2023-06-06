@@ -16,6 +16,9 @@ namespace codebattle_api.DTO
 
             CreateMap<User, UserDetailDTO>()
                 .ReverseMap();
+
+            CreateMap<User, UserDTONoPassword>()
+                .ReverseMap();
             #endregion USER
 
             #region FRIEND

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace codebattle_api.DTO
 {
     public class ParticipantDTO : BaseDTO
@@ -6,7 +8,9 @@ namespace codebattle_api.DTO
         public int GameId { get; set; }
         public double Score { get; set; }
         public int CurrentStep { get; set; }
-        public UserDTO? User { get; set; }
+        
+        [JsonIgnore]
+        public UserDTONoPassword? User { get; set; }
     }
     public class ParticipantDetailDTO : ParticipantDTO
     {
