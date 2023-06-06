@@ -23,6 +23,7 @@ namespace codebattle_api.Repositories
         {
             var newEntity = _mapper.Map<Entity>(newDto);
             newEntity.CreationDate = DateTime.Now.ToUniversalTime();
+            newEntity.IsActive = true;
             await dbSet.AddAsync(newEntity);
             await _context.SaveChangesAsync();
             return _mapper.Map<PostDTO>(newEntity);

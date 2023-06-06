@@ -30,7 +30,6 @@ namespace codebattle_api.Controllers
         /// <param name="id">Database Id of the desired Entity</param>
         /// <returns>Detail DTO of the desired Entity</returns>
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
         public virtual async Task<IActionResult> Get(int id)
         {
             var result = await _service.GetById(id);
@@ -44,7 +43,6 @@ namespace codebattle_api.Controllers
         /// <param name="postDto">New Content of the Entity</param>
         /// <returns>DTO of the edited entity</returns>
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
         public virtual async Task<IActionResult> Update(int id, [FromBody] PostDTO postDto)
         {
             try
@@ -65,7 +63,6 @@ namespace codebattle_api.Controllers
         /// <param name="postDTO">New Entity content</param>
         /// <returns>DTO of the new Entity</returns>
         [HttpPost("")]
-        [Authorize(Roles = "Admin")]
         public virtual async Task<IActionResult> Create([FromBody] PostDTO postDTO)
         {
             try
@@ -86,7 +83,6 @@ namespace codebattle_api.Controllers
         /// <param name="isDbDelete">Defines if the delete is going to be logical or physical</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
         public virtual async Task<IActionResult> Delete(int id, [FromBody] bool isDbDelete = false)
         {
             try

@@ -33,7 +33,7 @@ namespace codebattle_api.Controllers
         public async Task<IActionResult> Self()
         {
             try{
-                return Ok(await _service.GetById(this.User.GetUserId()));
+                return Ok(await _service.GetById(this.User.GetUserId(), true));
             } catch(CodeBattleException cbe) {
                 return ReturnError(cbe);
             }
