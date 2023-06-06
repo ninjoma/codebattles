@@ -121,7 +121,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options => options.EnablePersistAuthorization());
+} else {
+    app.UseSwagger();
+    app.UseSwaggerUI(options => options.EnablePersistAuthorization());
 }
+
 
 using (var scope = app.Services.CreateScope())
 {
