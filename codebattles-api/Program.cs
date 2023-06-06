@@ -107,7 +107,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = "codebattle-web",
             ValidAudience = builder.Configuration["Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("EncryptionKey") ?? "")),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("EncryptionKey") ?? "LaSuperMegaPasswordDePruebaPorCulpaDeMicrosoft")),
         };
     }
 });
