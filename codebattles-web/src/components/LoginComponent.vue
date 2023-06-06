@@ -13,7 +13,7 @@ export default {
             var emailInput = (this.$refs.email as any);
             var passwordInput = (this.$refs.password as any);
             if(emailInput.value.length > 3 && passwordInput.value.length > 3) {
-                this.$store.commit("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
+                this.$store.dispatch("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
             } else {
                 this.$store.commit("Alert/show", {type: "error", message: "username and password both have to be over 3 characters long."});
             }

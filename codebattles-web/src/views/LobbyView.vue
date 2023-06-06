@@ -14,25 +14,19 @@ export default {
     BattleArenaComponent
     },
     mounted() {
-        this.$store.dispatch("Game/getGame", this.$route.params.battleId);
+        this.$store.dispatch("Game/getGame", this.$route.params.battleId).then(() => {
+            var currentGame = this.$store.state.Game.currentGame;  
+            if(!currentGame.participants.map((participant) => participant.id).includes(this.$store.state.User.id)){
+                this.$store.commit("Alert/show", {type: "error", message: "This game has concluded or you're not in it"});
+                this.$router.push('/battle');
+            }
+        });
     }
 }
 </script>
 
 <template>
     <div class="flex flex-col flex-1">
-        <div class="w-full font-inter">
-            <div className="collapse collapse-arrow bg-success">
-                <input type="checkbox" className="peer" />
-                <div className="collapse-title text-primary-content">
-                    <h3 class="font-inter text-xl font-bold text-black">Exercise: {{  }}</h3>
-                </div>
-                <div className="collapse-content text-primary-content">
-                    <p className="rounded-xl bg-base-300 p-2">
-                       </p>
-                </div>
-            </div>
-        </div>
         <BattleArenaComponent></BattleArenaComponent>
     </div>
 </template>

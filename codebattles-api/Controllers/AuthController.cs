@@ -80,7 +80,7 @@ namespace codebattle_api.Controllers
             }
         }
 
-        [HttpPost("ForgotPassword/Generate")]
+        [HttpPost("ForgotPassword")]
         public async Task<IActionResult> ForgotPassword([FromBody] string email)
         {
             try
@@ -93,8 +93,8 @@ namespace codebattle_api.Controllers
             }
         }
 
-        [HttpPost("ForgotPassword/Check")]
-        public async Task<IActionResult> CheckPassword([FromBody] PasswordDTO passwordDTO)
+        [HttpGet("validatePassword")]
+        public async Task<IActionResult> CheckPassword(PasswordDTO passwordDTO)
         {
             try
             {
