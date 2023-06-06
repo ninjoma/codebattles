@@ -61,7 +61,6 @@ namespace codebattle_api.Services.GameServices
             };
 
 
-
             var participantResult = await _participantRepo.Add(paticipantDTO);
 
             return await GetById(gameResult.Id);
@@ -69,40 +68,20 @@ namespace codebattle_api.Services.GameServices
 
         public override async Task<GameDetailDTO> GetById(int id, bool isActive = true)
         {
-#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
-            var includes = new List<Expression<Func<Game, object>>>
-            {
-                u => u.GameMode,
-                u => u.Winner,
-                u => u.Participants,
-                u => u.Steps,
-                u => u.Participants
-            };
-#pragma warning restore CS8603
-
-            return await _repository.GetById<GameDetailDTO>(id, includes, isActive);
+            return await _gameRepo.GetById<GameDetailDTO>(id, isActive);
         }
 
         public async Task<IEnumerable<GameDetailDTO>> ListByFilter(int? languageId = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
         {
-            #pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
-            var includes = new List<Expression<Func<Game, object>>>
-                {
-                    u => u.GameMode,
-                    u => u.Winner,
-                    u => u.Participants,
-                    u => u.Steps,
-                };
-            #pragma warning restore CS8603
-
-            var result = await ListBySpec<GameDetailDTO>(
+            var result = await _gameRepo.ListBySpec<GameDetailDTO>(
                 x => x.IsActive &&
                  (gameModeId != null ? x.GameModeId == gameModeId : x.GameModeId == x.GameModeId) &&
                  (languageId != null ? x.LanguageId == languageId : x.LanguageId == x.LanguageId) &&
-                 (gameStatus != null ? x.GameStatus == gameStatus : x.GameStatus == x.GameStatus),
-                 includes);
+                 (gameStatus != null ? x.GameStatus == gameStatus : x.GameStatus == x.GameStatus)
+                 );
 
             return result;
         }
+
     }
 }

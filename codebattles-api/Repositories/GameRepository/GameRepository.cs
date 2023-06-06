@@ -60,11 +60,33 @@ namespace codebattle_api.Repositories.GameRepository
             query = query.Include(x => x.GameMode);
             query = query.Include(x => x.Language);
             query = query.Include(x => x.Participants).ThenInclude(x => x.User);
+            query = query.Include(x => x.Winner);
+            query = query.Include(x => x.Steps);
+#pragma warning restore CS8620
+            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
+        }
+
+        public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Game, bool>> specification, Expression<Func<Game, Game>>? selectExpression = null)
+        {
+            IQueryable<Game> query = dbSet;
+
+
+#pragma warning disable CS8620
+            query = query.Include(x => x.GameMode);
+            query = query.Include(x => x.Language);
+            query = query.Include(x => x.Participants).ThenInclude(x => x.User);
+            query = query.Include(x => x.Winner);
+            query = query.Include(x => x.Steps);
 #pragma warning restore CS8620
 
-            
+            query = query.Where(specification);
 
-            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
+            if (selectExpression != null)
+            {
+                query = query.Select(selectExpression);
+            }
+
+            return _mapper.Map<IEnumerable<returnDTO>>(await query.AsNoTracking().ToListAsync());
         }
     }
 }
