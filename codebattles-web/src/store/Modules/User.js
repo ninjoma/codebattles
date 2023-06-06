@@ -32,7 +32,7 @@ export default {
 			axios.get('/api/User/me').then((userResponse) => {
 				state.id = userResponse.data.id;
 				state.email = userResponse.data.email;
-				state.level = userReponse.data.level;
+				state.level = userResponse.data.level;
 				state.experience = userResponse.data.experience;
 				state.isPremium = userResponse.data.isPremium;
 				state.isAdmin = userResponse.data.isAdmin;

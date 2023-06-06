@@ -13,7 +13,9 @@ export default {
     },
     methods: {
         joinBattle(gameId){
-            this.$store.dispatch("Game/addParticipant", gameId);
+            this.$store.dispatch("Game/addParticipant", gameId).then(() => {
+                this.$router.push("lobby/" + gameId);
+            });
         }
     }
 }
@@ -23,7 +25,7 @@ export default {
     <div class="bg-base-300 rounded-xl p-6 shadow font-inter">
         <div className="flex justify-between items-baseline">
             <div>
-                <h5 class="text-[#36D399] font-bold text-lg">{{ game.participants[0].user.username }}'s lobby</h5>
+                <h5 class="text-[#36D399] font-bold text-lg">{{ game.participants[0] != null ? game.participants[0].user.username : null }}'s lobby</h5>
                 <div class="flex flex-col">
                     <span>Settings:</span>
                     <span>{{ game.gameMode.description }}, language: {{ game.language.name }}</span>

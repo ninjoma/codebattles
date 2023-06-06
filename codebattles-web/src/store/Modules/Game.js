@@ -26,7 +26,6 @@ export default {
 		retrieveGames({ commit }){
 			axios.get('/api/Game?gameStatus=1', {
 			}).then((response) => {
-				console.log(response);
 				response.data.forEach(game => {
 					game.userInBattle = game.participants.map((participant) => { return participant.userId }).includes(Store.getters['User/getId']);
 				});
@@ -42,6 +41,15 @@ export default {
 		addParticipant({ commit }, data) {
 			axios.post('/api/Participant/', {
 				gameId: data.game
+			})
+		},
+		createGame({ commit }, data) {
+			axios.post('/api/Game/', {
+				languageId: data.language,
+				gameModeId: 1,
+				gameStatus: 1
+			}).then((response) => {
+				commit('setGame', response.data);
 			})
 		}
 	}
