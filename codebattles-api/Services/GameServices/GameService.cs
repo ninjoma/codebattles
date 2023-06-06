@@ -74,6 +74,7 @@ namespace codebattle_api.Services.GameServices
                 u => u.Winner,
                 u => u.Participants,
                 u => u.Steps,
+                u => u.Participants
             };
 #pragma warning restore CS8603
 

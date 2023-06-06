@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using codebattle_api.DTO;
 using codebattle_api.Entities;
@@ -30,7 +31,8 @@ namespace codebattle_api.Repositories.GameRepository
                     var step = _mapper.Map<Step>(stepDto);
 
                     // Verificar si el step ya existe en el juego
-                    if (game.Steps != null){
+                    if (game.Steps != null)
+                    {
                         var existingStep = game.Steps.FirstOrDefault(s => s.Id == step.Id);
                         if (existingStep != null)
                         {
@@ -51,5 +53,18 @@ namespace codebattle_api.Repositories.GameRepository
             return _mapper.Map<GameDTO>(game);
         }
 
+        public async Task<returnDTO> GetById<returnDTO>(int id, bool isActive = true)
+        {
+            IQueryable<Game> query = dbSet;
+#pragma warning disable CS8620
+            query = query.Include(x => x.GameMode);
+            query = query.Include(x => x.Language);
+            query = query.Include(x => x.Participants).ThenInclude(x => x.User);
+#pragma warning restore CS8620
+
+            
+
+            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
+        }
     }
 }
