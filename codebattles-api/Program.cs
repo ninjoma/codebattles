@@ -70,7 +70,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 if (builder.Environment.IsDevelopment()){
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("local")));
 } else {
-builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(Environment.GetEnvironmentVariable("PostgresDB") ?? builder.Configuration.GetConnectionString("local")));
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("local")));
 }
 builder.Services.RegisterServices();
 
