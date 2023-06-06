@@ -155,7 +155,7 @@ namespace codebattle_api.Repositories
                 query = query.Select(selectExpression);
             }
 
-            return _mapper.Map<IEnumerable<returnDTO>>(await query.ToListAsync());
+            return _mapper.Map<IEnumerable<returnDTO>>(await query.AsNoTracking().ToListAsync());
         }
     }
 }

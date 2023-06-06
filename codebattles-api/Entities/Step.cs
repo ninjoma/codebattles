@@ -5,10 +5,6 @@ namespace codebattle_api.Entities
 {
     public class Step : Entity
     {
-        public int GameModeId { get; set; }
-
-        [ForeignKey(nameof(GameModeId))]
-
 
         [Required]
         public int LanguageId { get; set; }

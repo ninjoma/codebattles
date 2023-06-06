@@ -2,6 +2,7 @@ using System.Reflection;
 using AutoMapper;
 using codebattle_api.DTO;
 using codebattle_api.Repositories;
+using codebattle_api.Repositories.GameRepository;
 using codebattle_api.Services;
 
 namespace codebattle_api.Services
@@ -15,6 +16,7 @@ namespace codebattle_api.Services
 
             // collection.AddScoped<IUserService, UserService>();
             collection.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
+            collection.AddScoped(typeof(IGameRepository), typeof(GameRepository));
 
             //Implementacion de servicios automatica
             var assembly = Assembly.GetExecutingAssembly();
