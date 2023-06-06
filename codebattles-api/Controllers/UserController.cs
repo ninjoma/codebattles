@@ -17,7 +17,6 @@ namespace codebattle_api.Controllers
         {
         }
 
-
         public override async Task<IActionResult> Create([FromBody] UserDTO postDTO)
         {
             if (postDTO.Password != null)

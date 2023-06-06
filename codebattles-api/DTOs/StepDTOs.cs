@@ -12,6 +12,5 @@ namespace codebattle_api.DTO
     public class StepDetailDTO : StepDTO {
         public virtual ICollection<GameDTO>? Games { get; set; }
         public LanguageDTO? Language { get; set; }
-        public virtual ICollection<ResultDTO>? Results { get; set; }
     }
 }

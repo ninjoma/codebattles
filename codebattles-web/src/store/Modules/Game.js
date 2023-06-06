@@ -38,6 +38,11 @@ export default {
 			.then((response) => {
 				commit('setGame', response.data);
 			})
+		},
+		addParticipant({ commit }, data) {
+			axios.post('/api/Participant/', {
+				gameId: data.game
+			})
 		}
 	}
 };

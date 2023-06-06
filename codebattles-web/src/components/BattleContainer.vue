@@ -10,6 +10,11 @@ export default {
         return {
             GameStatus
         }
+    },
+    methods: {
+        joinBattle(gameId){
+            this.$store.dispatch("Game/addParticipant", gameId);
+        }
     }
 }
 </script>
@@ -18,26 +23,24 @@ export default {
     <div class="bg-base-300 rounded-xl p-6 shadow font-inter">
         <div className="flex justify-between items-baseline">
             <div>
-                <h5 class="text-[#36D399] font-bold text-lg">user with id {{ game.participants[0].userId }}'s lobby</h5>
+                <h5 class="text-[#36D399] font-bold text-lg">{{ game.participants[0].user.username }}'s lobby</h5>
                 <div class="flex flex-col">
                     <span>Settings:</span>
-                    <span>{{ game.gameMode.description }}</span>
+                    <span>{{ game.gameMode.description }}, language: {{ game.language.name }}</span>
                 </div>
             </div>
             <div class="flex flex-col items-end">
                 <span>Players: {{ game.participants.length }}/2</span>
-                <span class="text-end">{{ game.participants.map((participant) => { return 'ID: ' + participant.userId }).join(',') }}</span>
+                <span class="text-end">{{ game.participants.map((participant) => { return participant.user.username }).join(',') }}</span>
                 <button class="mt-2">
-                    <RouterLink v-if="game.gameStatus != GameStatus.Ended" :to="'/lobby/' + game.id">
-                        <button className="btn btn-success btn-sm">
-                            <span v-if="game.userInBattle == true">
-                                You are still in battle! Rejoin
-                            </span>
-                            <span v-else-if="game.participants.length < 2 && game.gameStatus != GameStatus.Started">
-                                Join Game
-                            </span>
-                        </button>
-                    </RouterLink>
+                    <button v-if="game.gameStatus != GameStatus.Ended" v-on:click="joinBattle(game.id)" className="btn btn-success btn-sm">
+                        <span v-if="game.userInBattle == true">
+                            You are still in battle! Rejoin
+                        </span>
+                        <span v-else-if="game.participants.length < 2 && game.gameStatus != GameStatus.Started">
+                            Join Game
+                        </span>
+                    </button>
                     <button v-else className="btn btn-success btn-disabled btn-sm">
                         <span>
                             This game already Ended
@@ -45,9 +48,6 @@ export default {
                     </button>
                 </button>
             </div>
-        </div>
-        <div class="flex justify-between">
-            
         </div>
     </div>
 </div>

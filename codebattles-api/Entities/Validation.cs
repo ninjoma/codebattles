@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace codebattle_api.Entities
 {
-    public class Result : Entity
+    public class Validation : Entity
     {
         [Required]
-        public string? Value { get; set; }
+        public string? EntryValue { get; set; }
 
         [Required]
-        public string? Name { get; set; }
+        public string? ExitValue { get; set; }
 
-        public virtual ICollection<Step>? Steps { get; set; }
+        public Step? Step { get; set; }
+
     }
 }

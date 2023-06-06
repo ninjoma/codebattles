@@ -17,5 +17,6 @@ namespace codebattle_api
         public DbSet<Step>? Step { get; set; }
         public DbSet<Tag>? Tag { get; set; }
         public DbSet<Badge>? Badge { get; set; }
+        public DbSet<Validation>? Validations { get; set; }
     }
 }
