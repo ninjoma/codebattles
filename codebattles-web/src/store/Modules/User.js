@@ -32,6 +32,8 @@ export default {
 			axios.get('/api/User/me').then((userResponse) => {
 				state.id = userResponse.data.id;
 				state.email = userResponse.data.email;
+				state.level = userReponse.data.level;
+				state.experience = userResponse.data.experience;
 				state.isPremium = userResponse.data.isPremium;
 				state.isAdmin = userResponse.data.isAdmin;
 			});
@@ -81,6 +83,10 @@ export default {
 		},
 		loginsso({ commit }, data){
 			commit('loginsso', data);
+		},
+		login({ commit }, data){
+			commit('login', data);
+			commit('load', localStorage.token != null);
 		}
 	}
 };

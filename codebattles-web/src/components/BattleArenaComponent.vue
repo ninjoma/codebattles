@@ -27,12 +27,10 @@ export default {
                 ? this.$route.params.battleId[0]
                 : this.$route.params.battleId;
 
-            connection.invoke("JoinBattle", this.battleId).then(() => {
-
-            })
-                .catch((error: any) => {
-                    console.error(error);
-                });
+            connection.invoke("JoinBattle", this.battleId)
+            .catch((error: any) => {
+                console.error(error);
+            });
 
             connection.on("RecieveCode", this.RecieveMessage);
             connection.on("UserJoined", this.UserJoined);
@@ -63,6 +61,9 @@ export default {
         },
         UserLeft(mensaje: any) {
             
+        },
+        getOtherParticipantInfo(data){
+            this.$store.state.Game.currentGame.participants;
         }
     }
 }
@@ -72,12 +73,12 @@ export default {
     <LobbyHeader></LobbyHeader>
     <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
         <div className="w-1/2 flex justify-between">
-            <PlayerCard />
+            <PlayerCard :level="$store.state.User.level" />
             <ScoreCard />
         </div>
         <div className="w-1/2 flex justify-between">
             <ScoreCard />
-            <PlayerCard />
+            <PlayerCard :level="1"  />
         </div>
     </div>
     <div class="flex grow w-full px-4 pb-2 gap-5">

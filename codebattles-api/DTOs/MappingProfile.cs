@@ -76,13 +76,13 @@ namespace codebattle_api.DTO
                 .ReverseMap();
             #endregion LANGUAGE
 
-            #region RESULT
-            CreateMap<Result, ResultDTO>()
+            #region VALIDATION
+            CreateMap<Validation, ValidationDTO>()
                             .ReverseMap();
 
-            CreateMap<Result, ResultDetailDTO>()
+            CreateMap<Validation, ValidationDetailDTO>()
                 .ReverseMap();
-            #endregion RESULT
+            #endregion VALIDATION
         }
     }
 }
