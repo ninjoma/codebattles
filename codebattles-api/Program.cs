@@ -66,7 +66,12 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityRequirement(securityRequirement);
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+if (builder.Environment.IsDevelopment()){
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("local")));
+} else {
+builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(Environment.GetEnvironmentVariable("PostgresDB") ?? builder.Configuration.GetConnectionString("local")));
+}
 builder.Services.RegisterServices();
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
@@ -130,7 +135,7 @@ if (app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-    // db.Database.Migrate();
+    db.Database.Migrate();
 }
 app.UseCors("CorsPolicy");
 app.UseRouting();
