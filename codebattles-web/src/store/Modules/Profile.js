@@ -9,6 +9,8 @@ export default {
 			email: "",
 			isPremium: false,
 			isAdmin: false,
+			level: 0,
+
 		}
 	},
 	mutations: {
@@ -18,12 +20,15 @@ export default {
 			state.email = user.email;
 			state.isPremium = user.isPremium;
 			state.isAdmin = user.isAdmin;
+			state.level = user.level;
+			state.experience = user.experience;
 		}
 	},
 	actions: {
 		loadProfile({ commit }, data){
 			axios.get('/api/User/' + data.id)
 			.then((response) => {
+				console.log(response.data);
 				commit('setUser', response.data);
 			})
 		}

@@ -27,6 +27,9 @@ export default {
          this.$store.dispatch('User/loginsso', response.credential).then(() => {
             this.$store.dispatch('User/load');
          });
+      },
+      clicked() {
+        event('login', { method: 'Google' })
       }
     },
     watch: {
@@ -38,11 +41,6 @@ export default {
             }
         }
     },
-    methods: {
-        clicked() {
-            event('login', { method: 'Google' })
-        }
-    }
 }
 </script>
 <template>

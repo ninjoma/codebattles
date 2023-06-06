@@ -12,7 +12,10 @@ export default {
     PlayerCard,
     ScoreCard,
     BattleArenaComponent
-}
+    },
+    mounted() {
+        this.$store.dispatch("Game/getGame", this.$route.params.battleId);
+    }
 }
 </script>
 
@@ -22,18 +25,11 @@ export default {
             <div className="collapse collapse-arrow bg-success">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title text-primary-content">
-                    <h3 class="font-inter text-xl font-bold text-black">Exercise: A walk in the park</h3>
+                    <h3 class="font-inter text-xl font-bold text-black">Exercise: {{  }}</h3>
                 </div>
                 <div className="collapse-content text-primary-content">
                     <p className="rounded-xl bg-base-300 p-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eget mattis metus, nec tempus
-                        tortor. Donec turpis ex, semper eget tellus quis, mattis pellentesque quam. Nulla facilisi. Mauris
-                        in arcu et diam efficitur ornare ac ut libero. Cras quis lorem laoreet neque facilisis laoreet sit
-                        amet quis nulla. Mauris eget gravida ipsum. Sed mollis rhoncus mi bibendum vehicula. Pellentesque id
-                        tellus id massa feugiat scelerisque et quis massa. Nullam erat augue, imperdiet in consectetur ut,
-                        eleifend vel metus. Quisque et felis sed odio tempor eleifend. Maecenas id lectus dui. Morbi
-                        pretium, odio a placerat porttitor, leo ligula feugiat sem, quis malesuada metus augue eu neque.
-                        Proin vulputate maximus dui, vitae rhoncus justo aliquet vitae.</p>
+                       </p>
                 </div>
             </div>
         </div>

@@ -22,15 +22,13 @@ export default {
         }
     },
     created() {
-        document.addEventListener('keydown', this.HandleGlobalKeyDown);
-
         startSignalRConnection().then(connection => {
             this.battleId = Array.isArray(this.$route.params.battleId)
                 ? this.$route.params.battleId[0]
                 : this.$route.params.battleId;
 
             connection.invoke("JoinBattle", this.battleId).then(() => {
-                console.log("--> You succesfully joined Battle " + this.battleId)
+
             })
                 .catch((error: any) => {
                     console.error(error);
@@ -46,33 +44,25 @@ export default {
     methods: {
         SendMessage() {
             if (this.connection != null) {
-                this.connection.invoke("SendCode", this.battleId, this.myCode, "1") //TODO: Cambiar el uno por el ID del usuario
-                    .then(() => {
-                        console.log("Code succesfully sended")
-                    })
-                    .catch((error: any) => {
-                        console.error(error);
-                    });
+                this.connection.invoke("SendCode", this.battleId, this.myCode, "1")
+                .catch((error: any) => {
+                    console.error(error);
+                });
             }
         },
         RecieveMessage(mensaje: any) {
-            console.log(mensaje)
-            if (mensaje.userId != this.test) { //TODO: Cambiar el test por el ID del usuario
-                this.enemyCode = mensaje.code;
-            }
-            console.log(this.test)
+            this.enemyCode = mensaje.code;
         },
-        HandleGlobalKeyDown(event: any) {
-            if (event.key === 's' && event.ctrlKey) {
-                event.preventDefault(); // Evitar el comportamiento predeterminado (guardar la página)
+        onCodeEditorChange(event: any) {
+            setTimeout(() => {
                 this.SendMessage();
-            }
+            }, 150);
         },
         UserJoined(mensaje: any) {
-            console.log(mensaje);
+            this.SendMessage()
         },
         UserLeft(mensaje: any) {
-            console.log(mensaje);
+            
         }
     }
 }
@@ -80,7 +70,6 @@ export default {
 
 <template>
     <LobbyHeader></LobbyHeader>
-    <input type="text" v-model="test">
     <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
         <div className="w-1/2 flex justify-between">
             <PlayerCard />
@@ -93,7 +82,7 @@ export default {
     </div>
     <div class="flex grow w-full px-4 pb-2 gap-5">
         <div class="grow w-1/2 bg-base-200 rounded-tr-lg p-3">
-            <CodeEditor v-model="myCode"></CodeEditor>
+            <CodeEditor v-model="myCode" @codeEditor:onchange="onCodeEditorChange"></CodeEditor>
         </div>
         <div class="grow w-1/2 bg-base-200 rounded-tl-lg p-3">
             <CodeEditor v-model="enemyCode" :disabled="true"></CodeEditor>
