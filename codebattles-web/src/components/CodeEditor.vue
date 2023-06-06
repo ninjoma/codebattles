@@ -56,6 +56,6 @@ export default {
         :disabled="disabled"
         :style="{
             height: '100%'
-        }" :extensions="extensions" @ready="handleReady" @change="" @focus=""
+        }" :extensions="extensions" @ready="handleReady" @change="$emit('codeEditor:onchange')"
         @blur="" />
 </template>

@@ -9,13 +9,13 @@ import LogoutView from "../views/LogoutView.vue";
 import Store from '../store/index.js';
 
 const routes: VueRouter.RouteRecordRaw[] = [
-    { path: '/lobby/:battleId', component: LobbyView},
-    { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true} },
-    { path: '/battle', component: BattleView },
-    { path: '/login', component: LoginView },
-    { path: '/register', component: RegisterView },
-    { path: '/forgot-password', component: ForgotPasswordView },
-    { path: '/logout', component: LogoutView, meta: {requiresAuth: false} }
+    { path: '/lobby/:battleId', meta: {requiresAuth: true}, component: LobbyView, name: 'game'},
+    { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true}, name: 'profile'},
+    { path: '/battle', component: BattleView, meta: {requiresAuth: true}, name: 'battles' },
+    { path: '/login', component: LoginView, name: 'login' },
+    { path: '/register', component: RegisterView, name: 'register' },
+    { path: '/forgot-password', component: ForgotPasswordView, name: 'forgot-password' },
+    { path: '/logout', component: LogoutView, meta: {requiresAuth: false}, name: 'logout' }
 ]
 
 const routerOptions: VueRouter.RouterOptions = {

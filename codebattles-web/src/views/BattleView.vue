@@ -3,7 +3,15 @@ import SectionTitle from '../components/SectionTitle.vue';
 import BattleContainer from '../components/BattleContainer.vue';
 import BattleCreationComponent from '../components/BattleCreationComponent.vue';
 export default {
-    components: { SectionTitle, BattleContainer, BattleCreationComponent }
+    components: { 
+        SectionTitle, 
+        BattleContainer,  
+        BattleCreationComponent
+    },
+    mounted() {
+        this.$store.dispatch("Game/retrieveGames");
+    }
+    
 }
 </script>
 <template>
@@ -13,9 +21,6 @@ export default {
             <BattleCreationComponent/>
         </div>
         <div class="flex flex-col gap-3">
-            <BattleContainer/>
-            <BattleContainer/>
-            <BattleContainer/>
             <BattleContainer/>
         </div>
     </div>

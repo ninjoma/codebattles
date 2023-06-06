@@ -18,6 +18,9 @@ export default {
 	getters: {
 		isLogged(state){
 			return state.isLogged;
+		},
+		getId(state){
+			return state.id;
 		}
 	},
 	mutations: {

@@ -10,6 +10,9 @@ export default {
         PlayerBadgesPanel,
         PlayerInfoPanel
     },
+    mounted() {
+        this.$store.dispatch("Profile/loadProfile", {id: this.$route.params.id});
+    },
     watch: {
         "$route.params.id": {
             handler() {

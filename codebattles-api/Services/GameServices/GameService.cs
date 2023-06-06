@@ -22,6 +22,8 @@ namespace codebattle_api.Services.GameServices
 
         public virtual async Task<GameDTO> AddWithParticipant(GameDTO postDTO, ClaimsPrincipal User)
         {
+            // Setup Game Status to wait for other players;
+            postDTO.GameStatus = GameStatusEnum.Waiting;
             var gameResult = await Add(postDTO);
 
             var paticipantDTO = new ParticipantDTO()
@@ -53,14 +55,14 @@ namespace codebattle_api.Services.GameServices
 
         public async Task<IEnumerable<GameDetailDTO>> ListByFilter(int? languageId = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
         {
-#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
+            #pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
             var includes = new List<Expression<Func<Game, object>>>
                 {
                     u => u.GameMode,
                     u => u.Winner,
                     u => u.Participants,
                 };
-#pragma warning restore CS8603
+            #pragma warning restore CS8603
 
             var result = await ListBySpec<GameDetailDTO>(
                 x => x.IsActive &&

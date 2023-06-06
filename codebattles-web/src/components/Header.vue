@@ -30,9 +30,6 @@ export default {
             </div>
             <a className="normal-case text-xl font-inter font-bold px-2">>/&lt; CODE BATTLES</a>
             <div class="h-full flex gap-3 hidden sm:flex">
-                <HeaderButton targetUrl="/lobby" v-if="$store.state.User.isLogged">
-                    <a>Lobby</a>
-                </HeaderButton>
                 <HeaderButton targetUrl="/battle">
                     <a>Battles</a>
                 </HeaderButton>

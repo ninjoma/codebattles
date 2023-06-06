@@ -48,9 +48,10 @@ namespace codebattle_api.Services.UserServices
                     selectExpression: selectExpression);
         }
 
+
         public override async Task<UserDetailDTO> GetById(int id, bool isActive = true)
         {
-#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
+            #pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
             var includes = new List<Expression<Func<User, object>>>
             {
                 u => u.Badges,
@@ -58,8 +59,7 @@ namespace codebattle_api.Services.UserServices
                 u => u.Participants,
                 u => u.WinnedGames
             };
-#pragma warning restore CS8603
-
+            #pragma warning restore CS8603
             return await _repository.GetById<UserDetailDTO>(id, includes, isActive);
         }
     }

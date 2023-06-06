@@ -29,13 +29,13 @@ export default {
                         <div>
                             <h3 class="text-2xl font-bold text-[#36D399]">{{ profile.username }}</h3>
                             <blockquote class="text-sm italic">
-                                <p>{{ profile.id }}</p>
+                                <p>ID: {{ profile.id }}</p>
                             </blockquote>
                         </div>
                         <div class="flex flex-col flex items-end flex-1 gap-1 font-inter w-full">
                             <div class="flex flex-1 items-end gap-1 font-inter">
                                 <a>LEVEL</a>
-                                <a class="text-3xl text-[#36D399]">23</a>
+                                <a class="text-3xl text-[#36D399]">{{ profile.level }}</a>
                             </div>
                             <div class="flex gap-2">
                                 <div className="tooltip tooltip-bottom" data-tip="Random Text">
@@ -54,9 +54,9 @@ export default {
                         </div>
                     </div>
                     <div class="py-2 flex flex-col items-center rounded-xl w-full">
-                        <progress className="progress progress-success h-10 m-1 rounded-sm" value="30" max="100"></progress>
+                        <progress className="progress progress-success h-10 m-1 rounded-sm" :value="profile.experience" :max="Math.max(1,profile.level) * 1000"></progress>
                         <div class="flex justify-end font-inter w-full">
-                            <a>CurrEXP / MaxEXP</a>
+                            <a>{{ profile.experience }} / {{ Math.max(1,profile.level) * 1000 }} EXP</a>
                         </div>
                     </div>
                     <div class="flex gap-2 w-full">
@@ -66,7 +66,7 @@ export default {
                         <button className="btn flex gap-2 flex-1">
                             <font-awesome-icon icon="fa-solid fa-flag"  /> Report
                         </button>
-                        <button className="btn flex gap-2 flex-1">
+                        <button v-if="$store.state.User.id == $store.state.Profile.id" className="btn flex gap-2 flex-1">
                             <font-awesome-icon icon="fa-solid fa-pen-to-square" /> Edit Profile
                         </button>
                     </div>
