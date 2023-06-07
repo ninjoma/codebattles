@@ -9,6 +9,14 @@ namespace codebattle_api
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var item in modelBuilder.Model.GetEntityTypes())
+            {
+                item.FindProperty("CreationDate")?.SetDefaultValueSql("NOW()");
+            }
+        }
+
         public DbSet<Friend>? Friend { get; set; }
         public DbSet<User>? User { get; set; }
         public DbSet<Game>? Game { get; set; }
@@ -17,6 +25,6 @@ namespace codebattle_api
         public DbSet<Step>? Step { get; set; }
         public DbSet<Tag>? Tag { get; set; }
         public DbSet<Badge>? Badge { get; set; }
-        public DbSet<Validation>? Validations { get; set; }
+        public DbSet<Validation>? Validation { get; set; }
     }
 }
