@@ -14,10 +14,13 @@ export default {
     methods: {
         joinBattle(gameId){
             this.$store.dispatch("Game/addParticipant", gameId).then(() => {
-                this.$router.push("lobby/" + gameId);
+                this.enterLobby(gameId)
             });
+        },
+        enterLobby(gameId) {
+            this.$router.push("lobby/" + gameId);
         }
-    }
+    },
 }
 </script>
 <template>
@@ -35,7 +38,7 @@ export default {
                 <span>Players: {{ game.participants.length }}/2</span>
                 <span class="text-end">{{ game.participants.map((participant) => { return participant.user.username }).join(',') }}</span>
                 <button class="mt-2">
-                    <button v-if="game.gameStatus != GameStatus.Ended" v-on:click="joinBattle(game.id)" className="btn btn-success btn-sm">
+                    <button v-if="game.gameStatus != GameStatus.Ended" v-on:click="game.userInBattle == false ? joinBattle(game.id) : enterLobby(game.id)" className="btn btn-success btn-sm">
                         <span v-if="game.userInBattle == true">
                             You are still in battle! Rejoin
                         </span>

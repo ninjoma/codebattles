@@ -5,6 +5,7 @@ import PlayerCard from "./PlayerCard.vue";
 import ScoreCard from "./ScoreCard.vue";
 import { startSignalRConnection } from "../signalr/signalr";
 import { HubConnection } from "@microsoft/signalr";
+import { mapState } from "vuex";
 export default {
     components: {
         LobbyHeader,
@@ -36,8 +37,8 @@ export default {
             connection.on("UserJoined", this.UserJoined);
             connection.on("UserLeft", this.UserJoined);
             this.connection = connection;
+            this.myCode = this.currentStep.boilerPlate;
         })
-
     },
     methods: {
         SendMessage() {
@@ -62,8 +63,14 @@ export default {
         UserLeft(mensaje: any) {
             
         },
-        getOtherParticipantInfo(data){
-            this.$store.state.Game.currentGame.participants;
+    },
+    computed: mapState({
+        currentGame: state => state.Game.currentGame,
+        currentStep: state => state.Game.currentGame.steps[state.Game.currentGame.userInBattle.currentStep]
+    }),
+    watch: {
+        '$store.Game.currentGame.userInBattle.currentStep': function(currentStep) {
+            console.log(currentStep);
         }
     }
 }
@@ -73,12 +80,14 @@ export default {
     <LobbyHeader></LobbyHeader>
     <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
         <div className="w-1/2 flex justify-between">
-            <PlayerCard :level="$store.state.User.level" />
-            <ScoreCard />
+            <PlayerCard :level="currentGame.userInBattle.user.level" :username="currentGame.userInBattle.user.username" />
+            <ScoreCard :currentStep="currentGame.userInBattle.currentStep" :totalSteps="currentGame.steps.length"/>
         </div>
         <div className="w-1/2 flex justify-between">
-            <ScoreCard />
-            <PlayerCard :level="1"  />
+            <ScoreCard :currentStep="currentGame.opponents[0]?.currentStep ?? '0'" :totalSteps="currentGame.steps.length"/>
+            <PlayerCard :level="currentGame.opponents[0]?.user.level ?? '0'"
+                :username="currentGame.opponents[0]?.user.username ?? 'Waiting...'"
+            />
         </div>
     </div>
     <div class="flex grow w-full px-4 pb-2 gap-5">

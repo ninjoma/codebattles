@@ -24,11 +24,9 @@ export default {
 		}
 	},
 	mutations: {
-		load(state, data) {
-			state.isLogged = data;
-			if(state.isLogged) {
-				axios.defaults.headers.common["Authorization"] = state.token ? ('Bearer ' + state.token) : null;
-			}	
+		load(state) {
+			state.token = localStorage.token;
+			axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.token;
 			axios.get('/api/User/me').then((userResponse) => {
 				state.id = userResponse.data.id;
 				state.email = userResponse.data.email;
@@ -36,6 +34,7 @@ export default {
 				state.experience = userResponse.data.experience;
 				state.isPremium = userResponse.data.isPremium;
 				state.isAdmin = userResponse.data.isAdmin;
+				state.isLogged = true;
 			});
 		},
 		login(state, data) {
@@ -79,14 +78,14 @@ export default {
             });
 		},
 		load({ commit }) {
-			commit('load', localStorage.token != null);
+			commit('load');
 		},
 		loginsso({ commit }, data){
 			commit('loginsso', data);
 		},
 		login({ commit }, data){
 			commit('login', data);
-			commit('load', localStorage.token != null);
+			commit('load');
 		}
 	}
 };

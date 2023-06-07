@@ -6,6 +6,7 @@ namespace codebattle_api.DTO
     {
         public string? Name { get; set; }
         public int Judge0Id { get; set; }
+        public string? Validator { get; set; }
     }
 
     public class LanguageDetailDTO : LanguageDTO
