@@ -8,6 +8,5 @@ namespace codebattle_api.Entities
         public int Judge0Id { get; set; }
 
         public virtual ICollection<Game>? Games { get; set; }
-        public virtual ICollection<Step>? Steps { get; set; }
     }
 }

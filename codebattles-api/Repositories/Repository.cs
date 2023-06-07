@@ -1,11 +1,12 @@
 using System.Linq.Expressions;
 using AutoMapper;
+using codebattle_api.DTO;
 using codebattle_api.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace codebattle_api.Repositories
 {
-    public class Repository<PostDTO, Entity> : IRepository<PostDTO, Entity> where PostDTO : class where Entity : Entities.Entity
+    public class Repository<PostDTO, Entity> : IRepository<PostDTO, Entity> where PostDTO : BaseDTO where Entity : Entities.Entity
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
@@ -23,7 +24,6 @@ namespace codebattle_api.Repositories
         {
             var newEntity = _mapper.Map<Entity>(newDto);
             newEntity.CreationDate = DateTime.Now.ToUniversalTime();
-            newEntity.IsActive = true;
             await dbSet.AddAsync(newEntity);
             await _context.SaveChangesAsync();
             return _mapper.Map<PostDTO>(newEntity);
