@@ -37,6 +37,7 @@ namespace codebattle_api.Services
 
         public virtual async Task<PostDTO> EditById(PostDTO entryDTO)
         {
+            entryDTO.CreationDate = DateTime.Now.ToUniversalTime();
             return await _repository.Edit(entryDTO);
 
         }

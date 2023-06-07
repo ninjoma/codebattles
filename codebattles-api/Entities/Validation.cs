@@ -11,7 +11,11 @@ namespace codebattle_api.Entities
         [Required]
         public string? ExitValue { get; set; }
 
-        public Step? Step { get; set; }
+        [Required]
+        public int StepId { get; set; }
+
+        [ForeignKey(nameof(StepId))]
+        public Step? Step { get; set; } = null!;
 
     }
 }

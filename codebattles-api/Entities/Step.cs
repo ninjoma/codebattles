@@ -25,7 +25,7 @@ namespace codebattle_api.Entities
 
 
         public virtual ICollection<Game>? Games { get; set; }
-        public virtual ICollection<Validation>? Validations { get; set; }
+        public virtual ICollection<Validation>? Validations { get; set; } = new List<Validation>();
 
     }
 }
