@@ -35,6 +35,7 @@ export default {
 		getGame({ commit }, data){
 			axios.get('/api/Game/' + data)
 			.then((response) => {
+				console.log(response.data);
 				commit('setGame', response.data);
 			})
 		},

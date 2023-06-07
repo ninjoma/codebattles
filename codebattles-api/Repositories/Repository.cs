@@ -24,7 +24,6 @@ namespace codebattle_api.Repositories
         public async Task<PostDTO> Add(PostDTO newDto)
         {
             var newEntity = _mapper.Map<Entity>(newDto);
-            newEntity.CreationDate = DateTime.Now.ToUniversalTime();
             await dbSet.AddAsync(newEntity);
             await _context.SaveChangesAsync();
             return _mapper.Map<PostDTO>(newEntity);
