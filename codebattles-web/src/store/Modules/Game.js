@@ -35,8 +35,12 @@ export default {
 		getGame({ commit }, data){
 			axios.get('/api/Game/' + data)
 			.then((response) => {
-				console.log(response.data);
-				commit('setGame', response.data);
+				var data = response.data
+				data.userInBattle = data.participants.filter(participant => {
+					return participant.userId == Store.getters['User/getId'];
+				});
+				console.log(data);
+				commit('setGame', data);
 			})
 		},
 		addParticipant({ commit }, data) {

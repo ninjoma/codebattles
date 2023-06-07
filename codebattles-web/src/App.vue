@@ -10,7 +10,9 @@ export default {
         ToastHandler
     },
     mounted() {
-      this.$store.dispatch("User/load");
+      if(localStorage.token) {
+        this.$store.dispatch("User/load");
+      }
     }
 }
 </script>

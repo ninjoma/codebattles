@@ -44,7 +44,7 @@ export default {
                 <HeaderButton :targetUrl=" '/users/' + $store.state.User.id + '/profile'">
                     <font-awesome-icon icon="fa-solid fa-user" />
                 </HeaderButton>
-                <HeaderButton targetUrl="/logout" v-if="$store.state.User.isAdmin">
+                <HeaderButton targetUrl="/logout" v-if="$store.state.User.isLogged">
                     <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
                 </HeaderButton>
             </div>
