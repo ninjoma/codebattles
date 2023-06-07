@@ -83,7 +83,6 @@ builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
                    .AllowCredentials();
         }));
 
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 .AddJwtBearer(options =>
