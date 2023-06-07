@@ -14,6 +14,7 @@ namespace codebattle_api
             foreach (var item in modelBuilder.Model.GetEntityTypes())
             {
                 item.FindProperty("CreationDate")?.SetDefaultValueSql("NOW()");
+                item.FindProperty("IsActive")?.SetDefaultValueSql("true");
             }
         }
 

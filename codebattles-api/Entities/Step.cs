@@ -12,8 +12,6 @@ namespace codebattle_api.Entities
         [ForeignKey(nameof(LanguageId))]
         public Language? Language { get; set; }
 
-
-
         [Required]
         public string? Name { get; set; }
 
