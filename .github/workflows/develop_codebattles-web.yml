@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: ./codebattles-web
+          path: ./codebattles-web/dist
 
   deploy:
     runs-on: ubuntu-latest
