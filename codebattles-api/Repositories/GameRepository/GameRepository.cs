@@ -74,9 +74,9 @@ namespace codebattle_api.Repositories.GameRepository
 #pragma warning disable CS8620
             query = query.Include(x => x.GameMode);
             query = query.Include(x => x.Language);
-            query = query.Include(x => x.Participants).ThenInclude(x => x.User);
             query = query.Include(x => x.Winner);
             query = query.Include(x => x.Steps);
+            query = query.Include(x => x.Participants).ThenInclude(x => x.User);
 #pragma warning restore CS8620
 
             query = query.Where(specification);

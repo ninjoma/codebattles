@@ -1,11 +1,12 @@
 <script lang="ts">
 import SectionTitle from '../components/SectionTitle.vue';
 import AdminEntityContainer from '../components/AdminEntityContainer.vue'
-import BadgeForm from '../components/BadgeForm.vue'
-import LanguageForm from '../components/LanguageForm.vue'
-import EntityListContainer from '../components/EntityListContainer.vue'
-import BadgeList from '../components/BadgeListComponent.vue'
-import LanguageList from '../components/LanguageListComponent.vue'
+import BadgeForm from '../components/Forms/BadgeForm.vue'
+import GameModeForm from '../components/Forms/GameModeForm.vue'
+import LanguageForm from '../components/Forms/LanguageForm.vue'
+import EntityListContainer from '../components/Lists/EntityListContainer.vue'
+import BadgeList from '../components/Lists/BadgeListComponent.vue'
+import LanguageList from '../components/Lists/LanguageListComponent.vue'
 export default {
     components: {
         SectionTitle,
@@ -15,6 +16,7 @@ export default {
         EntityListContainer,
         BadgeList,
         LanguageList,
+        GameModeForm,
     },
     mounted() {
     },
@@ -43,7 +45,7 @@ export default {
                     <BadgeList/>
                 </template>
             </AdminEntityContainer>
-            <AdminEntityContainer entity="Game" :showUpdate="false" :showDelete="true">
+            <AdminEntityContainer entity="Game" :showUpdate="false" :showDelete="true" :showCreate="false" :showList="false">
                 <template #create>
                     <BadgeForm/>
                 </template>
@@ -51,7 +53,7 @@ export default {
                     <BadgeList/>
                 </template>
             </AdminEntityContainer>
-            <AdminEntityContainer entity="Friend" :showUpdate="false" :showDelete="true">
+            <AdminEntityContainer entity="Friend" :showUpdate="false" :showDelete="true" :showCreate="false" :showList="false">
                 <template #create>
                     <BadgeForm/>
                 </template>
@@ -59,9 +61,9 @@ export default {
                     <BadgeList/>
                 </template>
             </AdminEntityContainer>
-            <AdminEntityContainer entity="GameMode" :showUpdate="false" :showDelete="true">
+            <AdminEntityContainer entity="GameMode" :showUpdate="false" :showDelete="true" :showCreate="true" :showList="false">
                 <template #create>
-                    <BadgeForm/>
+                    <GameModeForm/>
                 </template>
                 <template #list>
                     <BadgeList/>

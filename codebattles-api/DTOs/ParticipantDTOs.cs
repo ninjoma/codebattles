@@ -7,9 +7,7 @@ namespace codebattle_api.DTO
         public int UserId { get; set; }
         public int GameId { get; set; }
         public double Score { get; set; }
-        public int CurrentStep { get; set; }
-        
-        [JsonIgnore]
+        public int CurrentStep { get; set; }        
         public UserDTONoPassword? User { get; set; }
     }
     public class ParticipantDetailDTO : ParticipantDTO
