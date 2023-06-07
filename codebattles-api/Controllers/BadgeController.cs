@@ -24,8 +24,8 @@ namespace codebattle_api.Controllers
         {
             try
             {
-                var result = await _service.ListBySpec<BadgeDetailDTO>(x => x.Name != null && badgeName != null ? x.Name.Contains(badgeName) : x.Name == x.Name && x.IsActive);
-                return result != null ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
+                var result = await _service.ListBySpec<BadgeDetailDTO>(x => (x.Name != null && badgeName != null ? x.Name.Contains(badgeName) : x.Name == x.Name) && x.IsActive);
+                return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
             }
             catch (CodeBattleException ex)
             {

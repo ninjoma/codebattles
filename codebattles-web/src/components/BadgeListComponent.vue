@@ -25,7 +25,9 @@ export default {
             axios.get('/api/Badge' + (this.searchName != '' && this.searchName != null ? '?badgeName=' + this.searchName : ''))
 			.then((response) => {
 				this.badgeList = response.data;
-			})
+            }).catch((error) => {
+                this.badgeList = [];
+            })
         }
     }
 }

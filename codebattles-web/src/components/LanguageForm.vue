@@ -14,10 +14,10 @@ export default {
     },
     methods: {
         Create() {
-            axios.post('api/badge/', {
+            axios.post('api/Language/', {
                 id: 0,
                 name: this.badgeName,
-                description: this.description
+                judge0Id: this.description
             })
                 .then((response) => {
                     this.$store.commit('Alert/show', { type: 'success', message: 'Entity Succesfully created' })
@@ -27,15 +27,14 @@ export default {
                 })
         }
     }
-
 }
 </script>
 <template>
     <div class="form-control w-full my-3">
-        <input type="text" placeholder="Badge Name" v-model="badgeName" class="input input-bordered w-full" />
+        <input type="text" placeholder="Language Name" v-model="badgeName" class="input input-bordered w-full" />
     </div>
     <div class="form-control w-full my-3">
-        <input type="text" placeholder="Badge Description" v-model="description" class="input input-bordered w-full" />
+        <input type="number" placeholder="Judge0 Id" v-model="description" class="input input-bordered w-full" />
     </div>
     <button class="w-full btn btn-success" v-on:click="Create()">
         Create Badge

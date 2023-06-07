@@ -1,4 +1,5 @@
 <script lang="ts">
+import { moveCompletionSelection } from '@codemirror/autocomplete';
 import SectionTitle from '../components/SectionTitle.vue';
 import axios from "axios";
 export default {
@@ -25,6 +26,10 @@ export default {
             if (confirm("Do you want to delete this entity?") == true) {
                 axios.delete('api/' + this.entity + '/' + this.deleteId + '?isDbDelete=false')
                     .then((response) => {
+                        this.$store.commit('Alert/show', { type: 'success', message: 'Entity Succesfully deleted' })
+                    }).catch((error) => {
+                        console.log(error)
+                        this.$store.commit('Alert/show', { type: 'error', message: error.response.data.errorTranslation })
                     })
             } else {
             }
@@ -34,7 +39,7 @@ export default {
 }
 </script>
 <template>
-    <div class="flex flex-col bg-base-300 rounded-xl px-6 py-3 shadow my-5 flex flex-col">
+    <div class="flex flex-col bg-base-300 rounded-xl px-6 py-3 shadow my-5 flex flex-col shadow-lg">
         <div class="collapse collapse-arrow">
             <input type="checkbox" />
             <div class="collapse-title text-xl font-medium flex flex-row">

@@ -2,15 +2,19 @@
 import SectionTitle from '../components/SectionTitle.vue';
 import AdminEntityContainer from '../components/AdminEntityContainer.vue'
 import BadgeForm from '../components/BadgeForm.vue'
+import LanguageForm from '../components/LanguageForm.vue'
 import EntityListContainer from '../components/EntityListContainer.vue'
 import BadgeList from '../components/BadgeListComponent.vue'
+import LanguageList from '../components/LanguageListComponent.vue'
 export default {
     components: {
         SectionTitle,
         AdminEntityContainer,
         BadgeForm,
+        LanguageForm,
         EntityListContainer,
         BadgeList,
+        LanguageList,
     },
     mounted() {
     },
@@ -37,6 +41,38 @@ export default {
                 </template>
                 <template #list>
                     <BadgeList/>
+                </template>
+            </AdminEntityContainer>
+            <AdminEntityContainer entity="Game" :showUpdate="false" :showDelete="true">
+                <template #create>
+                    <BadgeForm/>
+                </template>
+                <template #list>
+                    <BadgeList/>
+                </template>
+            </AdminEntityContainer>
+            <AdminEntityContainer entity="Friend" :showUpdate="false" :showDelete="true">
+                <template #create>
+                    <BadgeForm/>
+                </template>
+                <template #list>
+                    <BadgeList/>
+                </template>
+            </AdminEntityContainer>
+            <AdminEntityContainer entity="GameMode" :showUpdate="false" :showDelete="true">
+                <template #create>
+                    <BadgeForm/>
+                </template>
+                <template #list>
+                    <BadgeList/>
+                </template>
+            </AdminEntityContainer>
+            <AdminEntityContainer entity="Language" :showUpdate="false" :showDelete="true">
+                <template #create>
+                    <LanguageForm/>
+                </template>
+                <template #list>
+                    <LanguageList/>
                 </template>
             </AdminEntityContainer>
         </div>

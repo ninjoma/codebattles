@@ -18,7 +18,7 @@ namespace codebattle_api.Exceptions
 
         public CodeBattleException(ErrorCode errorCode) : base(GetErrorMessage(errorCode))
         {
-            ErrorCode = ErrorCode;
+            ErrorCode = errorCode;
             ErrorTranslation = GetErrorTranslationMessage(errorCode);
         }
 

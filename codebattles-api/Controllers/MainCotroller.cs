@@ -110,6 +110,8 @@ namespace codebattle_api.Controllers
                     return BadRequest(new ErrorResponse(ex));
                 case ErrorCode.Unauthorized:
                     return Unauthorized(new ErrorResponse(ex));
+                case ErrorCode.NotFound:
+                    return NotFound(new ErrorResponse(ex));
                 default:
                     return BadRequest(new ErrorResponse(ex));
             }

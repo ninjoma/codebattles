@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using AutoMapper;
 using codebattle_api.Entities;
+using codebattle_api.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace codebattle_api.Repositories
@@ -34,7 +35,11 @@ namespace codebattle_api.Repositories
             var entity = await dbSet.FindAsync(id);
             if (entity != null)
             {
-                entity.IsActive = !entity.IsActive;
+                if (entity.IsActive){
+                    entity.IsActive = !entity.IsActive;
+                } else {
+                    throw new CodeBattleException(ErrorCode.NotFound);
+                }
                 await _context.SaveChangesAsync();
                 return true;
             }
