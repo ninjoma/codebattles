@@ -9,6 +9,6 @@ namespace codebattle_api.DTO
     }
 
     public class BadgeDetailDTO : BadgeDTO {
-        public virtual ICollection<UserDTO>? Users { get; set; }
+        public virtual ICollection<UserDTONoPassword>? Users { get; set; }
     }
 }

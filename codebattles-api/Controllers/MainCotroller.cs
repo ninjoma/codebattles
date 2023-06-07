@@ -83,7 +83,7 @@ namespace codebattle_api.Controllers
         /// <param name="isDbDelete">Defines if the delete is going to be logical or physical</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public virtual async Task<IActionResult> Delete(int id, [FromBody] bool isDbDelete = false)
+        public virtual async Task<IActionResult> Delete(int id, [FromQuery] bool isDbDelete = false)
         {
             try
             {
