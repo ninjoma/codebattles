@@ -7,6 +7,7 @@ import LanguageForm from '../components/Forms/LanguageForm.vue'
 import EntityListContainer from '../components/Lists/EntityListContainer.vue'
 import BadgeList from '../components/Lists/BadgeListComponent.vue'
 import LanguageList from '../components/Lists/LanguageListComponent.vue'
+import GameModeList from '../components/Lists/GameModeListComponent.vue'
 export default {
     components: {
         SectionTitle,
@@ -17,6 +18,7 @@ export default {
         BadgeList,
         LanguageList,
         GameModeForm,
+        GameModeList,
     },
     mounted() {
     },
@@ -36,7 +38,7 @@ export default {
 </script>
 <template>
     <div class="flex flex-col flex-1 items-center">
-        <div class="max-w-screen-2xl w-full p-2 ">
+        <div class="max-w-screen-lg w-full p-2 ">
             <AdminEntityContainer entity="Badge" :showUpdate="false" :showDelete="true">
                 <template #create>
                     <BadgeForm/>
@@ -61,12 +63,12 @@ export default {
                     <BadgeList/>
                 </template>
             </AdminEntityContainer>
-            <AdminEntityContainer entity="GameMode" :showUpdate="false" :showDelete="true" :showCreate="true" :showList="false">
+            <AdminEntityContainer entity="GameMode" :showUpdate="false" :showDelete="true" :showCreate="true" :showList="true">
                 <template #create>
                     <GameModeForm/>
                 </template>
                 <template #list>
-                    <BadgeList/>
+                    <GameModeList/>
                 </template>
             </AdminEntityContainer>
             <AdminEntityContainer entity="Language" :showUpdate="false" :showDelete="true">

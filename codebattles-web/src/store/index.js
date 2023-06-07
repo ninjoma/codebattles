@@ -4,6 +4,8 @@ import Search from './Modules/Search';
 import Profile from './Modules/Profile';
 import Alert from "./Modules/Alert";
 import Game from "./Modules/Game";
+import Language from "./Modules/Language";
+import Gamemode from "./Modules/Gamemode";
 
 export default createStore({
     modules: {
@@ -11,6 +13,8 @@ export default createStore({
         Search,
         Profile,
         Alert,
-        Game
+        Game,
+        Language,
+        Gamemode,
     }
 })

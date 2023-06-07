@@ -11,7 +11,7 @@ export default {
     },
     data() {
         return {
-            badgeList: [],
+            gamemodeList: [],
             searchName: '',
         }
     },
@@ -22,11 +22,11 @@ export default {
             }
         },
         fetchData() {
-            axios.get('/api/Badge' + (this.searchName != '' && this.searchName != null ? '?badgeName=' + this.searchName : ''))
+            axios.get('/api/GameMode' + (this.searchName != '' && this.searchName != null ? '?name=' + this.searchName : ''))
 			.then((response) => {
-				this.badgeList = response.data;
+				this.gamemodeList = response.data;
             }).catch((error) => {
-                this.badgeList = [];
+                this.gamemodeList = [];
             })
         }
     }
@@ -45,5 +45,5 @@ export default {
             </button>
         </div>
     </div>
-    <EntityListContainer :displayed-list="badgeList"></EntityListContainer>
+    <EntityListContainer :displayed-list="gamemodeList"></EntityListContainer>
 </template>
