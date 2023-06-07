@@ -5,13 +5,15 @@ export default {
     components: {
         
     },
-    mounted() { //const loginUri = window.location.origin + import.meta.env.VITE_SSO_LOGIN_URI;
+  mounted() { //const loginUri = window.location.origin + import.meta.env.VITE_SSO_LOGIN_URI;
+      // @ts-expect-error
       window.google.accounts.id.initialize({
         client_id: import.meta.env.VITE_GOOGLE_LOGIN_ID,
         callback: this.handleCredentialResponse,
         auto_select: true,
         itp_support: true
       })
+      // @ts-expect-error
       window.google.accounts.id.renderButton(
         this.$refs.googlebtn, {
           text: 'signin',
