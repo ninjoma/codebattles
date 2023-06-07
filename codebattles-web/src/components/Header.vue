@@ -28,7 +28,10 @@ export default {
                     <font-awesome-icon icon="fa-solid fa-bars" class="text-xl"/>
                 </label>
             </div>
-            <a className="normal-case text-xl font-inter font-bold px-2">>/&lt; CODE BATTLES</a>
+            <a className="normal-case text-xl font-inter font-bold px-2 flex gap-3">
+                >/&lt; 
+                <span className="hidden md:block">CODE BATTLES</span>
+            </a>
             <div class="h-full flex gap-3 hidden sm:flex">
                 <HeaderButton targetUrl="/battle">
                     <a>Battles</a>

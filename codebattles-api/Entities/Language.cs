@@ -7,6 +7,8 @@ namespace codebattle_api.Entities
         public string? Name { get; set; }
         public int Judge0Id { get; set; }
 
+        public string? Validator { get; set; }
+
         public virtual ICollection<Game>? Games { get; set; }
     }
 }

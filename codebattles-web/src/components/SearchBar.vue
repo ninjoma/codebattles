@@ -29,9 +29,9 @@ export default {
 }
 </script>
 <template>
-<div class="px-5 hidden sm:flex w-96">
-    <div className="relative w-96">
-        <input ref="searchInput" v-on:input="search" type="text" placeholder="Search..." className="input input-sm input-ghost w-full"/>
+<div class="px-5 hidden sm:flex max-w-96">
+    <div className="relative">
+        <input ref="searchInput" v-on:input="search" type="text" placeholder="Search..." className="input input-sm input-ghost flex-grow"/>
         <div v-if="showSearchBar" className="card w-full bg-base-100 shadow-xl absolute top-10">
             <div className="p-2 shadow-lg rounded-sm">
                 <b>Users</b>

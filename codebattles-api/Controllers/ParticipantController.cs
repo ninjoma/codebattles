@@ -7,6 +7,7 @@ using codebattle_api.utils.Extensions;
 using codebattle_api.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using codebattle_api.Services.GameServices;
 
 namespace codebattle_api.Controllers
 {
@@ -19,14 +20,13 @@ namespace codebattle_api.Controllers
         }
 
         [HttpPost("")]
-        public override async Task<IActionResult> Create([FromBody] ParticipantDTO postDTO)
+        public override async Task<IActionResult> Create([FromBody] ParticipantDTO? postDTO)
         {
             try
             {
-                if(postDTO?.UserId == null && (postDTO?.UserId != null && this.User.GetUserRole() != "Admin")) {
+                if((this.User.GetUserRole() != "Admin") || (postDTO?.UserId == null && this.User.GetUserRole() == "Admin")) {
                     postDTO.UserId = this.User.GetUserId();
                 }
- 
                 var result = await _service.Add(postDTO);
                 return Ok(result);
             }

@@ -6,7 +6,12 @@ export default {
 	state() {
 		return {
 			games: {},
-			currentGame: {}
+			currentGame: {
+				id: null,
+				steps: [],
+				userInBattle: { user: { level: null } },
+				opponents: []
+			}
 		}
 	},
 	getters: {
@@ -38,14 +43,17 @@ export default {
 				var data = response.data
 				data.userInBattle = data.participants.filter(participant => {
 					return participant.userId == Store.getters['User/getId'];
+				})[0];
+				data.opponents = data.participants.filter(participant => {
+					return participant.userId != Store.getters['User/getId'];
 				});
-				console.log(data);
+				delete data.participants;
 				commit('setGame', data);
 			})
 		},
 		addParticipant({ commit }, data) {
 			axios.post('/api/Participant/', {
-				gameId: data.game
+				gameId: data
 			})
 		},
 		createGame({ commit }, data) {
