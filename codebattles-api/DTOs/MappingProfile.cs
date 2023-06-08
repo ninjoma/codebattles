@@ -53,6 +53,8 @@ namespace codebattle_api.DTO
             #region STEP
             CreateMap<Step, StepDTO>()
                 .ReverseMap();
+            CreateMap<Step, StepDetailDTO>()
+            .ReverseMap();
             #endregion STEP
 
             #region TAG
