@@ -55,7 +55,8 @@ export default {
         @input="updateValue($event.target.value)"
         :disabled="disabled"
         :style="{
-            height: '100%'
+            height: '100%',
+            width: '100%'
         }" :extensions="extensions" @ready="handleReady" @change="$emit('codeEditor:onchange')"
         @blur="" />
 </template>

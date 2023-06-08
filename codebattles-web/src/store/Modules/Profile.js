@@ -28,7 +28,6 @@ export default {
 		loadProfile({ commit }, data){
 			axios.get('/api/User/' + data.id)
 			.then((response) => {
-				console.log(response.data);
 				commit('setUser', response.data);
 			})
 		}

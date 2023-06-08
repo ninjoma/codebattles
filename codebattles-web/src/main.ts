@@ -10,7 +10,7 @@ import Store from './store/index.js';
 import SearchStore from "./store/Modules/Search.js";
 import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag,
     faPlus, faPenToSquare, faBars, faJetFighter, faBrain, faStopwatch, 
-    faXmark, faXmarkCircle, faCircleXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+    faXmark, faXmarkCircle, faCircleXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck, faSkullCrossbones } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import VueGtagPlugin from 'vue-gtag';
 
@@ -21,7 +21,8 @@ if(import.meta.env.DEV) {
 
 library.add(faCrown, faCircleArrowUp, faUser, faRightFromBracket, 
     faFlag, faPlus, faPenToSquare, faBars, faJetFighter,
-    faBrain, faStopwatch, faCircleXmark, faXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck)
+    faBrain, faStopwatch, faCircleXmark, faXmark, faCircleExclamation, 
+    faTriangleExclamation, faCircleInfo, faCircleCheck, faSkullCrossbones)
 
 const app = createApp(App);
 
