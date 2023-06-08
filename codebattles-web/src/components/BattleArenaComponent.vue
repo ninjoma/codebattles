@@ -75,24 +75,38 @@ export default {
 
 <template>
     <LobbyHeader></LobbyHeader>
-    <div class="w-full py-2.5 px-4 flex gap-40 justify-between items-center">
-        <div className="w-1/2 flex justify-between">
-            <PlayerCard :level="currentGame.userInBattle?.user.level ?? '0'" :username="currentGame.userInBattle?.user.username ?? 'Waiting...'" />
-            <ScoreCard :currentStep="currentGame.userInBattle?.currentStep ?? '0'" :totalSteps="currentGame?.steps.length ?? '0'"/>
-        </div>
-        <div className="w-1/2 flex justify-between">
-            <ScoreCard :currentStep="currentGame?.opponents?.[0]?.currentStep ?? '0'" :totalSteps="currentGame?.steps.length ?? '0'"/>
-            <PlayerCard :level="currentGame?.opponents?.[0]?.user.level ?? '0'"
-                :username="currentGame?.opponents?.[0]?.user.username ?? 'Waiting...'"
-            />
-        </div>
+    <div class="h-8 lg:h-0">
     </div>
-    <div class="flex grow w-full px-4 pb-2 gap-5">
-        <div class="grow w-1/2 bg-base-200 rounded-tr-lg p-3">
-            <CodeEditor v-model="myCode" @codeEditor:onchange="onCodeEditorChange"></CodeEditor>
+    <div class="w-full grow py-2 flex overflow-x-scroll lg:overflow-x-none no-scrollbar">
+        <div class="lg:w-1/2 flex flex-col grow gap-1">
+            <div className="lg:w-full w-screen flex justify-between px-4">
+                <PlayerCard :level="currentGame.userInBattle?.user.level ?? '0'" :username="currentGame.userInBattle?.user.username ?? 'Waiting...'" />
+                <div class="lg:pr-20">
+                    <ScoreCard :currentStep="currentGame.userInBattle?.currentStep ?? '0'" :totalSteps="currentGame?.steps.length ?? '0'"/>
+                </div>
+            </div>
+            <div className="lg:w-full flex grow no-scrollbar">
+                <div class="px-4 w-screen flex grow">
+                    <div class="w-full grow bg-base-200 rounded-tl-lg p-3 flex-shrink-0">
+                        <CodeEditor v-model="myCode" @codeEditor:onchange="onCodeEditorChange"></CodeEditor>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="grow w-1/2 bg-base-200 rounded-tl-lg p-3">
-            <CodeEditor v-model="enemyCode" :disabled="true"></CodeEditor>
+        <div class="lg:w-1/2 flex flex-col grow gap-1">
+            <div className="lg:w-full w-screen flex justify-between px-4">
+                <div className="lg:pl-20">
+                    <PlayerCard :level="currentGame.userInBattle?.user.level ?? '0'" :username="currentGame.userInBattle?.user.username ?? 'Waiting...'" />
+                </div>
+                <ScoreCard :currentStep="currentGame.userInBattle?.currentStep ?? '0'" :totalSteps="currentGame?.steps.length ?? '0'"/>
+            </div>
+            <div className="lg:w-full flex grow no-scrollbar">
+                <div class="px-4 w-screen flex grow">
+                    <div class="w-full grow bg-base-200 rounded-tl-lg p-3 flex-shrink-0">
+                        <CodeEditor v-model="enemyCode" :disabled="true"></CodeEditor>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

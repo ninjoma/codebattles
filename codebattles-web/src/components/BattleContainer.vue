@@ -25,13 +25,13 @@ export default {
 </script>
 <template>
 <div v-for="game in $store.state.Game.games" className="w-full">
-    <div class="bg-base-300 rounded-xl p-6 shadow font-inter">
-        <div className="flex justify-between items-baseline">
+    <div class="bg-base-300 rounded-xl sm:p-6 p-4 shadow font-inter">
+        <div className="flex justify-between items-baseline gap-3">
             <div>
                 <h5 class="text-[#36D399] font-bold text-lg">{{ game.participants[0] != null ? game.participants[0].user.username : null }}'s lobby</h5>
-                <div class="flex flex-col">
+                <div class="sm:flex flex-col">
                     <span>Settings:</span>
-                    <span>{{ game.gameMode.description }}, language: {{ game.language.name }}</span>
+                    <span>{{ game.gameMode.description }}, {{ game.language.name }}</span>
                 </div>
             </div>
             <div class="flex flex-col items-end">
@@ -40,7 +40,7 @@ export default {
                 <button class="mt-2">
                     <button v-if="game.gameStatus != GameStatus.Ended" v-on:click="game.userInBattle == false ? joinBattle(game.id) : enterLobby(game.id)" className="btn btn-success btn-sm">
                         <span v-if="game.userInBattle == true">
-                            You are still in battle! Rejoin
+                            Still in battle
                         </span>
                         <span v-else-if="game.participants.length < 2 && game.gameStatus != GameStatus.Started">
                             Join Game
