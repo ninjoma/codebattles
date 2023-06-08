@@ -49,10 +49,9 @@ export default {
 
 <template>
     <div class="flex flex-col">
-        <div class="flex gap-2 flex-1 w-full justify-between items-baseline">
-            <SectionTitle>Battles</SectionTitle>
-        </div>
-        <div class="flex justify-between gap-3 flex-wrap lg:flex-nowrap">
+        <h3 class="text-lg font-inter decoration-4 decoration-[#36D399]">Create Battle
+        </h3>
+        <div class="flex justify-between gap-3 flex-wrap lg:flex-nowrap px-1">
             <div class="flex items-start flex-col w-full">
                 <h6 class="">Language of choice</h6>
                 <div  class="grid grid-cols-3 lg:grid-cols-6 py-2 gap-3 w-full">

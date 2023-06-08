@@ -1,15 +1,15 @@
 <script lang="ts">
 import Header from './Header.vue';
+import MobileNav from './MobileNav.vue' 
 export default {
     components: {
-        Header
+        Header,
+        MobileNav
     },
 }
 </script>
 <template>
-    <div className="drawer">
-        <input id="header-drawer" type="checkbox" className="drawer-toggle" /> 
-        <div className="drawer-content flex flex-col min-h-screen">
+    <div className="drawer-content flex flex-col min-h-screen">
             <!-- Navbar -->
             <Header/>
             <!-- Page content here -->
@@ -17,16 +17,8 @@ export default {
                 <slot/>
             </div>
         </div> 
-        <div className="drawer-side">
-            <label htmlFor="header-drawer" className="drawer-overlay"></label> 
-            <div className="menu p-4 w-80 bg-base-100">
-            <!-- Sidebar content here -->
-                <div>
-                    
-                </div>
-            
-            </div>
-            
+        <MobileNav/>
+        <div class="sm:h-0 h-16">
+
         </div>
-    </div>
 </template>

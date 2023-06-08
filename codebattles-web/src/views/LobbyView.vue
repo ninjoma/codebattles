@@ -7,11 +7,11 @@ import { startSignalRConnection } from "../signalr/signalr";
 import BattleArenaComponent from "../components/BattleArenaComponent.vue";
 export default {
     components: {
-    LobbyHeader,
-    CodeEditor,
-    PlayerCard,
-    ScoreCard,
-    BattleArenaComponent
+        LobbyHeader,
+        CodeEditor,
+        PlayerCard,
+        ScoreCard,
+        BattleArenaComponent
     },
     mounted() {
         this.$store.dispatch("Game/getGame", this.$route.params.battleId);
@@ -19,7 +19,7 @@ export default {
     watch: {
         '$store.state.Game.currentGame': {
             handler(currentGame) {
-                if(currentGame.participants.map((participant) => participant.id).includes(this.$store.state.User.id)){
+                if(currentGame.userInBattle == null){
                     this.$store.commit("Alert/show", {type: "error", message: "This game has concluded or you're not in it"});
                     this.$router.push('/battle');
                 }
