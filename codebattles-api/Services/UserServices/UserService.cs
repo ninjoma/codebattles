@@ -27,6 +27,7 @@ namespace codebattle_api.Services.UserServices
                     IsAdmin = p.IsAdmin,
                     IsPremium = p.IsPremium,
                     Email = p.Email,
+                    AvatarBase64 = p.AvatarBase64,
                 };
             }
             else
@@ -37,21 +38,21 @@ namespace codebattle_api.Services.UserServices
                     Username = p.Username,
                     IsAdmin = p.IsAdmin,
                     IsPremium = p.IsPremium,
+                    AvatarBase64 = p.AvatarBase64,
                 };
             }
             return await _repository
                 .ListBySpec<UserDetailDTO>(
-                    specification: x => x.Username != null && x.Email != null
-                        && x.Username.Contains(username)
-                        && x.Email.Contains(email)
-                        && x.IsActive,
+                    specification: x => x.Username != null && x.Email != null &&
+                    (x.Username.Contains(username) || x.Email.Contains(email))
+                    && x.IsActive,
                     selectExpression: selectExpression);
         }
 
 
         public override async Task<UserDetailDTO> GetById(int id, bool isActive = true)
         {
-            #pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
+#pragma warning disable CS8603 //OmniSharp Reconoce la expresion como un tipo simple y siempre da warning de posible referencia nula
             var includes = new List<Expression<Func<User, object>>>
             {
                 u => u.Badges,
@@ -59,7 +60,7 @@ namespace codebattle_api.Services.UserServices
                 u => u.Participants,
                 u => u.WinnedGames
             };
-            #pragma warning restore CS8603
+#pragma warning restore CS8603
             return await _repository.GetById<UserDetailDTO>(id, includes, isActive);
         }
     }

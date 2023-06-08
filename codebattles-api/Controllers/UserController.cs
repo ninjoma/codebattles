@@ -49,7 +49,7 @@ namespace codebattle_api.Controllers
             return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
         }
 
-        [HttpPut("/me")]
+        [HttpPut("me")]
         [Authorize]
         public async Task<IActionResult> UpdateMe(UserDTO user)
         {

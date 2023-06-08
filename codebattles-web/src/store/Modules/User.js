@@ -7,7 +7,8 @@ const defaultUser = {
 	email: "",
 	isPremium: false,
 	isAdmin: false,
-	isLogged: false
+	isLogged: false,
+	avatarBase64: "",
 }
 
 export default {
@@ -34,6 +35,7 @@ export default {
 				state.experience = userResponse.data.experience;
 				state.isPremium = userResponse.data.isPremium;
 				state.isAdmin = userResponse.data.isAdmin;
+				state.avatarBase64 = userResponse.data.avatarBase64;
 				state.isLogged = true;
 			});
 		},

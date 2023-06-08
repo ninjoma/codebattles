@@ -10,7 +10,7 @@ export default {
 			isPremium: false,
 			isAdmin: false,
 			level: 0,
-
+			avatarBase64: "",
 		}
 	},
 	mutations: {
@@ -22,6 +22,7 @@ export default {
 			state.isAdmin = user.isAdmin;
 			state.level = user.level;
 			state.experience = user.experience;
+			state.avatarBase64 = user.avatarBase64;
 		}
 	},
 	actions: {
@@ -30,6 +31,15 @@ export default {
 			.then((response) => {
 				console.log(response.data);
 				commit('setUser', response.data);
+			})
+		},
+		updateProfile({ commit }, data) {
+			axios.put('/api/User/me', {
+				username: data.username,
+				avatarBase64: data.avatarBase64,
+			})
+			.then((response) => {
+				
 			})
 		}
 	}

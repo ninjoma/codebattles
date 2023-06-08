@@ -7,6 +7,7 @@ namespace codebattle_api.DTO
         public string? Password { get; set; }
         public bool? IsPremium { get; set; }
         public bool? IsAdmin { get; set; }
+        public string? AvatarBase64 { get; set; }
         public int? Level { get; set; }
         public int? Experience { get; set; }
     }
@@ -26,6 +27,7 @@ namespace codebattle_api.DTO
         public bool? IsPremium { get; set; }
         public bool? IsAdmin { get; set; }
         public int? Level { get; set; }
+        public string? AvatarBase64 { get; set; }
         public int? Experience { get; set; }
     }
 }

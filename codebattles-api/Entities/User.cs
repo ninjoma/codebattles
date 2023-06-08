@@ -28,6 +28,8 @@ namespace codebattle_api.Entities
         [DefaultValue(0)]
         public int Level { get; set; }
 
+        public string? AvatarBase64 { get; set; }
+
         public bool IsPremium { get; set; }
         public bool IsAdmin { get; set; }
 

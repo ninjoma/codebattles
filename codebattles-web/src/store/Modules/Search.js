@@ -30,7 +30,8 @@ export default {
 					return {
 						id: element.id,
 						email: element.email,
-						username: element.username
+						username: element.username,
+						avatarBase64: element.avatarBase64
 					}
 				});
 				commit('setSearchedUsers', formattedUsers);
