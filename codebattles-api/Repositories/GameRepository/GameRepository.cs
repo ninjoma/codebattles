@@ -61,7 +61,7 @@ namespace codebattle_api.Repositories.GameRepository
             query = query.Include(x => x.Language);
             query = query.Include(x => x.Participants).ThenInclude(x => x.User);
             query = query.Include(x => x.Winner);
-            query = query.Include(x => x.Steps);
+            query = query.Include(x => x.Steps).ThenInclude(x => x.Validations);
 #pragma warning restore CS8620
             return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
         }

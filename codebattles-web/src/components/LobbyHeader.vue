@@ -4,7 +4,7 @@ import { mapState } from 'vuex';
 export default {
     computed: mapState({
         currentGame: state => state.Game.currentGame,
-        currentStep: state => state.Game.currentGame.steps[state.Game.currentGame.userInBattle.currentStep]
+        currentStep: state => state.Game.currentGame.steps[state.Game.currentGame.userInBattle?.currentStep]
     })
 }
 </script> 

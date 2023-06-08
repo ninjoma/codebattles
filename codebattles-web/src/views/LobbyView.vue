@@ -14,13 +14,17 @@ export default {
     BattleArenaComponent
     },
     mounted() {
-        this.$store.dispatch("Game/getGame", this.$route.params.battleId).then(() => {
-            var currentGame = this.$store.state.Game.currentGame;  
-            if(!currentGame.participants.map((participant) => participant.id).includes(this.$store.state.User.id)){
-                this.$store.commit("Alert/show", {type: "error", message: "This game has concluded or you're not in it"});
-                this.$router.push('/battle');
+        this.$store.dispatch("Game/getGame", this.$route.params.battleId);
+    },
+    watch: {
+        '$store.state.Game.currentGame': {
+            handler(currentGame) {
+                if(currentGame.participants.map((participant) => participant.id).includes(this.$store.state.User.id)){
+                    this.$store.commit("Alert/show", {type: "error", message: "This game has concluded or you're not in it"});
+                    this.$router.push('/battle');
+                }
             }
-        });
+        }
     }
 }
 </script>

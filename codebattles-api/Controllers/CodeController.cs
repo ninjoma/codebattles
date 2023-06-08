@@ -11,6 +11,8 @@ using System.Web;
 using System.Collections.Specialized;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace codebattle_api.Controllers
 {
@@ -19,12 +21,14 @@ namespace codebattle_api.Controllers
     public class CodeController : ControllerBase
     {
         private readonly IGameService _gameService;
-        private Dictionary<string, string> Results = new Dictionary<string, string> {};
         static readonly HttpClient client = new HttpClient();
 
-        public CodeController(IGameService gameService)
+        private readonly IConfiguration Configuration;
+
+        public CodeController(IGameService gameService, IConfiguration configuration)
         {
             _gameService = gameService;
+            Configuration = configuration;
         }
 
         [HttpPost("")]
@@ -48,15 +52,20 @@ namespace codebattle_api.Controllers
                 var currentStep = game.Steps?.ElementAt((int) self.CurrentStep);
                 var code = codeDTO.Code + " " + game.Language?.Validator;
 
-                var judge0url = SecretManager.GetSecret("Judge0");
-                var judge0token = SecretManager.GetSecret("Judge0-Key");
+                var judge0url = Configuration["Judge0"];
+                var judge0token = Configuration["Judge0-Key"];
 
-                using HttpResponseMessage response = await client.PostAsJsonAsync(judge0url + 
-                "submissions/?base64_encoded=false&wait=false&X-Judge0-Token=" + judge0token, new {
-                    stdin = currentStep.Validations.ElementAt(0),
+
+                JudgeDTO judge = new JudgeDTO {
                     source_code = code,
-                    callback_url = $"{this.Request.Scheme}://{this.Request.Host.Value.ToString()}/Code"
-                });
+                    language_id = game.Language.Judge0Id.ToString(),
+                    stdin = "\"megatest\""
+                };
+                var stringContent = new StringContent(JsonConvert.SerializeObject(judge), UnicodeEncoding.UTF8, "application/json");
+
+                using HttpResponseMessage response = await client.PostAsync(judge0url + 
+                "submissions?base64_encoded=false&wait=true&X-Judge0-Token=" + judge0token, stringContent);
+                string responseBody = await response.Content.ReadAsStringAsync();
 
                 return Ok();
             }
@@ -66,19 +75,6 @@ namespace codebattle_api.Controllers
             }
         }
     
-        [HttpPut("")]
-        public async Task<IActionResult> GetResult(dynamic values)
-        {
-            try
-            {
-                return Ok();
-                
-            }
-            catch (CodeBattleException ex)
-            {
-                return BadRequest(new ErrorResponse(ex));
-            }
-        }
     
     }
 }
