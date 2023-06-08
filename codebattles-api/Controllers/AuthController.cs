@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Web;
 using System.Collections.Specialized;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Net.Mail;
 
 namespace codebattle_api.Controllers
 {
@@ -85,7 +87,29 @@ namespace codebattle_api.Controllers
         {
             try
             {
-                return Ok(await _AuthSv.GeneratePasswordToken(email));
+
+                var fromAddress = new MailAddress(Configuration["mailerEmail"], "CodeBattles");
+                var toAddress = new MailAddress(email, email);
+                
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, Configuration["mailerPassword"])
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = "Codebattles - Forgot password",
+                    Body = "Here's your code. " +  _AuthSv.GeneratePasswordToken(email)
+                })
+                {
+                    smtp.Send(message);
+                }
+
+                return Ok();
             }
             catch (CodeBattleException ex)
             {
