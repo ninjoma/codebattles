@@ -6,8 +6,8 @@ namespace codebattle_api.DTO
     {
         public string? Result { get; set; }
         public string? Name { get; set; }
-        public int LanguageId { get; set; }
-        public int GameModeId { get; set; }
+        public int? LanguageId { get; set; }
+        public int? GameModeId { get; set; }
         public int? WinnerId { get; set; }
         public GameStatusEnum GameStatus { get; set; }
     }

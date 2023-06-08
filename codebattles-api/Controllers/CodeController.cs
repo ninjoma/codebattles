@@ -45,7 +45,7 @@ namespace codebattle_api.Controllers
                 }
 
                 var self = game.Participants?.First((participant) => participant.UserId == this.User.GetUserId());
-                var currentStep = game.Steps?.ElementAt(self.CurrentStep);
+                var currentStep = game.Steps?.ElementAt((int) self.CurrentStep);
                 var code = codeDTO.Code + " " + game.Language?.Validator;
 
                 var judge0url = SecretManager.GetSecret("Judge0");

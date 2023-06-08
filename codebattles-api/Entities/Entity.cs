@@ -8,10 +8,10 @@ namespace codebattle_api.Entities
     {
         [Key]
         public int Id { get; set; }
-        
+
         [DefaultValue(true)]
-        public bool IsActive { get; set; }
-        
+        public bool IsActive { get; set; } = true;
+
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime CreationDate { get; set; } = DateTime.Now.ToUniversalTime();
     }

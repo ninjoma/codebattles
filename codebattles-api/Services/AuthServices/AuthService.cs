@@ -162,11 +162,11 @@ namespace codebattle_api.Services.AuthServices
 
         private string GetUserRole(UserDTO user)
         {
-            if (user.IsAdmin)
+            if (user.IsAdmin != null && (bool) user.IsAdmin)
             {
                 return "Admin";
             }
-            else if (user.IsPremium)
+            else if (user.IsPremium != null && (bool)user.IsPremium)
             {
                 return "Premium";
             }

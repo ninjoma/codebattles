@@ -34,9 +34,12 @@ namespace codebattle_api.Repositories
             var entity = await dbSet.FindAsync(id);
             if (entity != null)
             {
-                if (entity.IsActive){
+                if (entity.IsActive)
+                {
                     entity.IsActive = !entity.IsActive;
-                } else {
+                }
+                else
+                {
                     throw new CodeBattleException(ErrorCode.NotFound);
                 }
                 await _context.SaveChangesAsync();
@@ -77,11 +80,31 @@ namespace codebattle_api.Repositories
 
         public async Task<PostDTO> Edit(PostDTO newDto)
         {
-            var entity = _mapper.Map<Entity>(newDto);
-            dbSet.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            var existingEntity = await dbSet.FindAsync(newDto.Id);
+
+            if (existingEntity == null)
+            {
+                // La entidad no existe, puedes manejar esto según tus necesidades.
+                throw new CodeBattleException(ErrorCode.NotFound);
+            }
+
+            // Actualizar solo los campos no nulos
+            var properties = typeof(PostDTO).GetProperties();
+
+            foreach (var property in properties)
+            {
+                var newValue = property.GetValue(newDto);
+
+                if (newValue != null)
+                {
+                    var existingProperty = typeof(Entity).GetProperty(property.Name);
+                    existingProperty.SetValue(existingEntity, newValue);
+                }
+            }
+
             await _context.SaveChangesAsync();
-            return _mapper.Map<PostDTO>(entity);
+
+            return _mapper.Map<PostDTO>(existingEntity);
         }
 
         public async Task<returnDTO> GetById<returnDTO>(int id, List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true)

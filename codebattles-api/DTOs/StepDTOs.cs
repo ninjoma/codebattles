@@ -4,7 +4,7 @@ namespace codebattle_api.DTO
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public int LanguageId { get; set; }
+        public int? LanguageId { get; set; }
         public string? BoilerPlate { get; set; }
         public virtual ICollection<ValidationDTO>? Validations { get; set; }
 

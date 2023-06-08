@@ -8,10 +8,10 @@ namespace codebattle_api.DTO
         public int Id { get; set; }
 
         [JsonIgnore]
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         [JsonIgnore]
-        public DateTime CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
 
     }
 

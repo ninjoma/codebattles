@@ -49,8 +49,10 @@ namespace codebattle_api.Services.GameServices
             // Setup Game Status to wait for other players
             postDTO.GameStatus = GameStatusEnum.Waiting;
             var gameResult = await _repository.Add(postDTO);
-
-            await _gameRepo.AddSteps(gameResult.Id, await getRandomSteps(gameResult.LanguageId, 3));
+            if (gameResult.LanguageId != null)
+            {
+                await _gameRepo.AddSteps(gameResult.Id, await getRandomSteps((int)gameResult.LanguageId, 3));
+            }
 
             var paticipantDTO = new ParticipantDTO()
             {
