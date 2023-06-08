@@ -66,7 +66,6 @@ namespace codebattle_api.Controllers
                 using HttpResponseMessage response = await client.PostAsync(judge0url + 
                 "submissions?base64_encoded=false&wait=true&X-Judge0-Token=" + judge0token, stringContent);
                 string responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody);
 
                 return Ok();
             }
