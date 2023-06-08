@@ -66,12 +66,6 @@ export default {
 				commit('setGame', data);
 			})
 		},
-		getGame({ commit }, data) {
-			axios.get('/api/Game/' + data)
-				.then((response) => {
-					commit('setGame', response.data);
-				})
-		},
 		addParticipant({ commit }, data) {
 			axios.post('/api/Participant/', {
 				gameId: data
