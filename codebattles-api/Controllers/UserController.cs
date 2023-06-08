@@ -31,9 +31,12 @@ namespace codebattle_api.Controllers
         [Authorize]
         public async Task<IActionResult> Self()
         {
-            try{
+            try
+            {
                 return Ok(await _service.GetById(this.User.GetUserId(), true));
-            } catch(CodeBattleException cbe) {
+            }
+            catch (CodeBattleException cbe)
+            {
                 return ReturnError(cbe);
             }
         }
@@ -45,6 +48,32 @@ namespace codebattle_api.Controllers
             var result = await _service.FilterUsers(username ?? "", email ?? "", User.GetUserRole());
             return result != null && result.Any() ? Ok(result) : NotFound(new ErrorResponse(new CodeBattleException(ErrorCode.NotFound)));
         }
+
+        [HttpPut("/me")]
+        [Authorize]
+        public async Task<IActionResult> UpdateMe(UserDTO user)
+        {
+            try
+            {
+                user.Id = User.GetUserId();
+                if (user.Password != null){
+                    user.Password = PasswordHasher.HashPassword(user.Password);
+                }
+                if (User.GetUserRole() != "Admin")
+                {
+                    user.IsPremium = null;
+                    user.IsAdmin = null;
+                }
+                var result = await _service.EditById(user);
+                return Ok(result);
+            }
+            catch (CodeBattleException cbe)
+            {
+                return ReturnError(cbe);
+            }
+        }
+
+
 
     }
 }
