@@ -9,6 +9,7 @@ namespace codebattle_api.Exceptions
         InvalidInput,
         PasswordsDontMatch,
         MissingTokenData,
+        CodeNotSuccesfull
 
     }
 }

@@ -119,7 +119,7 @@ namespace codebattle_api.Repositories
                 }
             }
 
-            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
+            return _mapper.Map<returnDTO>(await query.AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(id) && x.IsActive == isActive));
         }
 
         public async Task<IEnumerable<returnDTO>> List<returnDTO>(List<Expression<Func<Entity, object>>>? includes = null, bool isActive = true)
@@ -133,7 +133,7 @@ namespace codebattle_api.Repositories
                     query = query.Include(include);
                 }
             }
-            return _mapper.Map<IEnumerable<returnDTO>>(await query.Where(x => x.IsActive == isActive).ToListAsync());
+            return _mapper.Map<IEnumerable<returnDTO>>(await query.AsNoTracking().Where(x => x.IsActive == isActive).ToListAsync());
         }
 
         public async Task<bool> Save()
@@ -161,7 +161,7 @@ namespace codebattle_api.Repositories
                     query = query.Include(include);
                 }
             }
-            return _mapper.Map<returnDTO>(await query.FirstOrDefaultAsync(specification));
+            return _mapper.Map<returnDTO>(await query.AsNoTracking().FirstOrDefaultAsync(specification));
         }
 
         public async Task<IEnumerable<returnDTO>> ListBySpec<returnDTO>(Expression<Func<Entity, bool>> specification, List<Expression<Func<Entity, object>>>? includes = null, Expression<Func<Entity, Entity>>? selectExpression = null)

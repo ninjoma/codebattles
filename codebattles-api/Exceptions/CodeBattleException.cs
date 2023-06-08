@@ -14,6 +14,7 @@ namespace codebattle_api.Exceptions
             { ErrorCode.WrongLoginData, "Los datos de inicio de sesion proporcionados son incorrectos" },
             { ErrorCode.PasswordsDontMatch, "Las contraseñas no coinciden" },
             { ErrorCode.MissingTokenData, "El token suministrado no tiene todos los campos o estan mal formados" },
+            { ErrorCode.CodeNotSuccesfull, "El codigo que has suministrado no compila o no pasa las validaciones" },
         };
 
         public CodeBattleException(ErrorCode errorCode) : base(GetErrorMessage(errorCode))
