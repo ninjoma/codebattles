@@ -14,12 +14,14 @@ namespace codebattle_api.Services.AuthServices
 {
     public class AuthService : IAuthService
     {
+        private readonly IWebHostEnvironment _environment;
         private readonly IConfiguration _configuration;
         private readonly IRepository<UserDTO, User> _userRepo;
-        public AuthService(IConfiguration configuration, IRepository<UserDTO, User> userRepo)
+        public AuthService(IConfiguration configuration, IRepository<UserDTO, User> userRepo, IWebHostEnvironment environment)
         {
             _configuration = configuration;
             _userRepo = userRepo;
+            _environment = environment;
         }
 
         /// <summary>
@@ -31,7 +33,15 @@ namespace codebattle_api.Services.AuthServices
         {
             if (user != null && user.Email != null && user.Username != null)
             {
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
+                SymmetricSecurityKey? key = null;
+                if (_environment.IsDevelopment())
+                {
+                    key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretManager.GetSecret("EncryptionKey") ?? ""));
+                }
+                else
+                {
+                    key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("EncryptionKey") ?? "LaSuperMegaPasswordDePruebaPorCulpaDeMicrosoft"));
+                }
                 var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var claims = new[]{
@@ -113,10 +123,12 @@ namespace codebattle_api.Services.AuthServices
         public async Task<string?> HandleSsoLogin(string email)
         {
             var user = await _userRepo.GetBySpec<UserDTO>(x => x.Email != null && x.Email.Equals(email.Trim()));
-            if(user == null) {
+            if (user == null)
+            {
                 string username = email.Substring(0, email.IndexOf("@"));
                 var otherUsers = await _userRepo.ListBySpec<UserDTO>(x => x.Username != null && x.Username.Equals(username.Trim()));
-                user = await _userRepo.Add(new UserDTO {
+                user = await _userRepo.Add(new UserDTO
+                {
                     Username = username + otherUsers.Count(),
                     Email = email,
                     Password = "",
@@ -128,31 +140,31 @@ namespace codebattle_api.Services.AuthServices
 
         public async Task<string?> GeneratePasswordToken(string email)
         {
-            
+
             var user = await _userRepo.GetBySpec<User>(x => x.Email != null && x.Email.Equals(email.Trim()));
-            if(user != null && user.Email != null)
+            if (user != null && user.Email != null)
             {
                 var PasswordResetToken = RandomTokenGenerator.GenerateToken();
                 user.PasswordResetToken = PasswordResetToken;
                 await _userRepo.Save();
                 return PasswordResetToken;
             }
-            throw new CodeBattleException(ErrorCode.WrongLoginData); 
+            throw new CodeBattleException(ErrorCode.WrongLoginData);
         }
 
         public async Task<bool?> CheckPasswordToken(PasswordDTO passwordDTO)
         {
-            if(passwordDTO.NewPassword != null && passwordDTO.RepeatNewPassword != null && passwordDTO.PasswordResetToken != null)
+            if (passwordDTO.NewPassword != null && passwordDTO.RepeatNewPassword != null && passwordDTO.PasswordResetToken != null)
             {
                 var user = await _userRepo.GetBySpec<User>(x => x.PasswordResetToken != null && x.PasswordResetToken.Equals(passwordDTO.PasswordResetToken.Trim()));
-                if(passwordDTO.NewPassword == passwordDTO.RepeatNewPassword) 
+                if (passwordDTO.NewPassword == passwordDTO.RepeatNewPassword)
                 {
                     user.PasswordResetToken = null;
                     user.Password = PasswordHasher.HashPassword(passwordDTO.NewPassword);
                     await _userRepo.Save();
                     return true;
                 }
-                if(user != null)
+                if (user != null)
                 {
                     throw new CodeBattleException(ErrorCode.PasswordsDontMatch);
                 }
@@ -162,7 +174,7 @@ namespace codebattle_api.Services.AuthServices
 
         private string GetUserRole(UserDTO user)
         {
-            if (user.IsAdmin != null && (bool) user.IsAdmin)
+            if (user.IsAdmin != null && (bool)user.IsAdmin)
             {
                 return "Admin";
             }

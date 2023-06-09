@@ -4,7 +4,7 @@ let connection: HubConnection | null = null;
 
 export function startSignalRConnection(): Promise<HubConnection> {
   const connection = new HubConnectionBuilder()
-    .withUrl("https://192.168.1.142:7297/hubs/codehub")
+    .withUrl("https://codebattlesapi.azurewebsites.net:7297/hubs/codehub")
     .build();
 
   return connection.start()
