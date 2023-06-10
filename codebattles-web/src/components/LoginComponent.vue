@@ -19,7 +19,7 @@ export default {
             }
         },
         test() {
-            axios.post("https://jolly-wave-016057810.3.azurestaticapps.net/api/Auth/Login", {
+            axios.post("https://codebattlesapi.azurewebsites.net/api/Auth/Login", {
                 email: "data.email",
                 password: "data.password"
             })
