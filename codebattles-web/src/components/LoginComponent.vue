@@ -24,6 +24,7 @@ export default {
             handler(isLogged) {
                 if(isLogged == true) {
                     this.$router.push("/battle");
+                    this.$store.dispatch("User/load");
                 } 
             }
         }
@@ -40,7 +41,9 @@ export default {
         <div className="form-control w-full py-2">
             <input ref="password" type="password" placeholder="Password" className="input input-bordered w-full" />
             <label className="label">
-                <span className="label-text-alt"><a className="link" href="/forgot-password">I've forgotten my password</a></span>
+                <router-link to="/forgot-password">
+                    <a className="link" href="">I've forgotten my password</a>
+                </router-link>
             </label>
         </div>
         <div class="pb-5">

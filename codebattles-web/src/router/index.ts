@@ -5,6 +5,7 @@ import BattleView from "../views/BattleView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import ForgotPasswordView from "../views/ForgotPasswordView.vue";
+import VerifyPasswordView from "../views/VerifyPasswordView.vue";
 import LogoutView from "../views/LogoutView.vue";
 import Store from '../store/index.js';
 import AdminView from "../views/AdminView.vue";
@@ -16,6 +17,7 @@ const routes: VueRouter.RouteRecordRaw[] = [
     { path: '/login', component: LoginView, name: 'login' },
     { path: '/register', component: RegisterView, name: 'register' },
     { path: '/forgot-password', component: ForgotPasswordView, name: 'forgot-password' },
+    { path: '/verify-password', component: VerifyPasswordView, name: 'verify-password' },
     { path: '/logout', component: LogoutView, meta: {requiresAuth: false}, name: 'logout' },
     { path: '/admin', component: AdminView, meta: {requiresAuth: true}, name: 'admin' },
 ]

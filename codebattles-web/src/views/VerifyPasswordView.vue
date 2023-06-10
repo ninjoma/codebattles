@@ -1,9 +1,9 @@
 <script lang="ts">
-import ForgotPasswordComponent from '../components/ForgotPasswordComponent.vue';
+import VerifyPasswordComponent from '../components/VerifyPasswordComponent.vue';
 
 export default {
     components: {
-        ForgotPasswordComponent
+        VerifyPasswordComponent
     }
 }
 </script>
@@ -12,7 +12,7 @@ export default {
     <div class="flex-col flex-1 flex justify-center">
         <div class="flex w-full h-full items-center justify-center">
             <div class="max-w-md w-full">
-                <ForgotPasswordComponent></ForgotPasswordComponent>
+                <VerifyPasswordComponent></VerifyPasswordComponent>
             </div>
         </div>
     </div>

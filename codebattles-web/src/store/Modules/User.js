@@ -88,6 +88,20 @@ export default {
 		login({ commit }, data){
 			commit('login', data);
 			commit('load');
+		},
+		resetPassword({ commit }, data){
+			axios.get('/api/Auth/Password', {
+                params: { email: data }
+            })
+		},
+		verifyPassword({ commit }, data){
+			axios.post('/api/Auth/Password', { 
+				NewPassword: data.password,
+				RepeatNewPassword: data.verifypassword,
+				PasswordResetToken: data.token
+			}).then((response) => {
+				
+            });
 		}
 	}
 };

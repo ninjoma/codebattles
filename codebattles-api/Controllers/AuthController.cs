@@ -82,8 +82,8 @@ namespace codebattle_api.Controllers
             }
         }
 
-        [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword([FromBody] string email)
+        [HttpGet("Password")]
+        public async Task<IActionResult> ForgotPassword([FromQuery] string email)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace codebattle_api.Controllers
                 using (var message = new MailMessage(fromAddress, toAddress)
                 {
                     Subject = "Codebattles - Forgot password",
-                    Body = "Here's your code. " +  _AuthSv.GeneratePasswordToken(email)
+                    Body = "Here's your code. " + (await _AuthSv.GeneratePasswordToken(email)).ToString()
                 })
                 {
                     smtp.Send(message);
@@ -117,7 +117,7 @@ namespace codebattle_api.Controllers
             }
         }
 
-        [HttpGet("validatePassword")]
+        [HttpPost("Password")]
         public async Task<IActionResult> CheckPassword(PasswordDTO passwordDTO)
         {
             try
