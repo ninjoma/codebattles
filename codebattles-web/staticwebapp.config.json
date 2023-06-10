@@ -1,14 +1,12 @@
 {
     "routes": [
-        {
-            "route": "/api/*",
-            "serve": "/api",
-            "proxy": {
-                "target": "https://codebattlesapi.azurewebsites.net/",
-                "rewrite": {
-                    "^/api": ""
-                }
-            }
+      {
+        "route": "/api/:path*",
+        "rewrite": "/:path*",
+        "destination": {
+          "host": "codebattlesapi.azurewebsites.net",
+          "changeOrigin": true
         }
+      }
     ]
-}
+  }
