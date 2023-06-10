@@ -62,6 +62,6 @@ export default {
                 <router-link to="/register" tag="button" className="btn flex-1 w-full">Register</router-link>
             </div>
         </div>
-        <button class="btn">Boton de prueba de conexion</button>
+        <button class="btn" v-on:click="test">Boton de prueba de conexion</button>
     </div>
 </template> 
