@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://jolly-wave-016057810.3.azurestaticapps.net/api/',
+        target: 'https://codebattlesapi.azurewebsites.net/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       }
