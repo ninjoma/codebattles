@@ -1,0 +1,12 @@
+{
+    "routes": [
+      {
+        "route": "/api/*",
+        "serve": "/api",
+        "destination": {
+          "host": "codebattlesapi.azurewebsites.net",
+          "port": 443
+        }
+      }
+    ]
+  }
