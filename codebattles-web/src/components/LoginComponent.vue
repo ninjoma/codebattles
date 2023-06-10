@@ -17,6 +17,12 @@ export default {
             } else {
                 this.$store.commit("Alert/show", {type: "error", message: "username and password both have to be over 3 characters long."});
             }
+        },
+        test() {
+            axios.post("https://jolly-wave-016057810.3.azurestaticapps.net/api/Auth/Login", {
+                email: "data.email",
+                password: "data.password"
+            })
         }
     },
     watch: {
@@ -56,5 +62,6 @@ export default {
                 <router-link to="/register" tag="button" className="btn flex-1 w-full">Register</router-link>
             </div>
         </div>
+        <button class="btn">Boton de prueba de conexion</button>
     </div>
 </template> 
