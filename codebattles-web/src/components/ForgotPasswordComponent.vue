@@ -9,6 +9,8 @@ export default {
     methods: {
         resetPassword() {
             event('resetPassword', { event_category: 'login' })
+            this.$store.dispatch('User/resetPassword', (this.$refs.email as any).value);
+            this.$router.push('/verify-password');
         }
     }
 }
@@ -18,17 +20,16 @@ export default {
         <SectionTitle>Reset Password</SectionTitle>
         <div class="flex gap-3">
             <div className="form-control w-full py-2">
-                <input type="text" placeholder="Password" className="input input-bordered w-full" />
+                <input ref="email" type="text" placeholder="Email" className="input input-bordered w-full" />
             </div>
-        </div>
-        <div className="form-control w-full py-2">
-            <input type="password" placeholder="Repeat Password" className="input input-bordered w-full" />
         </div>
         <div class="pb-5">
             <div class="flex flex-col items-center gap-y-5 py-3">
                 <div class="flex gap-3 items-center w-full">
                     <router-link to="/login" tag="button" className="btn flex-1 w-full">Back</router-link>
-                    <button @click="resetPassword" className="btn flex-1 w-full btn-success">Reset Password</button>
+                    <router-link to="/verify-password" tag="button" className="btn flex-1 w-full btn-success" @click="resetPassword">
+                        Send Recovery Email
+                    </router-link>
                 </div>
             </div>
         </div>
