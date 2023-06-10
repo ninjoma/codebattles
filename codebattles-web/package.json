@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && vite build && xcopy staticwebapp.config.json dist\\ /Y",
     "preview": "vite preview"
   },
   "dependencies": {
