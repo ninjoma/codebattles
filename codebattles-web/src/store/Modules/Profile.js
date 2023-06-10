@@ -11,6 +11,7 @@ export default {
 			isAdmin: false,
 			level: 0,
 			avatarBase64: "",
+			badges: "",
 		}
 	},
 	mutations: {
@@ -23,6 +24,7 @@ export default {
 			state.level = user.level;
 			state.experience = user.experience;
 			state.avatarBase64 = user.avatarBase64;
+			state.badges = user.badges;
 		}
 	},
 	actions: {
