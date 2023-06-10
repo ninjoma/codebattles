@@ -12,7 +12,8 @@ namespace codebattle_api.Entities
         [Required]
         public int Time { get; set; }
 
-        
+        public int? MaxPlayers { get; set; }
+
         public virtual ICollection<Game>? Games {get; set; }
         public virtual ICollection<Tag>? Tags { get; set; }
 

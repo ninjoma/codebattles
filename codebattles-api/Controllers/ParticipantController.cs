@@ -15,8 +15,12 @@ namespace codebattle_api.Controllers
     [Route("[controller]")]
     public class ParticipantController : MainController<IParticipantService, ParticipantDTO, ParticipantDetailDTO, Participant>
     {
-        public ParticipantController(IParticipantService service) : base(service)
+
+        private readonly IGameService _gameService;
+
+        public ParticipantController(IParticipantService service, IGameService gameService) : base(service)
         {
+            _gameService = gameService;
         }
 
         [HttpPost("")]
@@ -24,7 +28,14 @@ namespace codebattle_api.Controllers
         {
             try
             {
-                if((this.User.GetUserRole() != "Admin") || (postDTO?.UserId == null && this.User.GetUserRole() == "Admin")) {
+                GameDetailDTO game = await _gameService.GetById((int) postDTO.GameId);
+
+                if(game.Participants.Count < game.GameMode.MaxPlayers) {
+                    return BadRequest("The maximum number of players in battle was reached.");
+                }
+
+                if((this.User.GetUserRole() != "Admin") || (postDTO?.UserId == null && this.User.GetUserRole() == "Admin")
+                    ) {
                     postDTO.UserId = this.User.GetUserId();
                 }
                 var result = await _service.Add(postDTO);
