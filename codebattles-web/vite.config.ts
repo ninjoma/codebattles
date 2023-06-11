@@ -10,10 +10,6 @@ export default defineConfig({
         target: 'https://codebattlesapi.azurewebsites.net/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
-        ignorePath: true,
-        headers: {
-          'Arr-Disable-Session-Affinity' : 'True',
-        }
       }
     }
   }
