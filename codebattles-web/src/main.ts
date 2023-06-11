@@ -13,6 +13,7 @@ import { faCrown, faCircleArrowUp, faUser, faRightFromBracket, faFlag,
     faXmark, faSkullCrossbones , faCircleXmark, faCircleExclamation, faTriangleExclamation, faCircleInfo, faCircleCheck, faFileImport } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import VueGtagPlugin from 'vue-gtag';
+import { assertCompletionStatement } from '@babel/types';
 
 if(import.meta.env.DEV) {
     // Allow CORS from localhost
@@ -28,7 +29,7 @@ const app = createApp(App);
 app.config.globalProperties.$store = Store;
 
 axios.defaults.withCredentials = true;
-
+axios.defaults.baseURL = "https://codebattlesapi.azurewebsites.net/";
 
 app.use(Router)
 

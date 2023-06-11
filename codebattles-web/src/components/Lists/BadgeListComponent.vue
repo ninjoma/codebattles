@@ -22,7 +22,7 @@ export default {
             }
         },
         fetchData() {
-            axios.get('/api/Badge' + (this.searchName != '' && this.searchName != null ? '?badgeName=' + this.searchName : ''))
+            axios.get('/Badge' + (this.searchName != '' && this.searchName != null ? '?badgeName=' + this.searchName : ''))
 			.then((response) => {
 				this.badgeList = response.data;
             }).catch((error) => {

@@ -28,7 +28,7 @@ export default {
 		load(state) {
 			state.token = localStorage.token;
 			axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.token;
-			axios.get('/api/User/me').then((userResponse) => {
+			axios.get('/User/me').then((userResponse) => {
 				state.id = userResponse.data.id;
 				state.email = userResponse.data.email;
 				state.level = userResponse.data.level;
@@ -71,7 +71,7 @@ export default {
 	},
 	actions: {
 		register({ commit }, data) {
-			axios.post('/api/Auth/Register', {
+			axios.post('/Auth/Register', {
                 username: data.username,
                 email: data.email,
                 password: data.password
@@ -90,12 +90,12 @@ export default {
 			commit('load');
 		},
 		resetPassword({ commit }, data){
-			axios.get('/api/Auth/Password', {
+			axios.get('/Auth/Password', {
                 params: { email: data }
             })
 		},
 		verifyPassword({ commit }, data){
-			axios.post('/api/Auth/Password', { 
+			axios.post('/Auth/Password', { 
 				NewPassword: data.password,
 				RepeatNewPassword: data.verifypassword,
 				PasswordResetToken: data.token

@@ -21,7 +21,7 @@ export default {
             }
         },
         fetchData() {
-            axios.get('/api/Language')
+            axios.get('/Language')
 			.then((response) => {
 				this.languageList = response.data;
             }).catch((error) => {

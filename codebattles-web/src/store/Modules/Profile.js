@@ -29,13 +29,13 @@ export default {
 	},
 	actions: {
 		loadProfile({ commit }, data){
-			axios.get('/api/User/' + data.id)
+			axios.get('/User/' + data.id)
 			.then((response) => {
 				commit('setUser', response.data);
 			})
 		},
 		updateProfile({ commit }, data) {
-			axios.put('/api/User/me', {
+			axios.put('/User/me', {
 				username: data.username,
 				avatarBase64: data.avatarBase64,
 			})

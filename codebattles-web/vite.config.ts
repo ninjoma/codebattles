@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://codebattlesapi.azurewebsites.net/',
-        // changeOrigin: true,
+        changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
         headers: {
           "host": "codebattlesapi.azurewebsites.net",
