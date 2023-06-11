@@ -9,17 +9,15 @@ import VerifyPasswordView from "../views/VerifyPasswordView.vue";
 import LogoutView from "../views/LogoutView.vue";
 import Store from '../store/index.js';
 import AdminView from "../views/AdminView.vue";
+import RankingView from "../views/RankingView.vue";
 
 const routes: VueRouter.RouteRecordRaw[] = [
     { path: '/lobby/:battleId', meta: {requiresAuth: true}, component: LobbyView, name: 'game'},
     { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true}, name: 'profile'},
     { path: '/battle', component: BattleView, meta: {requiresAuth: true}, name: 'battles' },
     { path: '/login', component: LoginView, name: 'login' },
-    { path: '/', 
-        redirect: to => {
-            return { path: '/battle' }
-        } 
-    },
+    { path: '/', redirect: to => { return { path: '/battle' } } },
+    { path: '/ranking', component: RankingView, name: 'ranking' },
     { path: '/register', component: RegisterView, name: 'register' },
     { path: '/forgot-password', component: ForgotPasswordView, name: 'forgot-password' },
     { path: '/verify-password', component: VerifyPasswordView, name: 'verify-password' },
