@@ -40,7 +40,7 @@ export default {
 			});
 		},
 		login(state, data) {
-			axios.post("/api/Auth/Login", {
+			axios.post("/Auth/Login", {
                 email: data.email,
                 password: data.password
             })
@@ -55,7 +55,7 @@ export default {
             })
 		},
 		loginsso(state, data) {
-			axios.post("/api/sso/login", data)
+			axios.post("/sso/login", data)
             .then((tokenResponse) => {
 				localStorage.token = tokenResponse.data;
 				state.token = localStorage.token;
