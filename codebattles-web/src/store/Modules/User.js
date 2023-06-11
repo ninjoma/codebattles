@@ -63,7 +63,7 @@ export default {
 	},
 	actions: {
 		register({ commit }, data) {
-			axios.post('Auth/Register', {
+			axios.post('/Auth/Register', {
                 username: data.username,
                 email: data.email,
                 password: data.password

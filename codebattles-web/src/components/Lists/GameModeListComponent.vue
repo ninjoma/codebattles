@@ -22,7 +22,7 @@ export default {
             }
         },
         fetchData() {
-            axios.get('/api/GameMode' + (this.searchName != '' && this.searchName != null ? '?name=' + this.searchName : ''))
+            axios.get('/GameMode' + (this.searchName != '' && this.searchName != null ? '?name=' + this.searchName : ''))
 			.then((response) => {
 				this.gamemodeList = response.data;
             }).catch((error) => {

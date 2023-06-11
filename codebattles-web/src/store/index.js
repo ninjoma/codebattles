@@ -6,6 +6,7 @@ import Alert from "./Modules/Alert";
 import Game from "./Modules/Game";
 import Language from "./Modules/Language";
 import Gamemode from "./Modules/Gamemode";
+import Stats from "./Modules/Stats";
 
 export default createStore({
     modules: {
@@ -16,5 +17,6 @@ export default createStore({
         Game,
         Language,
         Gamemode,
+        Stats
     }
 })

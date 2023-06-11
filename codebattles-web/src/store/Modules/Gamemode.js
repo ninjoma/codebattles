@@ -20,7 +20,7 @@ export default {
     },
     actions: {
         retrieveGamemodes({ commit }) {
-            axios.get('/api/GameMode', {
+            axios.get('/GameMode', {
             }).then((response) => {
                 commit('setGamemodes', response.data);
             })

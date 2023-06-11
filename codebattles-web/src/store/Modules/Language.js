@@ -20,7 +20,7 @@ export default {
     },
     actions: {
         retrieveLanguages({ commit }) {
-            axios.get('/api/Language', {
+            axios.get('/Language', {
             }).then((response) => {
                 commit('setLanguages', response.data);
             })

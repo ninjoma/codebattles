@@ -21,6 +21,12 @@ export default {
             } else {
                 this.$store.commit("Alert/show", {type: "error", message: "username and password both have to be over 3 characters long."});
             }
+        },
+        test() {
+            axios.post("https://codebattlesapi.azurewebsites.net/Auth/Login", {
+                email: "data.email",
+                password: "data.password"
+            })
         }
     },
     watch: {

@@ -29,7 +29,7 @@ export default {
 	},
 	actions: {
 		retrieveGames({ commit }) {
-			axios.get('/api/Game?gameStatus=1', {
+			axios.get('/Game?gameStatus=1', {
 			}).then((response) => {
 				response.data.forEach(game => {
 					game.userInBattle = game.participants.map((participant) => { return participant.userId }).includes(Store.getters['User/getId']);
@@ -39,7 +39,7 @@ export default {
 		},
 		retrieveFilterGames({ commit }, data) {
 
-			axios.get('/api/Game', {
+			axios.get('/Game', {
 				params: {
 					gameStatus: data.GameStatus,
 					gameModeId: data.Gamemode,
@@ -53,7 +53,7 @@ export default {
 			})
 		},
 		getGame({ commit }, data){
-			axios.get('/api/Game/' + data)
+			axios.get('/Game/' + data)
 			.then((response) => {
 				var data = response.data
 				data.userInBattle = data.participants.filter(participant => {
@@ -67,12 +67,12 @@ export default {
 			})
 		},
 		addParticipant({ commit }, data) {
-			axios.post('/api/Participant/', {
+			axios.post('/Participant/', {
 				gameId: data
 			})
 		},
 		createGame({ commit }, data) {
-			axios.post('/api/Game/', {
+			axios.post('/Game/', {
 				languageId: data.language,
 				gameModeId: 1,
 				gameStatus: 1

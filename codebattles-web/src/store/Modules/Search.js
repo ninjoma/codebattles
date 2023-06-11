@@ -19,7 +19,7 @@ export default {
 	},
 	actions: {
 		search({ commit }, data){
-			axios.get('/api/User', {
+			axios.get('/User', {
 				params: {
 					username: data.value,
 					email: data.value 

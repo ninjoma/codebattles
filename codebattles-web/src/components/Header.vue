@@ -18,7 +18,7 @@ export default {
                 <span className="">CODE BATTLES</span>
             </a>
             <div class="h-full flex gap-3 hidden sm:flex">
-                <HeaderButton targetUrl="/battle">
+                <HeaderButton targetUrl="/battle" v-if="$store.state.User.isLogged">
                     <a>Battles</a>
                 </HeaderButton>
                 <HeaderButton v-if="$store.state.User.isAdmin" targetUrl="/admin">
