@@ -14,6 +14,7 @@ export default defineConfig({
           "host": "codebattlesapi.azurewebsites.net",
         },
         cookieDomainRewrite: '',
+        secure: false,
       }
     }
   }
