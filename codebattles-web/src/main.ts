@@ -27,10 +27,12 @@ const app = createApp(App);
 
 app.config.globalProperties.$store = Store;
 
+axios.defaults.withCredentials = true;
+
+
 app.use(Router)
 
 .use(Store)
-
 
 .use(VueGtagPlugin, {
     appName: "Codebattles",
