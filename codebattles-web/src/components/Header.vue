@@ -30,6 +30,9 @@ export default {
                 <HeaderButton targetUrl="/battle" v-if="$store.state.User.isLogged">
                     <a>Battles</a>
                 </HeaderButton>
+                <HeaderButton targetUrl="/ranking" v-if="$store.state.User.isLogged">
+                    <a>Ranking</a>
+                </HeaderButton>
                 <HeaderButton v-if="$store.state.User.isAdmin" targetUrl="/admin">
                     <a>Admin</a>
                 </HeaderButton>

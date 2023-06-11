@@ -15,6 +15,11 @@ const routes: VueRouter.RouteRecordRaw[] = [
     { path: '/users/:id/profile', component: ProfileView, meta: {requiresAuth: true}, name: 'profile'},
     { path: '/battle', component: BattleView, meta: {requiresAuth: true}, name: 'battles' },
     { path: '/login', component: LoginView, name: 'login' },
+    { path: '/', 
+        redirect: to => {
+            return { path: '/battle' }
+        } 
+    },
     { path: '/register', component: RegisterView, name: 'register' },
     { path: '/forgot-password', component: ForgotPasswordView, name: 'forgot-password' },
     { path: '/verify-password', component: VerifyPasswordView, name: 'verify-password' },
