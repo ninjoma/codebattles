@@ -9,7 +9,7 @@ export default defineConfig({
       '/api': {
         target: 'https://codebattlesapi.azurewebsites.net/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // rewrite: (path) => path.replace(/^\/api/, ''),
         headers: {
           "host": "codebattlesapi.azurewebsites.net",
         },
