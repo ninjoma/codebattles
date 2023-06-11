@@ -14,7 +14,7 @@ namespace codebattle_api.Controllers
     /// <typeparam name="PostDTO"></typeparam>
     /// <typeparam name="DetailDTO"></typeparam>
     /// <typeparam name="Entity"></typeparam>
-    public abstract class MainController<IService, PostDTO, DetailDTO, Entity> : ControllerBase where PostDTO : BaseDTO where DetailDTO : BaseDTO where IService : IMainService<PostDTO, DetailDTO, Entity>
+    public abstract class MainController<IService, PostDTO, DetailDTO, Entity> : MainControllerBase where PostDTO : BaseDTO where DetailDTO : BaseDTO where IService : IMainService<PostDTO, DetailDTO, Entity>
     {
         #region Builder & Properties
         protected readonly IService _service;
@@ -96,6 +96,12 @@ namespace codebattle_api.Controllers
             }
         }
 
+
+
+    }
+
+    public abstract class MainControllerBase : ControllerBase
+    {
         /// <summary>
         /// Method that maps errors automatically
         /// </summary>
@@ -116,6 +122,5 @@ namespace codebattle_api.Controllers
                     return BadRequest(new ErrorResponse(ex));
             }
         }
-
     }
 }
