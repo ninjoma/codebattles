@@ -13,7 +13,11 @@ export default {
             var emailInput = (this.$refs.email as any);
             var passwordInput = (this.$refs.password as any);
             if(emailInput.value.length > 3 && passwordInput.value.length > 3) {
-                this.$store.dispatch("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value});
+                this.$store.dispatch("User/login", {email: (this.$refs.email as any).value, password: (this.$refs.password as any).value}).then(res => {
+                    if(res == "ERROR.NOTFOUND") {
+                        this.$store.commit("Alert/show", {type: "error", message: "No hay un usuario asociado a ese email."});
+                    }
+                });
             } else {
                 this.$store.commit("Alert/show", {type: "error", message: "username and password both have to be over 3 characters long."});
             }

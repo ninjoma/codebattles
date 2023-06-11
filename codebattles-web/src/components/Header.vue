@@ -6,16 +6,7 @@ export default {
         HeaderButton,
         SearchBar
     },
-    data(){
-        return {
-            showSearchBar: false
-        }
-    },
     methods: {
-        search() {
-            var searchInput = (this.$refs.searchInput as any)
-            searchInput.value.length > 1 ? this.showSearchBar = true : this.showSearchBar = false
-        }
     },
 }
 </script>
