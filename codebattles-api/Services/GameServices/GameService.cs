@@ -73,7 +73,7 @@ namespace codebattle_api.Services.GameServices
             return await _gameRepo.GetById<GameDetailDTO>(id, isActive);
         }
 
-        public async Task<IEnumerable<GameDetailDTO>> ListByFilter(int? languageId = null, int? gameModeId = null, GameStatusEnum? gameStatus = null)
+        public async Task<IEnumerable<GameDetailDTO>> ListByFilter(int? languageId = null, int? gameModeId = null, GameStatusEnum? gameStatus = null, bool? orderByLanguageId = null, bool? orderByGameStatus = null )
         {
             var result = await _gameRepo.ListBySpec<GameDetailDTO>(
                 x => x.IsActive &&
@@ -81,6 +81,17 @@ namespace codebattle_api.Services.GameServices
                  (languageId != null ? x.LanguageId == languageId : x.LanguageId == x.LanguageId) &&
                  (gameStatus != null ? x.GameStatus == gameStatus : x.GameStatus == x.GameStatus)
                  );
+
+            if (orderByGameStatus != null && orderByGameStatus == true){
+                result = result.OrderBy(x => x.LanguageId);
+            }
+            if (orderByGameStatus != null && orderByGameStatus == true){
+                result = result.OrderBy(x => x.GameStatus);
+            }
+            if (orderByGameStatus != null && orderByGameStatus == true && orderByGameStatus != null && orderByGameStatus == true){
+                result = result.OrderBy(x => x.LanguageId).ThenBy(x => x.GameStatus);
+            }
+
 
             return result;
         }

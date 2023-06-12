@@ -37,11 +37,11 @@ namespace codebattle_api.Controllers
 
         [HttpGet("")]
         [Authorize(Roles = "User, Admin")]
-        public async Task<IActionResult> List([FromQuery] int? languageId = null, [FromQuery] int? gameModeId = null, [FromQuery] GameStatusEnum? gameStatus = null)
+        public async Task<IActionResult> List([FromQuery] int? languageId = null, [FromQuery] int? gameModeId = null, [FromQuery] GameStatusEnum? gameStatus = null, [FromQuery] bool? orderByLanguageId = null, [FromQuery] bool? orderByGameStatus = null )
         {
             try
             {
-                var result = await _service.ListByFilter(languageId, gameModeId, gameStatus);
+                var result = await _service.ListByFilter(languageId, gameModeId, gameStatus, orderByLanguageId, orderByGameStatus);
                 return result != null ? Ok(result) : NotFound(result);
             }
             catch (CodeBattleException ex)
