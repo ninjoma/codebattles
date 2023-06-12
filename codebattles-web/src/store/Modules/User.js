@@ -68,7 +68,7 @@ export default {
                 email: data.email,
                 password: data.password
             }).then((response) => {
-				login({ commit }, {email: data.email, password: data.password});
+				login({ commit }, response.data);
             });
 		},
 		load({ commit }) {
@@ -79,6 +79,7 @@ export default {
 		loginsso({ commit }, data){
 			axios.post("/sso/login", data).then((userResponse) => {
 				commit('loginsso', userResponse.data);	
+				load({ commit });
             });
 		},
 		login({ commit }, data){
