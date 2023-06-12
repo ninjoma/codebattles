@@ -1,7 +1,10 @@
 <script lang="ts">
 import axios from "axios";
+import GraphComponent from "../components/GraphComponent.vue";
 export default { 
-    components: { },
+    components: { 
+        GraphComponent
+    },
     data() {
         return {
             ranking: {}
@@ -17,6 +20,7 @@ export default {
 </script>
 <template>
     <div class="lg:rounded-xl p-4 lg:p-10 font-inter w-full">
+        <GraphComponent></GraphComponent>
         <div class="rounded-xl px-6 flex items-center justify-center w-full">
             <span class="text-success pr-3">Place</span>
             <div class="flex w-full justify-between">
