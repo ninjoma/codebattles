@@ -1,0 +1,26 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+ Codebattles:
+  image: tearingmoon/codebattles_api
+  ports:
+    - "5209:80"
+  environment:
+    - ENCRYPTION_KEY=supermegasecret_
+    - DB_PASSWORD=supermegapassword
+    - USE_SWAGGER=true
+ db:
+  image: postgres
+  restart: always
+  environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DATABASE=codebattle
+  ports:
+    - '5432:5432'
+  volumes:
+    - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
