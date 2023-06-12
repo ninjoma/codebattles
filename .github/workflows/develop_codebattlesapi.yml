@@ -5,8 +5,7 @@ name: codebattles-api
 
 on:
   push:
-    branches:
-      - develop
+    branches: [ main, develop ]
   workflow_dispatch:
 
 jobs:
