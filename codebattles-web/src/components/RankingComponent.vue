@@ -3,12 +3,15 @@ import axios from "axios";
 export default { 
     components: { },
     data() {
-        
-    }
+        return {
+            ranking: {}
+        }
+    },
     mounted() {
-        axios.get("/ranking", function(){
-            
-        })
+        axios.get("/Rankings")
+            .then((response) => {
+                this.ranking = response.data
+            })
     }
 }
 </script>
@@ -21,11 +24,11 @@ export default {
                 <span>Total battles won</span>
             </div>
         </div>
-        <div v-for="user, index in ranking" class="rounded-xl bg-base-300 p-4 px-6 flex items-center justify-center w-full">
-            <h3 class="text-2xl text-success pr-3">#{{ index }}</h3>
+        <div v-for="user, index in ranking" class="rounded-xl bg-base-300 p-4 px-6 flex my-1 items-center justify-center w-full">
+            <h3 class="text-2xl text-success pr-3">#{{ index + 1 }}</h3>
             <div class="flex w-full justify-between">
                 <span>{{ user.username }}</span>
-                <span>{{ user.battleswon }}</span>
+                <span>{{ user.battlesWon }}</span>
             </div>
         </div>
     </div>
