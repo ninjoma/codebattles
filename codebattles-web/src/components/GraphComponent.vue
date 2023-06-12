@@ -16,20 +16,16 @@ export default {
     data() {
         return {
             chartData: {
-            labels: [ 'January', 'February', 'March' ],
-            datasets: [ { data: [40, 20, 12] } ]
+                labels: [ axios.get("/Rankings").then((response) => { return response.data.map((user) => { user.username }); }) ],
+                datasets: [ { data: axios.get("/Rankings").then((response) => { return response.data.map((user) => {user.battlesWon }); }) } ]
             },
             chartOptions: {
-            responsive: true
+                responsive: true
             }
         }
     },
     mounted() {
-        axios.get("/Rankings")
-            .then((response) => {
-                this.chartData.labels = response.data.map((user) => { user.username });
-                this.chartData.datasets[0].data = response.data.map((user) => {user.battlesWon });
-            })
+        
     },
     
 }
