@@ -121,10 +121,10 @@ export default {
         <div class="lg:w-1/2 flex flex-col grow gap-1">
             <div className="lg:w-full w-screen flex justify-between px-4">
                 <div className="lg:pl-20">
-                    <PlayerCard :level="currentGame.oponents?.[0]?.user.level ?? '0'"
-                        :username="currentGame.oponents?.[0]?.user.username ?? 'Waiting...'" />
+                    <PlayerCard :level="currentGame.opponents?.[0]?.user.level ?? '0'"
+                        :username="currentGame.opponents?.[0]?.user.username ?? 'Waiting...'" />
                 </div>
-                <ScoreCard :currentStep="currentGame.oponents?.[0]?.currentStep ?? '0'"
+                <ScoreCard :currentStep="currentGame.opponents?.[0]?.currentStep ?? '0'"
                     :totalSteps="currentGame?.steps.length ?? '0'" />
             </div>
             <div className="lg:w-full flex grow no-scrollbar">
