@@ -16,16 +16,15 @@ export default {
     data() {
         return {
             chartData: {
-                labels: [ axios.get("/Rankings").then((response) => { return response.data.map((user) => { user.username }); }) ],
-                datasets: [ { data: axios.get("/Rankings").then((response) => { return response.data.map((user) => {user.battlesWon }); }) } ]
+                labels: [ '10/06/2023', '11/06/2023', '12/06/2023' ],
+                datasets: [ { data: [40, 20, 12] } ]
             },
-            chartOptions: {
+                chartOptions: {
                 responsive: true
             }
         }
     },
     mounted() {
-        
     },
     
 }
