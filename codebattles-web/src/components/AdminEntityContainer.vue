@@ -24,7 +24,7 @@ export default {
     methods: {
         deleteEntity() {
             if (confirm("Do you want to delete this entity?") == true) {
-                axios.delete('api/' + this.entity + '/' + this.deleteId + '?isDbDelete=false')
+                axios.delete(this.entity + '/' + this.deleteId + '?isDbDelete=false')
                     .then((response) => {
                         this.$store.commit('Alert/show', { type: 'success', message: 'Entity Succesfully deleted' })
                     }).catch((error) => {

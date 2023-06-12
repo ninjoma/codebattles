@@ -10,12 +10,13 @@ export default {
         return {
             badgeName: null,
             description: null,
+            badgeId: 0,
         }
     },
     methods: {
         Create() {
-            axios.post('badge/', {
-                id: 0,
+            axios.put('/badge/' + this.badgeId, {
+                id: this.badgeId,
                 name: this.badgeName,
                 description: this.description
             })
@@ -32,12 +33,15 @@ export default {
 </script>
 <template>
     <div class="form-control w-full my-3">
+        <input type="number" placeholder="Badge Name" v-model="badgeId" class="input input-bordered w-full" />
+    </div>
+    <div class="form-control w-full my-3">
         <input type="text" placeholder="Badge Name" v-model="badgeName" class="input input-bordered w-full" />
     </div>
     <div class="form-control w-full my-3">
         <input type="text" placeholder="Badge Description" v-model="description" class="input input-bordered w-full" />
     </div>
     <button class="w-full btn btn-success" v-on:click="Create()">
-        Create Badge
+        Update Badge
     </button>
 </template>

@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         Create() {
-            axios.post('api/GameMode/', {
+            axios.post('GameMode/', {
                 id: 0,
                 name: this.name,
                 description: this.description,

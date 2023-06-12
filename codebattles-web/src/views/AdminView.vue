@@ -4,6 +4,7 @@ import AdminEntityContainer from '../components/AdminEntityContainer.vue'
 import BadgeForm from '../components/Forms/BadgeForm.vue'
 import GameModeForm from '../components/Forms/GameModeForm.vue'
 import LanguageForm from '../components/Forms/LanguageForm.vue'
+import Updatebadge from '../components/Forms/UpdatebadgeForm.vue'
 import EntityListContainer from '../components/Lists/EntityListContainer.vue'
 import BadgeList from '../components/Lists/BadgeListComponent.vue'
 import LanguageList from '../components/Lists/LanguageListComponent.vue'
@@ -19,6 +20,7 @@ export default {
         LanguageList,
         GameModeForm,
         GameModeList,
+        Updatebadge
     },
     mounted() {
     },
@@ -39,12 +41,15 @@ export default {
 <template>
     <div class="flex flex-col flex-1 items-center">
         <div class="max-w-screen-lg w-full p-2 ">
-            <AdminEntityContainer entity="Badge" :showUpdate="false" :showDelete="true">
+            <AdminEntityContainer entity="Badge" :showUpdate="true" :showDelete="true">
                 <template #create>
                     <BadgeForm/>
                 </template>
                 <template #list>
                     <BadgeList/>
+                </template>
+                <template #update>
+                    <Updatebadge/>
                 </template>
             </AdminEntityContainer>
             <AdminEntityContainer entity="Game" :showUpdate="false" :showDelete="true" :showCreate="false" :showList="false">
