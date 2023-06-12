@@ -26,7 +26,7 @@ export default {
         <a className="font-inter font-bold flex-1">Battle Num: #{{ currentGame.id }}</a>
         <div className="relative rounded-lg bg-base-200 p-2 top-6 border-0">
             <div className="">
-                <button className="btn btn-lg btn-success flex-1 flex flex-col">
+                <button className="btn btn-lg btn-success flex-1 flex flex-col" v-on:click="$emit('Submited')">
                     <a className="">Submit</a>
                     <small>(Ctrl + S)</small>
                 </button>

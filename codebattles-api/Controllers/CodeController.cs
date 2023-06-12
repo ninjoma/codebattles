@@ -49,7 +49,7 @@ namespace codebattle_api.Controllers
                     return NoContent();
                 }
 
-                GameDetailDTO game = await _gameService.GetById(Int32.Parse(codeDTO?.BattleId));
+                GameDetailDTO game = await _gameService.GetById((int) codeDTO.BattleId);
 
                 if (game == null)
                 {
@@ -134,8 +134,10 @@ namespace codebattle_api.Controllers
                 {
                     Id = game.Id,
                     GameStatus = GameStatusEnum.Ended,
+                    WinnerId = User.GetUserId(),
                 };
                 await _gameService.EditById(postDto);
+                
             }
         }
         private async Task AddUserExperience(int expAmmount)

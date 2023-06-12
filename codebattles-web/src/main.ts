@@ -20,7 +20,7 @@ import { assertCompletionStatement } from '@babel/types';
 if (import.meta.env.DEV) {
     // Allow CORS from localhost
     axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-    axios.defaults.baseURL = "https://localhost:7297/";
+    axios.defaults.baseURL = "http://localhost:5209/";
 } else {
     axios.defaults.baseURL = "https://codebattlesapi.azurewebsites.net/";
 }

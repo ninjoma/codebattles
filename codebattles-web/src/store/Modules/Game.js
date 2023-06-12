@@ -10,7 +10,8 @@ export default {
 				id: null,
 				steps: [],
 				userInBattle: { user: { level: null } },
-				opponents: []
+				opponents: [],
+				
 			}
 		}
 	},
