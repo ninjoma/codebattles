@@ -111,10 +111,8 @@ namespace codebattle_api.Services.AuthServices
                     {
                         throw new CodeBattleException(ErrorCode.WrongLoginData);
                     }
-                }
-                else
-                {
-                    throw new CodeBattleException(ErrorCode.WrongLoginData);
+                } else {
+                    throw new CodeBattleException(ErrorCode.NotFound);
                 }
             }
             throw new CodeBattleException(ErrorCode.InvalidInput);
