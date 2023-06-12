@@ -62,15 +62,6 @@ export default {
 		},
 	},
 	actions: {
-		register({ commit }, data) {
-			axios.post('/Auth/Register', {
-                username: data.username,
-                email: data.email,
-                password: data.password
-            }).then((response) => {
-				this.login({ commit }, response.data);
-            });
-		},
 		load({ commit }) {
 			axios.get('/User/me').then((userResponse) => {
 				commit('load', userResponse.data);
@@ -79,7 +70,7 @@ export default {
 		loginsso({ commit }, data){
 			axios.post("/sso/login", data).then((userResponse) => {
 				commit('loginsso', userResponse.data);	
-				this.load({ commit });
+				load({ commit });
             });
 		},
 		login({ commit }, data){
@@ -89,7 +80,7 @@ export default {
             })
             .then((tokenResponse) => {
 				commit('login', tokenResponse.data);
-				this.load({ commit });
+				load({ commit });
             }).catch((call) => {
 				if(call.response.data.errorCode == 2) {
 					return call.response.data.errorTranslation;
@@ -109,6 +100,15 @@ export default {
 			}).then((response) => {
 				
             });
-		}
+		},
+		register({ commit }, data) {
+			axios.post('/Auth/Register', {
+                username: data.username,
+                email: data.email,
+                password: data.password
+            }).then((response) => {
+				login({ commit }, response.data);
+            });
+		},
 	}
 };
